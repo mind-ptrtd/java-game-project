@@ -8,8 +8,6 @@ public class Test_Git {
 		System.out.println("Bracnh: Main");
 		
 		System.out.println("Test From Earth^^");
-		
-		System.out.println("This is Only on My Branch");
 	}
 
 }
