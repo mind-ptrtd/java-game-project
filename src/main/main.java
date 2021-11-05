@@ -1,6 +1,6 @@
-package test;
+package main;
 
-public class Test_Git {
+public class main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
