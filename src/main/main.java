@@ -8,6 +8,8 @@ public class main {
 		System.out.println("Bracnh: Main");
 		
 		System.out.println("Test From Earth^^");
+		
+		System.out.println("From Earth");
 	}
 
 }
