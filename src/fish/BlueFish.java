@@ -14,7 +14,7 @@ public class BlueFish extends Fish{
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		WritableImage crop = new WritableImage(GameLogic.getInstance().fishPic.getPixelReader(),0,0,16,16);
+		WritableImage crop = new WritableImage(GameLogic.getInstance().fishPic.getPixelReader(),0,0,32,32);
 		//gc.drawImage(GameLogic.getInstance().fishPic, 400, 400);
 		gc.drawImage(crop, 400, 400);
 	}

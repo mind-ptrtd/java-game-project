@@ -38,8 +38,8 @@ public class GameLogic {
 	}
 
 	public static void loadResource() {
-		map = new Image(ClassLoader.getSystemResource("map.png").toString());
-		fishPic = new Image(ClassLoader.getSystemResource("blue_discus.png").toString());
+		map = new Image(ClassLoader.getSystemResource("beach.png").toString());
+		fishPic = new Image(ClassLoader.getSystemResource("blueFish.png").toString());
 		/*
 		mapSprite = new Image(ClassLoader.getSystemResource("Map.png").toString());
 		mineSprite = new Image(ClassLoader.getSystemResource("Mine.png").toString());
