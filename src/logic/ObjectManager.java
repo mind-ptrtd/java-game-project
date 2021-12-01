@@ -5,6 +5,7 @@ import java.util.List;
 
 import UI.Map;
 import fish.*;
+import player.Willy;
 
 public class ObjectManager {
 	private List<Entity> gameObjectContainer;
@@ -17,6 +18,11 @@ public class ObjectManager {
 
 		Fish fish1 = new BlueFish();
 		this.addNewObject(fish1);
+		
+		//new change
+		Willy player1 = new Willy();
+		this.addNewObject(player1);
+		
 		
 		
 		/*
