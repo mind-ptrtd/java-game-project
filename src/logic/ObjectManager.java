@@ -3,9 +3,9 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import UI.Map;
 import fish.*;
 import player.Willy;
+import ui.Map;
 
 public class ObjectManager {
 	private List<Entity> gameObjectContainer;

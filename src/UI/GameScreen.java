@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import input.InputUtility;
 import javafx.scene.canvas.Canvas;

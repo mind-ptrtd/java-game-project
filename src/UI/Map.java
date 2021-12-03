@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import javafx.scene.canvas.GraphicsContext;
 import logic.GameLogic;

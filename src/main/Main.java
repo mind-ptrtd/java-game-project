@@ -1,5 +1,4 @@
 package main;
-import UI.GameScreen;
 import input.InputUtility;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -14,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.GameLogic;
 import logic.ObjectManager;
+import ui.GameScreen;
 
 public class Main extends Application {
 	public static void main(String[] args) {
@@ -54,6 +54,6 @@ public class Main extends Application {
 				InputUtility.updateInputState();
 			}
 		};
-		animation.start();
+		//animation.start();
 	}
 }
