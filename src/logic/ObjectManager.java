@@ -40,7 +40,10 @@ public class ObjectManager {
 		GameLogic.getInstance().add(entity);
 	}
 	
+
 	public void update(){
 		//update();
 	}
+
+
 }
