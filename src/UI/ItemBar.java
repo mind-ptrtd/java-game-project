@@ -1,8 +1,6 @@
 package ui;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -29,7 +27,7 @@ public class ItemBar extends VBox {
 		storage.setAlignment(Pos.BOTTOM_CENTER);
 		Text item = new Text();
 		item.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 20 ));
-		item.setText("ITEM");
+		item.setText("Item");
 		item.setFill(Color.AZURE);
 		item.setTextAlignment(TextAlignment.CENTER);
 		this.setBackground(new Background(new BackgroundFill(Color.SADDLEBROWN, null, null)));
