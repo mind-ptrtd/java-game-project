@@ -1,4 +1,4 @@
-package ui;
+package UI;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Tooltip;

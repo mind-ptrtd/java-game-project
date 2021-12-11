@@ -12,13 +12,11 @@ public class GameLogic {
 	private static final GameLogic instance = new GameLogic();
 	private List<IRenderable> entities;
 	private Comparator<IRenderable> comparator;
-	public static Image mapSprite;
-	public static Image mineSprite;
-	public static AudioClip  explosionSound;
 	
 	public static Image map;
 	public static Image fishPic;
 	public static Image playerPic;
+	public static Image emptySprite;
 	
 
 	static {
@@ -42,11 +40,7 @@ public class GameLogic {
 		map = new Image(ClassLoader.getSystemResource("beach.png").toString());
 		fishPic = new Image(ClassLoader.getSystemResource("blueFish.png").toString());
 		playerPic = new Image(ClassLoader.getSystemResource("willy.png").toString());
-		/*
-		mapSprite = new Image(ClassLoader.getSystemResource("Map.png").toString());
-		mineSprite = new Image(ClassLoader.getSystemResource("Mine.png").toString());
-		explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
-		*/
+		emptySprite = new Image(ClassLoader.getSystemResource("EmptySprite.png").toString());
 	}
 
 	public void add(IRenderable entity) {

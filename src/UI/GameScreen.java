@@ -11,7 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 
 public class GameScreen extends Canvas {
-
+	
 	public GameScreen(double width, double height) {
 		super(width, height);
 		this.setVisible(true);
