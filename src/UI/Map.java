@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import javafx.scene.canvas.GraphicsContext;
 import logic.GameLogic;
@@ -17,7 +17,7 @@ public class Map implements IRenderable{
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		gc.drawImage(GameLogic.getInstance().map, 0, 0);
-		System.out.println("Yes");
+		// System.out.println("Yes");
 	}
 
 	@Override
