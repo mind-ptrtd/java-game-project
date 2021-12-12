@@ -25,6 +25,13 @@ public abstract class Entity implements IRenderable{
 	public int getZ(){
 		return z;
 	}
-	
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
 	
 }

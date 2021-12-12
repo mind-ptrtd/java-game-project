@@ -1,4 +1,4 @@
-package ui;
+package UI;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.Background;

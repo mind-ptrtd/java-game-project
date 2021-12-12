@@ -4,20 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fish.*;
+import main.Main;
 import player.Willy;
-import ui.Map;
+import UI.Map;
 
 public class ObjectManager {
-	private List<Entity> gameObjectContainer;
+	private static final List<Entity> gameObjectContainer = new ArrayList<Entity>(); 
 	
 	public ObjectManager(){
-		this.gameObjectContainer = new ArrayList<Entity>();
 		
 		Map bgMap = new Map();
 		GameLogic.getInstance().add(bgMap);
 
-		Fish fish1 = new BlueFish();
-		this.addNewObject(fish1);
+		for (int i=0;i<20;i++) {
+			this.addNewObject(new BlueFish());
+		}
 		
 		//new change
 		Willy player1 = new Willy();
@@ -42,7 +43,11 @@ public class ObjectManager {
 	
 
 	public void update(){
-		//update();
+		for(Entity obj : gameObjectContainer) {
+			if(obj instanceof Updateable) {
+				((Updateable) obj).update();
+			}
+		}
 	}
 
 
