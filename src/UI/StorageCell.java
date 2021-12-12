@@ -16,12 +16,12 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import logic.GameLogic;
 
 
 public class StorageCell extends Pane {
 	
 	private boolean isDrawn;
-	private final String BLUEFISH_IMAGE = "blueFish.png";
 	
 	public StorageCell() {
 		this.setPrefWidth(42);
@@ -33,8 +33,7 @@ public class StorageCell extends Pane {
 				CornerRadii.EMPTY, new BorderWidths(2.5))));
 		
 	
-		String blueFishImage = ClassLoader.getSystemResource(BLUEFISH_IMAGE).toString();
-		Image bfImage = new Image(blueFishImage) ;
+		Image bfImage = GameLogic.getInstance().blueFish_Right ;
 		WritableImage crop = new WritableImage(bfImage.getPixelReader(),0,0,32,32);
 		this.draw(crop);
 		

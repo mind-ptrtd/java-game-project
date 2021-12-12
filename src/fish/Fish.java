@@ -18,18 +18,11 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 	public static Random random = new Random();
 	protected String name;
 	protected int speedX,price;
-	protected boolean isLeft,isRight;
+	protected boolean isLeft,isRight,turnLeft,turnRight;
 	private float timer,runTime;
 	private ImageView imageView;
 	private Animation animation;
 	private boolean isHook,isKeep;
-	
-	private static final int COLUMNS  = 4;
-	private static final int COUNT    = 4;
-	private static final int OFFSET_X =  0;
-	private static final int OFFSET_Y =  0;
-	private static final int WIDTH    = 32;
-	private static final int HEIGHT   = 32;
 	
 	// Sea Level in range(7,17) Due to Height of GameScreen 600px
 	public Fish(){
@@ -40,11 +33,10 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 		this.y = 7*32+random.nextInt(10*32);
 		this.isKeep = false;
 		this.isHook = false;
-		
-		this.speedX = 2;
+		this.speedX = 1;
 		
 		createFirstSprite();
-		createSprite();
+		upDateSprite();
 	}
 	public void ToggleRight() {
 		this.isRight = !isLeft;
@@ -61,12 +53,16 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 			// KeepInStorage (Despawn)
 		}
 		if(x<=0) {
+			turnRight = true;
 			isRight=true;
 			ToggleLeft();
+			upDateSprite();
 		}
 		if(x>=800-32) {
+			turnLeft = true;
 			isLeft=true;
 			ToggleRight();
+			upDateSprite();
 		}
 		if(!isHook && !isKeep) {
 			if(isRight) {
@@ -76,9 +72,14 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 			}
 		}
 	}
+	// For Sprite Animation
+		private static final int COLUMNS  = 4;
+		private static final int COUNT    = 4;
+		private static final int OFFSET_X =  0;
+		private static final int OFFSET_Y =  0;
+		private static final int WIDTH    = 32;
+		private static final int HEIGHT   = 32;
 	// Handle Display
-	
-	
 	@Override
 	public void draw(GraphicsContext gc) {
 		/* In Animation We can't use this
@@ -89,23 +90,41 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 		*/
 		System.out.println(getX());
 		System.out.println(getY());
+		upDateImageView();
+	}
+	public void upDateImageView() {
 		Main.removeFromPane(imageView);
 		imageView.relocate(getX(), getY());
 		Main.addToPane(imageView);
 	}
+	
 	private void createFirstSprite() {
-		imageView = new ImageView(GameLogic.getInstance().fishPic);
+		if(isRight) {
+			imageView = new ImageView(GameLogic.getInstance().blueFish_Right);
+		} else {
+			imageView = new ImageView(GameLogic.getInstance().blueFish_Left);
+		}
 	}
 	
-	private void createSprite() {
-		/*
+	private void upDateSprite() {
 		if(isKeep) {
 			imageView.setImage(null);
 			animation.stop();
 			imageView = new ImageView(GameLogic.getInstance().emptySprite);
 		}
-		*/
-		// imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
+		if(turnRight) {
+			imageView.setImage(null);
+			animation.stop();
+			imageView = new ImageView(GameLogic.getInstance().blueFish_Right);
+			turnRight = false;
+		}
+		if(turnLeft) {
+			imageView.setImage(null);
+			animation.stop();
+			imageView = new ImageView(GameLogic.getInstance().blueFish_Left);
+			turnLeft = false;
+		}
+		imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
 		// imageView.relocate((double)(getX()), (double)(getY()));
 		// imageView.relocate(arg0, arg1);
 		if(!isKeep) {
@@ -120,7 +139,6 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 			animation.play();
 		}
 	}
-	
 	public int getSpeed() {
 		return speedX;
 	}

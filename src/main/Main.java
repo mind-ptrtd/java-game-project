@@ -27,7 +27,7 @@ import fish.Fish;
 public class Main extends Application {
 	
 	public Storage storage;
-	public static final Pane imagePane = new Pane();
+	public static Pane imagePane = new Pane();
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
@@ -43,6 +43,7 @@ public class Main extends Application {
 		ObjectManager objectManager = new ObjectManager();
 		GameScreen gameScreen = new GameScreen(800, 600);
 		
+		imagePane.setMaxSize(800, 600);
 		Group screen = new Group();
 		screen.getChildren().addAll(gameScreen,imagePane);
 		
