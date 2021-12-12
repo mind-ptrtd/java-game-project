@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -82,6 +82,7 @@ public class StorageCell extends Button {
 			Button yes = new Button("YES");
 			yes.setPrefWidth(12);
 			yes.setPrefHeight(10);
+			return yes;
 		}
 		
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import fish.*;
 import main.Main;
 import player.Willy;
-import UI.Map;
+import ui.Map;
 
 public class ObjectManager {
 	private static final List<Entity> gameObjectContainer = new ArrayList<Entity>(); 

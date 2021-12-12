@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import input.InputUtility;
 import javafx.scene.canvas.Canvas;
@@ -64,7 +64,7 @@ public class GameScreen extends Canvas {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
 		for (IRenderable entity : GameLogic.getInstance().getEntities()) {
-			System.out.println(GameLogic.getInstance().getEntities());
+			//System.out.println(GameLogic.getInstance().getEntities());
 			//System.out.println(entity.getZ());
 			if (entity.isVisible() && !entity.isDestroyed()) {
 				entity.draw(gc);

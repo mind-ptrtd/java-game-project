@@ -88,8 +88,8 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 		gc.drawImage(crop, getX(), getY());
 		gc.translate(speedX, 0);
 		*/
-		System.out.println(getX());
-		System.out.println(getY());
+		//System.out.println(getX());
+		//System.out.println(getY());
 		upDateImageView();
 	}
 	public void upDateImageView() {
