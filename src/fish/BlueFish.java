@@ -1,6 +1,5 @@
 package fish;
 
-import animation.Animateable;
 import javafx.scene.image.ImageView;
 import logic.GameLogic;
 

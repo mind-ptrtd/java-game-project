@@ -5,7 +5,8 @@ import logic.Entity;
 import main.Main;
 public interface Animateable {
 	// for Classify
-	public abstract ImageView getImageView();
+	public abstract void upDateSprite();
+	public abstract void startAnimation();
 	public abstract void upDateImageView();
 	/*
 	    Main.removeFromPane(imageView);

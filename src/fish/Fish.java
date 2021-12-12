@@ -8,7 +8,6 @@ import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.util.Duration;
 import logic.Entity;
 import logic.GameLogic;
@@ -25,7 +24,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 	protected String name;
 	protected int price;
 	protected boolean isLeft, isRight, isTurnLeft, isTurnRight;
-	private float timer, runTime, speedX;
+	private float speedX;
 	private ImageView imageView;
 	private Animation animation;
 	private boolean isHook, isKeep;
@@ -93,8 +92,8 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 	// Handle Display
 	@Override
 	public void draw(GraphicsContext gc) {
-		System.out.println(getX());
-		System.out.println(getY());
+		// System.out.println(getX());
+		// System.out.println(getY());
 		upDateImageView();
 	}
 
@@ -109,12 +108,12 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 		imageView = imageViewFish();
 	}
 
-	private void upDateSprite() {
+	public void upDateSprite() {
 		// Hook (Dead)
 		if (isKeep) {
 			imageView.setImage(null);
 			animation.stop();
-			imageView = new ImageView(GameLogic.getInstance().emptySprite);
+			imageView.setImage(GameLogic.getInstance().emptySprite);
 		}
 		// TurnRight
 		if (isTurnRight) {
@@ -138,8 +137,9 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 				imageView.setRotate(-45);				
 			}
 		}
-		// imageView.relocate((double)(getX()), (double)(getY()));
-		// imageView.relocate(arg0, arg1);
+		startAnimation();
+	}
+	public void startAnimation() {
 		if (!isKeep) {
 			animation = new SpriteAnimation(imageView, Duration.millis(1000), COUNT, COLUMNS, OFFSET_X, OFFSET_Y, WIDTH,
 					HEIGHT);
