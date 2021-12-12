@@ -7,6 +7,9 @@ public class RainbowTrout extends Fish {
 	public RainbowTrout() {
 		super();
 		fishType = FishType.RAINBOWTROUT;
+		this.price = 300;
+		this.name = "Rainbow Trout";
+		this.setSpeed(2);
 	}
 
 	@Override

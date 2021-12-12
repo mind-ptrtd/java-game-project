@@ -7,6 +7,9 @@ public class Squid extends Fish {
 	public Squid() {
 		super();
 		fishType = FishType.SQUID;
+		this.price = 350;
+		this.name = "Squid";
+		this.setSpeed(2);
 	}
 
 	@Override

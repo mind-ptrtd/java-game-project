@@ -93,8 +93,8 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 	// Handle Display
 	@Override
 	public void draw(GraphicsContext gc) {
-		System.out.println(getX());
-		System.out.println(getY());
+		//System.out.println(getX());
+		//System.out.println(getY());
 		upDateImageView();
 	}
 
