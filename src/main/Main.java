@@ -43,7 +43,6 @@ public class Main extends Application {
 		ObjectManager objectManager = new ObjectManager();
 		GameScreen gameScreen = new GameScreen(800, 600);
 		
-		imagePane.setMaxSize(800, 600);
 		Group screen = new Group();
 		screen.getChildren().addAll(gameScreen,imagePane);
 		
