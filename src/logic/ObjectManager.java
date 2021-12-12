@@ -16,15 +16,13 @@ public class ObjectManager {
 		Map bgMap = new Map();
 		GameLogic.getInstance().add(bgMap);
 
-		for (int i=0;i<20;i++) {
+		for (int i=0;i<5;i++) {
 			this.addNewObject(new BlueFish());
 		}
 		
 		//new change
 		Willy player1 = new Willy();
 		this.addNewObject(player1);
-		
-		
 		
 		/*
 		Background bg = new Background();

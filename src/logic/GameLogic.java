@@ -14,7 +14,8 @@ public class GameLogic {
 	private Comparator<IRenderable> comparator;
 	
 	public static Image map;
-	public static Image fishPic;
+	public static Image blueFish_Right;
+	public static Image blueFish_Left;
 	public static Image playerPic;
 	public static Image emptySprite;
 	
@@ -38,7 +39,8 @@ public class GameLogic {
 
 	public static void loadResource() {
 		map = new Image(ClassLoader.getSystemResource("beach.png").toString());
-		fishPic = new Image(ClassLoader.getSystemResource("blueFish.png").toString());
+		blueFish_Right = new Image(ClassLoader.getSystemResource("blueFish_Right.png").toString());
+		blueFish_Left = new Image(ClassLoader.getSystemResource("blueFish_Left.png").toString());
 		playerPic = new Image(ClassLoader.getSystemResource("willy.png").toString());
 		emptySprite = new Image(ClassLoader.getSystemResource("EmptySprite.png").toString());
 	}

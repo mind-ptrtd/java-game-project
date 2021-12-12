@@ -23,16 +23,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import logic.GameLogic;
 
 
 public class StorageCell extends Button {
 	
 	private boolean isDrawn;
-	private final String BLUEFISH_IMAGE = "blueFish.png";
-	private ObservableList<StorageCell> cell = FXCollections.observableArrayList();
 	
 	public StorageCell() {
 		this.setPrefWidth(42);
@@ -43,8 +39,7 @@ public class StorageCell extends Button {
 		this.setBorder(new Border(new BorderStroke(Color.BURLYWOOD, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, new BorderWidths(2.5))));
 	
-		String blueFishImage = ClassLoader.getSystemResource(BLUEFISH_IMAGE).toString();
-		Image bfImage = new Image(blueFishImage) ;
+		Image bfImage = GameLogic.getInstance().blueFish_Right ;
 		WritableImage crop = new WritableImage(bfImage.getPixelReader(),0,0,32,32);
 		this.draw(crop);
 		
