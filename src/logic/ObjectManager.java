@@ -6,7 +6,7 @@ import java.util.List;
 import fish.*;
 import main.Main;
 import player.Willy;
-import UI.Map;
+import ui.Map;
 
 public class ObjectManager {
 	private static final List<Entity> gameObjectContainer = new ArrayList<Entity>(); 
@@ -16,9 +16,7 @@ public class ObjectManager {
 		Map bgMap = new Map();
 		GameLogic.getInstance().add(bgMap);
 
-		for (int i=0;i<5;i++) {
-			this.addNewObject(new BlueFish());
-		}
+		initializeFish();
 		
 		//new change
 		Willy player1 = new Willy();
@@ -32,6 +30,17 @@ public class ObjectManager {
 		addNewObject(tank);
 		addNewObject(mine);
 		*/
+	}
+	public void initializeFish() {
+		for (int i=0;i<5;i++) {
+			this.addNewObject(new BlueFish());
+		}
+		for (int i=0;i<5;i++) {
+			this.addNewObject(new Trash());
+		}
+		for (int i=0;i<5;i++) {
+			this.addNewObject(new Tuna ());
+		}
 	}
 	
 	protected void addNewObject(Entity entity){

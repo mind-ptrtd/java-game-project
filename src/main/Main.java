@@ -18,9 +18,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.GameLogic;
 import logic.ObjectManager;
-import UI.GameScreen;
-import UI.ItemBar;
-import UI.Storage;
+import ui.GameScreen;
+import ui.ItemBar;
+import ui.Storage;
 import animation.Animateable;
 import fish.Fish;
 
@@ -43,7 +43,6 @@ public class Main extends Application {
 		ObjectManager objectManager = new ObjectManager();
 		GameScreen gameScreen = new GameScreen(800, 600);
 		
-		imagePane.setMaxSize(800, 600);
 		Group screen = new Group();
 		screen.getChildren().addAll(gameScreen,imagePane);
 		

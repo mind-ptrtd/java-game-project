@@ -14,8 +14,7 @@ public class GameLogic {
 	private Comparator<IRenderable> comparator;
 	
 	public static Image map;
-	public static Image blueFish_Right;
-	public static Image blueFish_Left;
+	public static Image blueFish_Right,blueFish_Left,tuna_Right,tuna_Left,trash_Right,trash_Left;
 	public static Image playerPic;
 	public static Image emptySprite;
 	
@@ -43,6 +42,11 @@ public class GameLogic {
 		blueFish_Left = new Image(ClassLoader.getSystemResource("blueFish_Left.png").toString());
 		playerPic = new Image(ClassLoader.getSystemResource("willy.png").toString());
 		emptySprite = new Image(ClassLoader.getSystemResource("EmptySprite.png").toString());
+		trash_Right = new Image(ClassLoader.getSystemResource("trash_Right.png").toString());
+		trash_Left = new Image(ClassLoader.getSystemResource("trash_Left.png").toString());
+		tuna_Right = new Image(ClassLoader.getSystemResource("tuna_Right.png").toString());
+		tuna_Left = new Image(ClassLoader.getSystemResource("tuna_Left.png").toString());
+		
 	}
 
 	public void add(IRenderable entity) {

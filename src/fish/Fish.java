@@ -17,9 +17,9 @@ import main.Main;
 public abstract class Fish extends Entity implements Updateable,Animateable{
 	public static Random random = new Random();
 	protected String name;
-	protected int speedX,price;
+	protected int price;
 	protected boolean isLeft,isRight,turnLeft,turnRight;
-	private float timer,runTime;
+	private float timer,runTime,speedX;
 	private ImageView imageView;
 	private Animation animation;
 	private boolean isHook,isKeep;
@@ -33,7 +33,7 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 		this.y = 7*32+random.nextInt(10*32);
 		this.isKeep = false;
 		this.isHook = false;
-		this.speedX = 1;
+		setSpeed(0.1f+random.nextFloat());
 		
 		createFirstSprite();
 		upDateSprite();
@@ -52,13 +52,14 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 		if(isKeep) {
 			// KeepInStorage (Despawn)
 		}
-		if(x<=0) {
+		// Swimming Area
+		if(x<=0+10) {
 			turnRight = true;
 			isRight=true;
 			ToggleLeft();
 			upDateSprite();
 		}
-		if(x>=800-32) {
+		if(x>=800-32-10) {
 			turnLeft = true;
 			isLeft=true;
 			ToggleRight();
@@ -82,12 +83,6 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 	// Handle Display
 	@Override
 	public void draw(GraphicsContext gc) {
-		/* In Animation We can't use this
-		WritableImage crop = new WritableImage(GameLogic.getInstance().fishPic.getPixelReader(),0,0,32,32);
-		//gc.drawImage(GameLogic.getInstance().fishPic, 400, 400);
-		gc.drawImage(crop, getX(), getY());
-		gc.translate(speedX, 0);
-		*/
 		System.out.println(getX());
 		System.out.println(getY());
 		upDateImageView();
@@ -99,13 +94,26 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 	}
 	
 	private void createFirstSprite() {
-		if(isRight) {
-			imageView = new ImageView(GameLogic.getInstance().blueFish_Right);
-		} else {
-			imageView = new ImageView(GameLogic.getInstance().blueFish_Left);
+		if(this instanceof BlueFish) {
+			if(isRight) {
+				imageView = new ImageView(GameLogic.getInstance().blueFish_Right);
+			} else {
+				imageView = new ImageView(GameLogic.getInstance().blueFish_Left);
+			}
+		} else if (this instanceof Trash){
+			if(isRight) {
+				imageView = new ImageView(GameLogic.getInstance().trash_Right);
+			} else {
+				imageView = new ImageView(GameLogic.getInstance().trash_Left);
+			}
+		} else if (this instanceof Tuna) {
+			if(isRight) {
+				imageView = new ImageView(GameLogic.getInstance().tuna_Right);
+			} else {
+				imageView = new ImageView(GameLogic.getInstance().tuna_Left);
+			}
 		}
 	}
-	
 	private void upDateSprite() {
 		if(isKeep) {
 			imageView.setImage(null);
@@ -115,22 +123,38 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 		if(turnRight) {
 			imageView.setImage(null);
 			animation.stop();
-			imageView = new ImageView(GameLogic.getInstance().blueFish_Right);
+			if(this instanceof BlueFish) {
+				imageView = new ImageView(GameLogic.getInstance().blueFish_Right);				
+			} else if(this instanceof Trash) {
+				imageView = new ImageView(GameLogic.getInstance().trash_Right);	
+			} else if(this instanceof Tuna) {
+				imageView = new ImageView(GameLogic.getInstance().tuna_Right);	
+			}
 			turnRight = false;
 		}
 		if(turnLeft) {
 			imageView.setImage(null);
 			animation.stop();
-			imageView = new ImageView(GameLogic.getInstance().blueFish_Left);
+			if(this instanceof BlueFish) {
+				imageView = new ImageView(GameLogic.getInstance().blueFish_Left);				
+			} else if(this instanceof Trash) {
+				imageView = new ImageView(GameLogic.getInstance().trash_Left);	
+			} else if(this instanceof Tuna) {
+				imageView = new ImageView(GameLogic.getInstance().tuna_Left);	
+			}
 			turnLeft = false;
 		}
 		imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
+		if(this instanceof Tuna) {
+			if(isRight) imageView.setRotate(45);
+			else imageView.setRotate(-45);
+		}
 		// imageView.relocate((double)(getX()), (double)(getY()));
 		// imageView.relocate(arg0, arg1);
 		if(!isKeep) {
 			animation = new SpriteAnimation(
 		             imageView,
-		             Duration.millis(500),
+		             Duration.millis(1000),
 		             COUNT, COLUMNS,
 		             OFFSET_X, OFFSET_Y,
 		             WIDTH, HEIGHT
@@ -139,11 +163,11 @@ public abstract class Fish extends Entity implements Updateable,Animateable{
 			animation.play();
 		}
 	}
-	public int getSpeed() {
+	public float getSpeed() {
 		return speedX;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(float speed) {
 		this.speedX = speed;
 	}
 
