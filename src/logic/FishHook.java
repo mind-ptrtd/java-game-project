@@ -26,7 +26,7 @@ public class FishHook extends Entity implements Updateable, ImageViewable {
 		super();
 		x = FishingSystem.getInstance().getGlobalWillyX();
 		y = FishingSystem.getInstance().getGlobalWillyY(); // under his Willy's Feet
-		z = 20;
+		z = 30;
 		speedY = 2;
 		createFirstSprite();
 		upDateSprite();

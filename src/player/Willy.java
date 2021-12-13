@@ -11,10 +11,10 @@ import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import logic.Direction;
 import logic.Entity;
-import logic.GameObject;
 import logic.Updateable;
 import main.Main;
 import logic.FishingSystem;
+import logic.GameObject;
 
 public class Willy extends Entity implements Updateable, Animateable {
 	private ImageView imageView;

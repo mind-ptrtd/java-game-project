@@ -39,7 +39,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 	private float speedX;
 	private ImageView imageView;
 	private Animation animation;
-	private boolean isHook, isDead, isTurnLeft, isTurnRight, isNearMe,isBombMem,isBombHappen;
+	private boolean isHook, isDead, isTurnLeft, isTurnRight, isNearMe, isBombMem, isBombHappen;
 	private double fishHookX, fishHookY;
 
 	// Sea Level in range(7,17) Due to Height of GameScreen 600px
@@ -54,7 +54,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 	}
 
 	public boolean checkHitBox() { // Near Hook Count as Catch (HITBOX 20*30)
-		return Math.abs(fishHookX + 16 - (getX()+16)) <= 10 && Math.abs(fishHookY + 10 - (getY()+16)) <= 15;
+		return Math.abs(fishHookX + 16 - (getX() + 16)) <= 10 && Math.abs(fishHookY + 10 - (getY() + 16)) <= 15;
 	}
 
 	public void move(Direction dir) {
@@ -83,42 +83,45 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 		fishHookX = FishingSystem.getInstance().getGlobalFishHookX();
 		fishHookY = FishingSystem.getInstance().getGlobalFishHookY();
 		isNearMe = FishingSystem.getInstance().getNearMe();
-		
-		if(isHook) {
+
+		if (isHook) {
 			x = fishHookX;
 			y = fishHookY;
 		}
-			
-		if(this.fishType == fishType.BOMB && checkHitBox()) { // BOMB ATTACH
+		if (this.fishType == fishType.BOMB && checkHitBox()) { // BOMB ATTACH
 			// Play bomb Sound
-				x = 200;
-				y = 0;
-				this.isDead = true;
-				this.setDestroyed(true);
-				this.upDateSprite();
-				for(Fish fish : FishingSystem.getHookinventory()) {
-					Platform.runLater(new Runnable() {
-						public void run() {
-							FishingSystem.getInstance().removeFishFromHook(fish);
-							FishingSystem.getInstance().decreaseFishCount();
-							System.out.println("FISH BOMB : " + fish);
-							fish.isDead = true;
-							fish.setDestroyed(true);
-							fish.upDateSprite();
-						}
-					});
-				}
+			x = 200;
+			y = 0;
+			this.fishType = FishType.NONE;
+			this.isDead = true;
+			this.setDestroyed(true);
+			this.upDateSprite();
+			for (Fish fish : FishingSystem.getHookinventory()) {
+				Platform.runLater(new Runnable() {
+					public void run() {
+						FishingSystem.getInstance().removeFishFromHook(fish);
+						FishingSystem.getInstance().decreaseFishCount();
+						System.out.println("FISH BOMB : " + fish);
+						fish.isDead = true;
+						fish.setDestroyed(true);
+						fish.upDateSprite();
+					}
+				});
+			}
+			GameObject.getInstance().bombSound.play();
 		}
-		if (fishType != fishType.BOMB && !isHook && !FishingSystem.getInstance().isHookFull() && checkHitBox()) { // CATCH FISH
+		if (fishType != fishType.BOMB && !isHook && !FishingSystem.getInstance().isHookFull() && checkHitBox()) { // CATCH
+																													// FISH
 			isHook = true;
 			FishingSystem.getInstance().addFishToHook(this);
 			System.out.println("HOOK FULL? : " + FishingSystem.getInstance().isHookFull());
+			GameObject.getInstance().pingSound.play();
 			// System.out.println("CATCH THIS FISH : "+this);
 		}
 		if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // Keep Fish
 			Platform.runLater(new Runnable() {
 				public void run() {
-					for (Fish fish : FishingSystem.getHookinventory()) {						
+					for (Fish fish : FishingSystem.getHookinventory()) {
 						FishingSystem.getInstance().removeFishFromHook(fish);
 						FishingSystem.getInstance().addFishToBackPack(fish);
 						FishingSystem.getInstance().decreaseFishCount();

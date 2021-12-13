@@ -14,7 +14,7 @@ public class GameObject {
 	private Comparator<IRenderable> comparator;
 
 	public static Image map, playerPic, emptySprite, fishHook,bomb;
-	public static AudioClip bombSound;
+	public static AudioClip bombSound,pingSound;
 	public static Image blueFish_Right, blueFish_Left, tuna_Right, tuna_Left, trash_Right, trash_Left, bass_Right,
 			bass_Left, carp_Right, carp_Left, lionFish_Right, lionFish_Left, midNight_Right, midNight_Left, squid_Right,
 			squid_Left, rainbowTrout_Right, rainbowTrout_Left;
@@ -64,6 +64,7 @@ public class GameObject {
 		fishHook = new Image(ClassLoader.getSystemResource("fishHook.png").toString(), 32, 32, false, false);
 		bomb = new Image(ClassLoader.getSystemResource("Bomb.png").toString());
 		bombSound = new AudioClip(ClassLoader.getSystemResource("BombSound.wav").toString());
+		pingSound = new AudioClip(ClassLoader.getSystemResource("PingSound.wav").toString());
 	}
 
 	public void add(IRenderable entity) {
