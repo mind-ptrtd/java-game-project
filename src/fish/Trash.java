@@ -1,7 +1,7 @@
 package fish;
 
 import javafx.scene.image.ImageView;
-import logic.GameLogic;
+import logic.GameObject;
 
 public class Trash extends Fish{
 	public Trash() {
@@ -9,16 +9,16 @@ public class Trash extends Fish{
 		fishType = FishType.TRASH;
 		this.price = 0;
 		this.name = "Trash";
-		this.setSpeed(2);
+		this.setSpeed(2*speedFactor);
 		// ADD BELOW
 	}
 
 	@Override
 	public ImageView imageViewFish() {
 		if(isRight) {
-			return new ImageView(GameLogic.getInstance().trash_Right);
+			return new ImageView(GameObject.getInstance().trash_Right);
 		} else {
-			return new ImageView(GameLogic.getInstance().trash_Left);
+			return new ImageView(GameObject.getInstance().trash_Left);
 		}
 	}
 	@Override

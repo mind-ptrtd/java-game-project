@@ -1,7 +1,7 @@
 package fish;
 
 import javafx.scene.image.ImageView;
-import logic.GameLogic;
+import logic.GameObject;
 
 public class RainbowTrout extends Fish {
 	public RainbowTrout() {
@@ -9,15 +9,15 @@ public class RainbowTrout extends Fish {
 		fishType = FishType.RAINBOWTROUT;
 		this.price = 300;
 		this.name = "Rainbow Trout";
-		this.setSpeed(2);
+		this.setSpeed(2*speedFactor);
 	}
 
 	@Override
 	public ImageView imageViewFish() {
 		if(isRight) {
-			return new ImageView(GameLogic.getInstance().rainbowTrout_Right);
+			return new ImageView(GameObject.getInstance().rainbowTrout_Right);
 		} else {
-			return new ImageView(GameLogic.getInstance().rainbowTrout_Left);
+			return new ImageView(GameObject.getInstance().rainbowTrout_Left);
 		}
 	}
 	@Override

@@ -21,6 +21,14 @@ public abstract class Entity implements IRenderable{
 		return visible;
 	}
 	
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	public void setDestroyed(boolean destroyed) {
+		this.destroyed = destroyed;
+	}
+
 	@Override
 	public int getZ(){
 		return z;

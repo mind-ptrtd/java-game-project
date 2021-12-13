@@ -1,7 +1,7 @@
 package fish;
 
 import javafx.scene.image.ImageView;
-import logic.GameLogic;
+import logic.GameObject;
 
 public class BlueFish extends Fish{
 	
@@ -10,7 +10,7 @@ public class BlueFish extends Fish{
 		this.price = 100;
 		this.name = "Blue Fish";
 		this.fishType = fishType.BLUEFISH;
-		this.setSpeed(1);
+		this.setSpeed(1*speedFactor);
 		// ADD BELOW
 		
 	}
@@ -18,9 +18,9 @@ public class BlueFish extends Fish{
 	@Override
 	public ImageView imageViewFish() {
 		if(isRight) {
-			return new ImageView(GameLogic.getInstance().blueFish_Right);
+			return new ImageView(GameObject.getInstance().blueFish_Right);
 		} else {
-			return new ImageView(GameLogic.getInstance().blueFish_Left);
+			return new ImageView(GameObject.getInstance().blueFish_Left);
 		}
 	}
 

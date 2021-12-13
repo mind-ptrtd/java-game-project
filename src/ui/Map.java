@@ -1,9 +1,9 @@
 package ui;
 
 import javafx.scene.canvas.GraphicsContext;
-import logic.GameLogic;
+import logic.GameObject;
 import logic.IRenderable;
-import logic.ObjectManager;
+import logic.GameLogic;
 
 public class Map implements IRenderable{
 
@@ -14,7 +14,7 @@ public class Map implements IRenderable{
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		gc.drawImage(GameLogic.getInstance().map, 0, 0);
+		gc.drawImage(GameObject.getInstance().map, 0, 0);
 	}
 
 	@Override

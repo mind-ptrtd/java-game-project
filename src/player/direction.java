@@ -2,5 +2,7 @@ package player;
 
 public enum direction {
 	RIGHT,
-	LEFT
+	LEFT,
+	DOWN,
+	UP,
 }

@@ -5,13 +5,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import logic.GameLogic;
+import logic.GameObject;
 import logic.IRenderable;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 
 public class GameScreen extends Canvas {
-	
+
 	public GameScreen(double width, double height) {
 		super(width, height);
 		this.setVisible(true);
@@ -63,17 +63,12 @@ public class GameScreen extends Canvas {
 	public void paintComponent() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
-		for (IRenderable entity : GameLogic.getInstance().getEntities()) {
-			//System.out.println(GameLogic.getInstance().getEntities());
-			//System.out.println(entity.getZ());
+		for (IRenderable entity : GameObject.getInstance().getEntities()) {
+			// System.out.println(GameObject.getInstance().getEntities());
+			// System.out.println(entity.getZ());
 			if (entity.isVisible() && !entity.isDestroyed()) {
 				entity.draw(gc);
 			}
 		}
-
-		// System.out.println("===============");
-		// System.out.println("===============");
-
 	}
-
 }

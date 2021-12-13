@@ -3,73 +3,107 @@ package fish;
 import java.util.Random;
 
 import animation.SpriteAnimation;
+import input.InputUtility;
 import animation.Animateable;
 import javafx.animation.Animation;
+import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import logic.Entity;
+import logic.FishingSystem;
 import logic.GameLogic;
+import logic.GameObject;
 import logic.Updateable;
 import main.Main;
+import logic.FishingSystem;
 
 public abstract class Fish extends Entity implements Updateable, Animateable {
-	
+
 	protected abstract ImageView imageViewFish();
+
 	protected abstract boolean isNeedToRotate();
-	
+
+	protected final static float speedFactor = 0.5f;
+
 	public static Random random = new Random();
-	protected FishType fishType; 
+
+	// For Child Class
+	protected FishType fishType;
 	protected String name;
 	protected int price;
-	protected boolean isLeft, isRight, isTurnLeft, isTurnRight;
+	protected boolean isLeft, isRight;
+
 	private float speedX;
 	private ImageView imageView;
 	private Animation animation;
-	private boolean isHook, isKeep;
+	private boolean isHook, isKeep, isTurnLeft, isTurnRight,isNearMe;
+	private double fishHookX, fishHookY;
 
 	// Sea Level in range(7,17) Due to Height of GameScreen 600px
 	public Fish() {
-		this.isLeft = random.nextBoolean();
-		ToggleRight();
-		this.z = 20;
-		this.x = random.nextInt(400);
-		this.y = 7 * 32 + random.nextInt(10 * 32);
-		this.isKeep = false;
-		this.isHook = false;
-		setSpeed(0.1f + random.nextFloat());
+		isLeft = random.nextBoolean();
+		isRight = !isLeft;
+		z = 20;
+		x = random.nextInt(400);
+		y = 7 * 32 + random.nextInt(10 * 32);
+		isKeep = isHook = false;
 		createFirstSprite();
 		upDateSprite();
 	}
-	
-	public void ToggleRight() {
-		this.isRight = !isLeft;
-	}
-
-	public void ToggleLeft() {
-		this.isLeft = !isRight;
-	}
 
 	// Handle Logic
-	public void update() {
+	public void logicUpdate() {
+		// Pull Global to local
+		fishHookX = FishingSystem.getInstance().getGlobalFishHookX();
+		fishHookY = FishingSystem.getInstance().getGlobalFishHookY();
+		isNearMe = FishingSystem.getInstance().getNearMe();
+		
 		if (isHook) {
-			// hooked();
+			x = fishHookX;
+			y = fishHookY;
 		}
-		if (isKeep) {
-			// KeepInStorage (Despawn)
+
+		if (Math.abs(fishHookX + 16 - getX()) <= 10 && Math.abs(fishHookY + 10 - getY()) <= 10) {
+			isHook = true;
+			// Stick with Hook
+			x = fishHookX;
+			y = fishHookY;			
+			FishingSystem.getInstance().addFishToHook(this);
+			//System.out.println("CATCH THIS FISH : "+this);
 		}
-		// Swimming Area Offset = 10 (Preventing Collision edges)
-		if (x <= 0 + 10) {
+		if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // Keep Fish
+			
+			for (Fish fish : FishingSystem.getHookinventory()) {
+				Platform.runLater(new Runnable() {
+					public void run() {
+						FishingSystem.getInstance().removeFishFromHook(fish);
+						FishingSystem.getInstance().addFishToBackPack(fish);
+						System.out.println("ADD THIS FISH TO BACKPACK : "+fish);
+						fish.setDestroyed(true);
+						fish.isHook = false;
+						fish.isKeep = true;
+						upDateSprite();
+					}
+				});
+			}
+			System.out.println("HOOK :"+FishingSystem.getInstance().getHookinventory());
+			System.out.println("BACKPACK :"+FishingSystem.getInstance().getBackpackinventory());
+		}
+
+		// Swimming Area Offset = 20 (Preventing Collision edges)
+		if (x <= 0 + 20) {
 			isTurnRight = true;
 			isRight = true;
-			ToggleLeft();
+			isLeft = false;
 			upDateSprite();
 		}
-		if (x >= 800 - 32 - 10) {
+		if (x >= 800 - 32 - 20) {
 			isTurnLeft = true;
 			isLeft = true;
-			ToggleRight();
+			isRight = false;
 			upDateSprite();
 		}
 		if (!isHook && !isKeep) {
@@ -92,8 +126,8 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 	// Handle Display
 	@Override
 	public void draw(GraphicsContext gc) {
-		//System.out.println(getX());
-		//System.out.println(getY());
+		// System.out.println(getX());
+		// System.out.println(getY());
 		upDateImageView();
 	}
 
@@ -103,7 +137,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 		Main.addToPane(imageView);
 	}
 
-	private void createFirstSprite() {
+	public void createFirstSprite() {
 		// GetImageView Of each Fish
 		imageView = imageViewFish();
 	}
@@ -113,7 +147,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 		if (isKeep) {
 			imageView.setImage(null);
 			animation.stop();
-			imageView.setImage(GameLogic.getInstance().emptySprite);
+			imageView.setImage(GameObject.getInstance().emptySprite);
 		}
 		// TurnRight
 		if (isTurnRight) {
@@ -132,13 +166,14 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 		imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
 		if (isNeedToRotate()) {
 			if (isRight) {
-				imageView.setRotate(45);				
+				imageView.setRotate(45);
 			} else {
-				imageView.setRotate(-45);				
+				imageView.setRotate(-45);
 			}
 		}
 		startAnimation();
 	}
+
 	public void startAnimation() {
 		if (!isKeep) {
 			animation = new SpriteAnimation(imageView, Duration.millis(1000), COUNT, COLUMNS, OFFSET_X, OFFSET_Y, WIDTH,

@@ -1,16 +1,5 @@
 package animation;
 
-import javafx.scene.image.ImageView;
-import logic.Entity;
-import main.Main;
-public interface Animateable {
-	// for Classify
-	public abstract void upDateSprite();
+public interface Animateable extends ImageViewable{
 	public abstract void startAnimation();
-	public abstract void upDateImageView();
-	/*
-	    Main.removeFromPane(imageView);
-		imageView.relocate(getX(), getY());
-		Main.addToPane(imageView);
-	 */
 }
