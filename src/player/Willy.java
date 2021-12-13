@@ -9,6 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
+import logic.Direction;
 import logic.Entity;
 import logic.GameObject;
 import logic.Updateable;
@@ -18,24 +19,24 @@ import logic.FishingSystem;
 public class Willy extends Entity implements Updateable, Animateable {
 	private ImageView imageView;
 	private Animation animation;
-	private boolean isWalkLeft, isWalkRight, isFishing, isDead, isFront,isNearMe;
+	private boolean isWalkLeft, isWalkRight, isFishing, isDead, isFront, isNearMe;
 	private float speedX;
 
 	public Willy() {
 		super();
-		this.x = 400;
-		this.y = 120;
-		this.z = 10;
+		x = 400;
+		y = 120;
+		z = 10;
 		speedX = 1.5f;
-		isWalkLeft = isWalkRight = isFishing = isDead = false;
 		isFront = true;
 		createFirstSprite();
 		upDateSprite();
 	}
+
 	// margin 20
-	public void move(direction dir) {
-		if (dir == direction.RIGHT) {
-			if (x <= 800 - 32 - 20) {
+	public void move(Direction dir) {
+		if (dir == Direction.RIGHT) {
+			if (x <= 800 - 32 - 20) { // 60 is OK
 				x += speedX;
 			}
 		} else {
@@ -44,57 +45,56 @@ public class Willy extends Entity implements Updateable, Animateable {
 			}
 		}
 	}
+
 	// Update Logic
 	public void logicUpdate() {
 		// Pull Global to local
 		isNearMe = FishingSystem.getInstance().getNearMe();
 		// Push local to global
 		FishingSystem.getInstance().setGlobalXY(getX(), getY());
-		
-		
+
+		// Control
 		if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // reset
 			isWalkLeft = isWalkRight = false;
 			setFishing(false);
 			isFront = true;
 			upDateSprite();
 			System.out.println("Keep");
-		}
-		if (InputUtility.getKeyPressed(KeyCode.SPACE)) {
+		} else if (InputUtility.getKeyPressed(KeyCode.SPACE)) {
 			isFront = false;
 			setFishing(true);
 			upDateSprite();
-		}
-		// MOVE RIGHT
-		if (isWalkRight && InputUtility.getKeyPressed(KeyCode.D)) {
-			move(direction.RIGHT);
-		}
-		if ((isWalkLeft || isFront) && InputUtility.getKeyPressed(KeyCode.D)) {
-			move(direction.RIGHT);
-			isWalkRight = true;
-			isFront = isWalkLeft = false;
-			upDateSprite();
-		}
-		// MOVE LEFT
-		if (isWalkLeft && InputUtility.getKeyPressed(KeyCode.A)) {
-			//
-			move(direction.LEFT);
-		}
-		if ((isWalkRight || isFront) && InputUtility.getKeyPressed(KeyCode.A)) {
-			move(direction.LEFT);
-			isWalkLeft = true;
-			isFront = isWalkRight = false;
-			upDateSprite();
-		}
-		if (!InputUtility.getKeyPressed(KeyCode.A) && !InputUtility.getKeyPressed(KeyCode.D) && !isFishing) {
-			isWalkLeft = isWalkRight = false;
-			isFront = true;
-			upDateSprite();
+		} else {
+			// MOVE RIGHT
+			if (isWalkRight && InputUtility.getKeyPressed(KeyCode.D)) {
+				move(Direction.RIGHT);
+			}
+			if ((isWalkLeft || isFront) && InputUtility.getKeyPressed(KeyCode.D)) {
+				move(Direction.RIGHT);
+				isWalkRight = true;
+				isFront = isWalkLeft = false;
+				upDateSprite();
+			}
+			// MOVE LEFT
+			if (isWalkLeft && InputUtility.getKeyPressed(KeyCode.A)) {
+				move(Direction.LEFT);
+			}
+			if ((isWalkRight || isFront) && InputUtility.getKeyPressed(KeyCode.A)) {
+				move(Direction.LEFT);
+				isWalkLeft = true;
+				isFront = isWalkRight = false;
+				upDateSprite();
+			}
+			// RESET STAND AFTER WALK
+			if (!InputUtility.getKeyPressed(KeyCode.A) && !InputUtility.getKeyPressed(KeyCode.D) && !isFishing) {
+				isWalkLeft = isWalkRight = false;
+				isFront = true;
+				upDateSprite();
+			}
 		}
 	}
 
 	public void draw(GraphicsContext gc) {
-		// System.out.println(getX());
-		// System.out.println(getY());
 		upDateImageView();
 	}
 
@@ -103,8 +103,8 @@ public class Willy extends Entity implements Updateable, Animateable {
 		imageView.relocate(getX(), getY());
 		Main.addToPane(imageView);
 	}
-	// For Sprite Animation
 
+	// For Sprite Animation
 	private static int coloumn;
 	private static int count;
 	private static int offsetX;
@@ -155,6 +155,7 @@ public class Willy extends Entity implements Updateable, Animateable {
 			imageView.setImage(GameObject.getInstance().playerPic);
 			setSpriteProporty(1, 1, 0, 0, 32, 2 * 32);
 		}
+		imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
 		startAnimation();
 	}
 
@@ -167,9 +168,11 @@ public class Willy extends Entity implements Updateable, Animateable {
 			animation.play();
 		}
 	}
+
 	public boolean isFishing() {
 		return isFishing;
 	}
+
 	public void setFishing(boolean isFishing) {
 		this.isFishing = isFishing;
 		FishingSystem.getInstance().setFishing(isFishing); // Update Global
