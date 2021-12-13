@@ -8,6 +8,9 @@ public class Tuna extends Fish {
 	public Tuna() {
 		super();
 		fishType = FishType.TUNA;
+		this.price = 200;
+		this.name = "Tuna";
+		this.setSpeed(2);
 		// ADD BELOW
 	}
 

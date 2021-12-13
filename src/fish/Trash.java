@@ -7,6 +7,9 @@ public class Trash extends Fish{
 	public Trash() {
 		super();
 		fishType = FishType.TRASH;
+		this.price = 0;
+		this.name = "Trash";
+		this.setSpeed(2);
 		// ADD BELOW
 	}
 

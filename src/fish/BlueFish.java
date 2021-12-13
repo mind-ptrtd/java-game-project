@@ -8,9 +8,11 @@ public class BlueFish extends Fish{
 	public BlueFish() {
 		super();
 		this.price = 100;
-		this.name = "BlueFish";
+		this.name = "Blue Fish";
 		this.fishType = fishType.BLUEFISH;
+		this.setSpeed(1);
 		// ADD BELOW
+		
 	}
 
 	@Override

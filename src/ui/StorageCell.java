@@ -1,6 +1,12 @@
 package ui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
@@ -14,12 +20,13 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.GameLogic;
 
 
-public class StorageCell extends Pane {
+public class StorageCell extends Button {
 	
 	private boolean isDrawn;
 	
@@ -31,17 +38,18 @@ public class StorageCell extends Pane {
 		this.setPadding(new Insets(3));
 		this.setBorder(new Border(new BorderStroke(Color.BURLYWOOD, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, new BorderWidths(2.5))));
-		
 	
 		Image bfImage = GameLogic.getInstance().blueFish_Right ;
 		WritableImage crop = new WritableImage(bfImage.getPixelReader(),0,0,32,32);
 		this.draw(crop);
 		
 		this.setTooltip();
-		
 	}
 		
 		
+	
+
+
 		private void draw(Image image) {
 			BackgroundSize bgSize = new BackgroundSize(42,42,false,false,false,false);
 			BackgroundImage bgImg = new BackgroundImage(image, null, null, null, bgSize);
@@ -69,4 +77,12 @@ public class StorageCell extends Pane {
 				tooltip.hide();
 			});		
 		}
+		
+		static Button yesButton() {
+			Button yes = new Button("YES");
+			yes.setPrefWidth(12);
+			yes.setPrefHeight(10);
+			return yes;
+		}
+		
 }

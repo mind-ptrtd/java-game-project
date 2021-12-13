@@ -7,6 +7,9 @@ public class Bass extends Fish {
 	public Bass() {
 		super();
 		fishType =FishType.BASS;
+		this.price = 500;
+		this.name = "Bass";
+		this.setSpeed(7);
 	}
 
 	@Override
