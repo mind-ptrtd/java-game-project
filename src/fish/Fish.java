@@ -2,9 +2,9 @@ package fish;
 
 import java.util.Random;
 
+import animation.Animateable;
 import animation.SpriteAnimation;
 import input.InputUtility;
-import animation.Animateable;
 import javafx.animation.Animation;
 import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;

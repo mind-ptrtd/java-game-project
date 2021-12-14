@@ -1,6 +1,4 @@
 package main;
-import input.InputUtility;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -23,6 +21,7 @@ import ui.ItemBar;
 import ui.Storage;
 import animation.Animateable;
 import fish.Fish;
+import input.InputUtility;
 
 public class Main extends Application {
 	
