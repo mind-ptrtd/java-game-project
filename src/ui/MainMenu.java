@@ -22,6 +22,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.GameObject;
@@ -64,7 +66,12 @@ public class MainMenu extends VBox {
 	}
 
 	private void initExitGame() {
-		Button exitButton = new Button("EXIT");
+		Button exitButton = new Button("Exit");
+		exitButton.setPrefWidth(100);
+		exitButton.setPrefHeight(45);
+		exitButton.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 8));
+		
+		
 		setExitGame(exitButton);
 		exitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
