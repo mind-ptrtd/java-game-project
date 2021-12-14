@@ -43,6 +43,7 @@ public class ManagerTab extends HBox {
 		Text moneyText = new Text("Money: " + "100" + "       ");
 		// will be changing to sum of fish price soon
 		moneyText.setFont(Font.font("Comic Sans Ms", FontWeight.LIGHT, FontPosture.REGULAR, 18));
+		moneyText.setFill(Color.LIGHTGOLDENRODYELLOW);
 		setMoneyText(moneyText);
 		
 	}
