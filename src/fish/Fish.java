@@ -116,7 +116,6 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 			FishingSystem.getInstance().addFishToHook(this);
 			System.out.println("HOOK FULL? : " + FishingSystem.getInstance().isHookFull());
 			GameObject.getInstance().pingSound.play();
-			// System.out.println("CATCH THIS FISH : "+this);
 		}
 		if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // Keep Fish
 			Platform.runLater(new Runnable() {

@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
@@ -18,68 +19,79 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import logic.GameObject;
+import main.Game;
+import main.Main;
 
-public class MainMenu {
+public class MainMenu extends VBox {
+	private Button newGame,exitGame;
+	private Text gameName;
 	
-
-	private AnchorPane mainPane;
-	private Scene mainScene;
-	private Stage mainStage;
-	
-
-	
-	
-	
-
-	
-
-	public Stage getMainStage() {
-		return mainStage;
-	}
+	public MainMenu() {
+		setPrefSize(800, 600);
+		createBackground();
+		setSpacing(50);
+		setAlignment(Pos.CENTER);
 		
-	
-
-
-	private void newGame() {
+		initGameName();
+		initNewGame();
+		initExitGame();
+		
+		getChildren().addAll(gameName,newGame,exitGame);
+	}
+	private void initGameName() {
+		Text gameName = new Text("FISH GAME");
+		gameName.setFont(new Font(50));
+		setGameName(gameName);
+	}
+	private void initNewGame() {
 		Button newGameButton = new Button("New Game");
 		newGameButton.setPrefWidth(190);
 		newGameButton.setPrefHeight(49);
-		newGameButton.setStyle("-fx-background-color: brown");
-		mainPane.getChildren().add(newGameButton);
-		
-		newGameButton.setOnAction(new EventHandler<ActionEvent>() {
+		//newGameButton.setStyle("-fx-background-color: brown");
+		setNewGame(newGameButton);
 
-			@Override
-			public void handle(ActionEvent event) {
-				mainStage.show();
-				
-				
+		newGameButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				Main.setScreenNow(Game.INGAME);
 			}
 		});
 	}
-	
-	private void exitGame() {
+
+	private void initExitGame() {
 		Button exitButton = new Button("EXIT");
-		
-		
-		exitButton.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				mainStage.close();
-				
+		setExitGame(exitButton);
+		exitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				Main.setClose(true);
 			}
 		});
-		
 	}
-	
+
 	private void createBackground() {
-		Image backgroundImage = new Image("beach.png", 800, 600, false, false);
-		BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
-		mainPane.setBackground(new Background(background));
+		Image backgroundImage = GameObject.getInstance().map;
+		BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT,
+				BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
+		setBackground(new Background(background));
+	}
+
+	public void setNewGame(Button newGame) {
+		this.newGame = newGame;
+	}
+
+	public void setExitGame(Button exitGame) {
+		this.exitGame = exitGame;
+	}
+	public void setGameName(Text gameName) {
+		this.gameName = gameName;
 	}
 	
+
 //	private void createLogo() {
 //		ImageView logo = new ImageView("/resources/space_runner.png");
 //		logo.setLayoutX(380);
@@ -106,6 +118,5 @@ public class MainMenu {
 //		mainPane.getChildren().add(logo);
 //		
 //	}
-	
 
 }
