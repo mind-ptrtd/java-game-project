@@ -1,6 +1,6 @@
 package logic;
 
-public class MarketSystem {
+public class ShopSystem {
 	private static float fishSpeedFactor = 0.5f;
 	private static float walkSpeedFactor = 1f;
 	private static float hookSpeedFactor = 1f;
@@ -14,7 +14,7 @@ public class MarketSystem {
 	}
 
 	public static void setMoney(int money) {
-		MarketSystem.money = money;
+		ShopSystem.money = money;
 	}
 
 	public static float getFishSpeedFactor() {
@@ -22,7 +22,7 @@ public class MarketSystem {
 	}
 
 	public static void setFishSpeedFactor(float fishSpeedFactor) {
-		MarketSystem.fishSpeedFactor = fishSpeedFactor;
+		ShopSystem.fishSpeedFactor = fishSpeedFactor;
 	}
 
 	public static float getWalkSpeedFactor() {
@@ -30,7 +30,7 @@ public class MarketSystem {
 	}
 
 	public static void setWalkSpeedFactor(float walkSpeedFactor) {
-		MarketSystem.walkSpeedFactor = walkSpeedFactor;
+		ShopSystem.walkSpeedFactor = walkSpeedFactor;
 	}
 
 	public static float getHookSpeedFactor() {
@@ -38,7 +38,7 @@ public class MarketSystem {
 	}
 
 	public static void setHookSpeedFactor(float hookSpeedFactor) {
-		MarketSystem.hookSpeedFactor = hookSpeedFactor;
+		ShopSystem.hookSpeedFactor = hookSpeedFactor;
 	}
 
 	public static int getHookSize() {

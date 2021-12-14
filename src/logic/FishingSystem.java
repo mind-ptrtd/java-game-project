@@ -39,7 +39,7 @@ public class FishingSystem {
 	}
 	public static void fishUpdate() {
 		// Pull From Global
-		HookSize = MarketSystem.getHookSize();
+		HookSize = ShopSystem.getHookSize();
 		
 		int fishHOOK = 0;
 		for (int i = allFishContainer.size() - 1; i >= 0; i--) {

@@ -17,7 +17,7 @@ import logic.Entity;
 import logic.FishingSystem;
 import logic.GameLogic;
 import logic.GameObject;
-import logic.MarketSystem;
+import logic.ShopSystem;
 import logic.Updateable;
 import main.Main;
 import logic.FishingSystem;
@@ -27,7 +27,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 	protected abstract ImageView imageViewFish();
 	protected abstract boolean isNeedToRotate();
 	
-	protected static float fishSpeedFactor = MarketSystem.getFishSpeedFactor();
+	protected static float fishSpeedFactor = ShopSystem.getFishSpeedFactor();
 	public static Random random = new Random();
 
 	// For Child Class
@@ -94,7 +94,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 		fishHookX = FishingSystem.getInstance().getGlobalFishHookX();
 		fishHookY = FishingSystem.getInstance().getGlobalFishHookY();
 		isNearMe = FishingSystem.getInstance().getNearMe();
-		fishSpeedFactor = MarketSystem.getFishSpeedFactor();
+		fishSpeedFactor = ShopSystem.getFishSpeedFactor();
 		
 		if (isHook) {
 			x = fishHookX;
@@ -133,11 +133,11 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 						fish.fishwhere = FishWhere.DEAD;	// DIE
 						System.out.println("SELL : " + fish.name);
 						killFish(fish);
-						MarketSystem.setMoney(MarketSystem.getMoney()+fish.price);
+						ShopSystem.setMoney(ShopSystem.getMoney()+fish.price);
 					}
 				//}).start();
 			}
-			System.out.println("YOU GOT : "+MarketSystem.getMoney());
+			System.out.println("YOU GOT : "+ShopSystem.getMoney());
 			GameObject.getInstance().pingSound.play();
 		}
 

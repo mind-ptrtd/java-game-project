@@ -15,7 +15,7 @@ import logic.Updateable;
 import main.Main;
 import logic.FishingSystem;
 import logic.GameObject;
-import logic.MarketSystem;
+import logic.ShopSystem;
 
 public class Willy extends Entity implements Updateable, Animateable {
 	private ImageView imageView;
@@ -51,7 +51,7 @@ public class Willy extends Entity implements Updateable, Animateable {
 	public void logicUpdate() {
 		// Pull Global to local
 		isNearMe = FishingSystem.getInstance().getNearMe();
-		speedX = 1.5f * MarketSystem.getWalkSpeedFactor();
+		speedX = 1.5f * ShopSystem.getWalkSpeedFactor();
 		// Push local to global
 		FishingSystem.getInstance().setGlobalXY(getX(), getY());
 
