@@ -50,7 +50,7 @@ public class FishingSystem {
 				allFishContainer.remove(fishInLoop);
 			}
 		}
-		System.out.println(fishHOOK);
+		//System.out.println(fishHOOK);
 		setFishHook(fishHOOK);
 	}
 

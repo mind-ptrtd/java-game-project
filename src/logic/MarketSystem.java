@@ -5,8 +5,18 @@ public class MarketSystem {
 	private static float walkSpeedFactor = 1f;
 	private static float hookSpeedFactor = 1f;
 	private static int HookSize = 1;
-	
-	//----------------------------//
+
+	private static int money;
+
+	// ----------------------------//
+	public static int getMoney() {
+		return money;
+	}
+
+	public static void setMoney(int money) {
+		MarketSystem.money = money;
+	}
+
 	public static float getFishSpeedFactor() {
 		return fishSpeedFactor;
 	}

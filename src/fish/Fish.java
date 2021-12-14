@@ -133,11 +133,11 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 						fish.fishwhere = FishWhere.DEAD;	// DIE
 						System.out.println("SELL : " + fish.name);
 						killFish(fish);
-						System.out.println("YOU GOT : "+fish.price);
-						// money += fish.price
+						MarketSystem.setMoney(MarketSystem.getMoney()+fish.price);
 					}
 				//}).start();
 			}
+			System.out.println("YOU GOT : "+MarketSystem.getMoney());
 			GameObject.getInstance().pingSound.play();
 		}
 
