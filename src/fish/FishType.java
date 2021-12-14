@@ -12,5 +12,5 @@ public enum FishType {
 	SQUID,
 	TRASH,
 	BOMB,
-	NONE
+	NONE // FOR BOMB WHEN EXPLODE
 }
