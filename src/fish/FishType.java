@@ -11,4 +11,6 @@ public enum FishType {
 	RAINBOWTROUT,
 	SQUID,
 	TRASH,
+	BOMB,
+	NONE
 }

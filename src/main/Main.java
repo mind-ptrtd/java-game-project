@@ -17,7 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.GameLogic;
-import logic.ObjectManager;
+import logic.GameObject;
 import ui.GameScreen;
 import ui.ItemBar;
 import ui.Storage;
@@ -40,7 +40,7 @@ public class Main extends Application {
 		stage.setTitle("Fish Game");
 		stage.setResizable(false);
 		
-		ObjectManager objectManager = new ObjectManager();
+		GameLogic gameLogic = new GameLogic();
 		GameScreen gameScreen = new GameScreen(800, 600);
 		
 		Group screen = new Group();
@@ -68,8 +68,8 @@ public class Main extends Application {
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
 				gameScreen.paintComponent();
-				objectManager.update();
-				GameLogic.getInstance().update();
+				gameLogic.logicUpdate();
+				GameObject.getInstance().logicUpdate();
 				InputUtility.updateInputState();
 			}
 		};

@@ -1,7 +1,7 @@
 package fish;
 
 import javafx.scene.image.ImageView;
-import logic.GameLogic;
+import logic.GameObject;
 
 public class Midnight extends Fish{
 	public Midnight() {
@@ -9,15 +9,15 @@ public class Midnight extends Fish{
 		fishType = FishType.MIDNIGHT;
 		this.price = 400;
 		this.name = "Midnight";
-		this.setSpeed(4);
+		this.setSpeed(4*speedFactor);
 	}
 
 	@Override
 	public ImageView imageViewFish() {
 		if(isRight) {
-			return new ImageView(GameLogic.getInstance().midNight_Right);
+			return new ImageView(GameObject.getInstance().midNight_Right);
 		} else {
-			return new ImageView(GameLogic.getInstance().midNight_Left);
+			return new ImageView(GameObject.getInstance().midNight_Left);
 		}
 	}
 	@Override

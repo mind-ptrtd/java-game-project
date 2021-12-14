@@ -1,91 +1,103 @@
 package logic;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
+import javafx.application.Platform;
 
-import javafx.scene.image.Image;
-import javafx.scene.media.AudioClip;
+import fish.*;
+import main.Main;
+import player.Willy;
+import ui.Map;
 
 public class GameLogic {
-	private static final GameLogic instance = new GameLogic();
-	private List<IRenderable> entities;
-	private Comparator<IRenderable> comparator;
-	
-	public static Image map;
-	public static Image blueFish_Right,blueFish_Left,tuna_Right,tuna_Left,trash_Right,trash_Left,
-		bass_Right,bass_Left,carp_Right,carp_Left,lionFish_Right,lionFish_Left,midNight_Right,midNight_Left,
-		squid_Right,squid_Left,rainbowTrout_Right,rainbowTrout_Left;
-	public static Image playerPic;
-	public static Image emptySprite;
-	
-
-	static {
-		loadResource();
-	}
+	private static final List<Entity> gameObjectContainer = new ArrayList<Entity>();
+	public static Random random = new Random();
+	private float spawnTimer;
 
 	public GameLogic() {
-		entities = new ArrayList<IRenderable>();
-		comparator = (IRenderable o1, IRenderable o2) -> {
-			if (o1.getZ() > o2.getZ())
-				return 1;
-			return -1;
-		};
+
+		Map bgMap = new Map();
+		GameObject.getInstance().add(bgMap);
+
+		initializeFish();
+
+		// new change
+		Willy player = new Willy();
+		this.addNewObject(player);
+
+		FishHook fishHook = new FishHook();
+		this.addNewObject(fishHook);
 	}
-
-	public static GameLogic getInstance() {
-		return instance;
+	
+	public void spawnMoreFish() {
+		addNewObject(FishRandomizer());
+		FishingSystem.getInstance().increaseFishCount();
 	}
-
-	public static void loadResource() {
-		map = new Image(ClassLoader.getSystemResource("beach.png").toString());
-		playerPic = new Image(ClassLoader.getSystemResource("willy.png").toString());
-		emptySprite = new Image(ClassLoader.getSystemResource("EmptySprite.png").toString());
-		// --- FISH -- //
-		blueFish_Right = new Image(ClassLoader.getSystemResource("blueFish_Right.png").toString());
-		blueFish_Left = new Image(ClassLoader.getSystemResource("blueFish_Left.png").toString());
-		tuna_Right = new Image(ClassLoader.getSystemResource("tuna_Right.png").toString());
-		tuna_Left = new Image(ClassLoader.getSystemResource("tuna_Left.png").toString());
-		bass_Right = new Image(ClassLoader.getSystemResource("bass_Right.png").toString());
-		bass_Left = new Image(ClassLoader.getSystemResource("bass_Left.png").toString());
-		carp_Right = new Image(ClassLoader.getSystemResource("carp_Right.png").toString());
-		carp_Left = new Image(ClassLoader.getSystemResource("carp_Left.png").toString());
-		lionFish_Right = new Image(ClassLoader.getSystemResource("lionFish_Right.png").toString());
-		lionFish_Left = new Image(ClassLoader.getSystemResource("lionFish_Left.png").toString());
-		midNight_Right = new Image(ClassLoader.getSystemResource("midNight_Right.png").toString());
-		midNight_Left = new Image(ClassLoader.getSystemResource("midNight_Left.png").toString());
-		squid_Right = new Image(ClassLoader.getSystemResource("squid_Right.png").toString());
-		squid_Left = new Image(ClassLoader.getSystemResource("squid_Left.png").toString());
-		rainbowTrout_Right = new Image(ClassLoader.getSystemResource("rainbowTrout_Right.png").toString());
-		rainbowTrout_Left = new Image(ClassLoader.getSystemResource("rainbowTrout_Left.png").toString());
-
-		trash_Right = new Image(ClassLoader.getSystemResource("trash_Right.png").toString());
-		trash_Left = new Image(ClassLoader.getSystemResource("trash_Left.png").toString());	
-	}
-
-	public void add(IRenderable entity) {
-		// System.out.println("add");
-		entities.add(entity);
-		Collections.sort(entities, comparator);
-		/*
-		for(IRenderable x: entities){
-			if(x instanceof Tank) System.out.println("tank");
-			if(x instanceof Mine) System.out.println("mine");
-			if(x instanceof Field) System.out.println("field");
-			
-		}
-		*/
-	}
-
-	public void update() {
-		for (int i = entities.size() - 1; i >= 0; i--) {
-			if (entities.get(i).isDestroyed())
-				entities.remove(i);
+	public void initializeFish() {
+		int numberOfFish = 10 + random.nextInt(10);
+		for (int i = 0; i < numberOfFish; i++) {
+			addNewObject(FishRandomizer());
 		}
 	}
 
-	public List<IRenderable> getEntities() {
-		return entities;
+	public Fish FishRandomizer() {
+		ArrayList<FishType> allFishType = new ArrayList<FishType>(List.of(
+				FishType.BLUEFISH,FishType.TUNA,FishType.TRASH,
+				FishType.CARP,FishType.BASS,FishType.LIONFISH,
+				FishType.MIDNIGHT,FishType.RAINBOWTROUT,FishType.SQUID,FishType.BOMB
+		));
+		int randIdx = random.nextInt(allFishType.size());
+		FishType newFishType = allFishType.get(randIdx);
+		switch(newFishType) {
+		  case BLUEFISH:
+			  return new BlueFish();
+		  case TUNA:
+			  return new Tuna();
+		  case TRASH:
+			  return new Trash();
+		  case CARP:
+			  return new Carp();
+		  case BASS:
+			  return new Bass();
+		  case LIONFISH:
+			  return new LionFish();
+		  case RAINBOWTROUT:
+			  return new RainbowTrout();
+		  case MIDNIGHT:
+			  return new Midnight();
+		  case SQUID:
+			  return new Squid();
+		  case BOMB:
+		  	  return new Bomb();
+		  default:
+		    System.out.println("ERROR");
+		    return new BlueFish();
+		    // Blue Fish is Default
+		}
 	}
+
+	public static void removeFromGameObject(Entity entity) {
+		gameObjectContainer.remove(entity);
+		GameObject.getInstance().remove(entity);
+	}
+
+	protected void addNewObject(Entity entity) {
+		gameObjectContainer.add(entity);
+		GameObject.getInstance().add(entity);
+	}
+	// Handle Logic among Updateble
+	public void logicUpdate() {
+		spawnTimer+=0.1f;
+		if((spawnTimer>=10) && (FishingSystem.getInstance().getFishCount()<FishingSystem.getInstance().getPoolSize())) {
+			spawnMoreFish();
+			spawnTimer=0;
+		}
+		for (Entity obj : gameObjectContainer) {
+			if (obj instanceof Updateable) {
+				((Updateable) obj).logicUpdate();
+			}
+		}
+	}
+
 }

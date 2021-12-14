@@ -23,7 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import logic.GameLogic;
+import logic.GameObject;
 
 
 public class StorageCell extends Button {
@@ -39,7 +39,7 @@ public class StorageCell extends Button {
 		this.setBorder(new Border(new BorderStroke(Color.BURLYWOOD, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, new BorderWidths(2.5))));
 	
-		Image bfImage = GameLogic.getInstance().blueFish_Right ;
+		Image bfImage = GameObject.getInstance().blueFish_Right ;
 		WritableImage crop = new WritableImage(bfImage.getPixelReader(),0,0,32,32);
 		this.draw(crop);
 		
