@@ -1,6 +1,5 @@
 package ui;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,21 +27,21 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.GameLogic;
+import main.Main;
 
 public class Storage extends GridPane {
-	
+
 	private ObservableList<StorageCell> cell = FXCollections.observableArrayList();
-	
-	
+
 	public Storage() {
-			
+
 		this.setPrefWidth(150);
 		this.setAlignment(Pos.BOTTOM_CENTER);
 		this.setVgap(12);
 		this.setHgap(20);
 		this.setPadding(new Insets(12));
 		this.setBackground(new Background(new BackgroundFill(Color.SADDLEBROWN, null, null)));
-		
+
 		for (int x = 0; x < 2; x++) {
 			for (int y = 0; y < 10; y++) {
 				StorageCell cells = new StorageCell();
@@ -50,30 +49,18 @@ public class Storage extends GridPane {
 				this.add(cells, x, y);
 			}
 		}
-		
+
 		for (StorageCell storageCell : cell) {
-	 		storageCell.setOnAction(new EventHandler<ActionEvent>() {
-	 			public void handle(ActionEvent event) {
-	 				if (storageCell != null) { 
-	 					// add show
-	 					System.out.println("ok");
-	 					
-	 				}
-	 				
-	
-	 			}
-	 		});
-	 	}
-		
+			storageCell.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+					if (storageCell != null) {
+						// add show
+						Main.getSellPopUp().setVisible(true);
+						System.out.println("ok");
+					}
+				}
+			});
+		}
 	}
-	
 
-	
-	
-	
-	
 }
-
-
-
-

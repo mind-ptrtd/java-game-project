@@ -1,8 +1,10 @@
 package ui;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
@@ -13,28 +15,22 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.Main;
 
 public class SellPopUp extends VBox {
-	
-	private boolean isShown;
-	
-	
+	private Text sellText;
+	private Button yesBtn,noBtn;
+
 	public SellPopUp() {
-		
 		this.setPrefWidth(120);
 		this.setPrefHeight(200);
-	    this.setAlignment(Pos.CENTER);
-	    this.setSpacing(3.5);
-	    Text sellText = new Text("Sell this item?");
-	    sellText.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 20 ));
-	    Button yesBut = new Button("YES");
-	    yesBut.setFont(new Font(10));
-	    yesBut.setPrefWidth(40);
-	    yesBut.setPrefHeight(30);
-	    Button noBut = new Button("NO");
-	    noBut.setFont(new Font(10));
-	    noBut.setPrefWidth(40);
-	    noBut.setPrefHeight(30);
+		this.setAlignment(Pos.CENTER);
+		this.setSpacing(3.5);
+		
+		initSellText();
+		initYesBtn();
+		initNoBtn();
+		
 //	    VBox fishInfo = new VBox(20);
 //	    fishInfo.setAlignment(Pos.CENTER);		
 //	    Image fishImage = GameLogic.getInstance().bass_Right;
@@ -43,18 +39,49 @@ public class SellPopUp extends VBox {
 //	    	    BackgroundPosition.DEFAULT, 
 //	    	    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
 //	    fishInfo.getChildren().add(bgImg);
-	    this.getChildren().addAll(sellText, yesBut, noBut);
-	    this.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
-	}
-
-
-	public void setShown(boolean isShown) {
 		
-		if (isShown) {
-			this.setVisible(true);
-		}
+		this.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
+		this.getChildren().addAll(sellText, yesBtn, noBtn);
+	}
+	private void initSellText() {
+		Text sellText = new Text("Sell this item?");
+		sellText.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		setSellText(sellText);
+	}
+	private void initYesBtn() {
+		Button yesBtn = new Button("YES");
+		yesBtn.setFont(new Font(10));
+		yesBtn.setPrefWidth(40);
+		yesBtn.setPrefHeight(30);
+		setYesBtn(yesBtn);
+		yesBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				// GET MONEY
+				Main.getSellPopUp().setVisible(false);
+			}
+		});
+	}
+	private void initNoBtn() {
+		Button noBtn = new Button("NO");
+		noBtn.setFont(new Font(10));
+		noBtn.setPrefWidth(40);
+		noBtn.setPrefHeight(30);
+		setNoBtn(noBtn);
+		noBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				Main.getSellPopUp().setVisible(false);
+			}
+		});
 	}
 	
+	public void setSellText(Text sellText) {
+		this.sellText = sellText;
+	}
+	public void setYesBtn(Button yesBtn) {
+		this.yesBtn = yesBtn;
+	}
+	public void setNoBtn(Button noBtn) {
+		this.noBtn = noBtn;
+	}
 	
-
 }
