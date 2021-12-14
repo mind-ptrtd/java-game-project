@@ -64,7 +64,7 @@ public class GameScreen extends Canvas {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
 		for (IRenderable entity : GameObject.getInstance().getEntities()) {
-			// System.out.println(GameObject.getInstance().getEntities());
+			System.out.println(GameObject.getInstance().getEntities());
 			// System.out.println(entity.getZ());
 			if (entity.isVisible() && !entity.isDestroyed()) {
 				entity.draw(gc);

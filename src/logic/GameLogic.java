@@ -3,9 +3,9 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javafx.application.Platform;
 
 import fish.*;
+import javafx.application.Platform;
 import main.Main;
 import player.Willy;
 import ui.Map;
