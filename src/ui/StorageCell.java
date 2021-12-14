@@ -78,11 +78,7 @@ public class StorageCell extends Button {
 			});		
 		}
 		
-		static Button yesButton() {
-			Button yes = new Button("YES");
-			yes.setPrefWidth(12);
-			yes.setPrefHeight(10);
-			return yes;
-		}
+		
+		
 		
 }
