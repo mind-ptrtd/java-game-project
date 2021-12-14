@@ -84,15 +84,15 @@ public class Storage extends GridPane {
         noBut.setFont(new Font(10));
         noBut.setPrefWidth(40);
         noBut.setPrefHeight(30);
-        VBox fishInfo = new VBox(20);
-        fishInfo.setAlignment(Pos.CENTER);		
-        Image fishImage = GameLogic.getInstance().bass_Right;
-        BackgroundImage bgImg = new BackgroundImage(fishImage, 
-        	    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-        	    BackgroundPosition.DEFAULT, 
-        	    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
-        fishInfo.getChildren().add(bgImg);
-        sellVbox.getChildren().addAll(sellText, fishInfo, yesBut, noBut);
+//        VBox fishInfo = new VBox(20);
+//        fishInfo.setAlignment(Pos.CENTER);		
+//        Image fishImage = GameLogic.getInstance().bass_Right;
+//        BackgroundImage bgImg = new BackgroundImage(fishImage, 
+//        	    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+//        	    BackgroundPosition.DEFAULT, 
+//        	    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+//        fishInfo.getChildren().add(bgImg);
+        sellVbox.getChildren().addAll(sellText, yesBut, noBut);
         Scene sellScene = new Scene(sellVbox, 200, 200);
         sellShow.setScene(sellScene);
         sellShow.show();
