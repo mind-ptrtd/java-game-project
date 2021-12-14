@@ -21,6 +21,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -48,14 +49,16 @@ public class MainMenu extends VBox {
 	}
 	private void initGameName() {
 		Text gameName = new Text("FISH GAME");
-		gameName.setFont(new Font(50));
+		gameName.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 45));
+		gameName.setFill(Color.DARKSLATEGRAY);
 		setGameName(gameName);
 	}
 	private void initNewGame() {
 		Button newGameButton = new Button("New Game");
-		newGameButton.setPrefWidth(190);
-		newGameButton.setPrefHeight(49);
-		//newGameButton.setStyle("-fx-background-color: brown");
+		newGameButton.setPrefWidth(150);
+		newGameButton.setPrefHeight(50);
+		newGameButton.setFont(Font.font("Comic Sans Ms", FontWeight.LIGHT, FontPosture.REGULAR, 20));
+		newGameButton.setTextFill(Color.CADETBLUE);
 		setNewGame(newGameButton);
 
 		newGameButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -67,10 +70,10 @@ public class MainMenu extends VBox {
 
 	private void initExitGame() {
 		Button exitButton = new Button("Exit");
-		exitButton.setPrefWidth(100);
-		exitButton.setPrefHeight(45);
-		exitButton.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 8));
-		
+		exitButton.setPrefWidth(150);
+		exitButton.setPrefHeight(50);
+		exitButton.setFont(Font.font("Comic Sans Ms", FontWeight.LIGHT, FontPosture.REGULAR, 20));
+		exitButton.setTextFill(Color.CADETBLUE);
 		
 		setExitGame(exitButton);
 		exitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -98,32 +101,5 @@ public class MainMenu extends VBox {
 		this.gameName = gameName;
 	}
 	
-
-//	private void createLogo() {
-//		ImageView logo = new ImageView("/resources/space_runner.png");
-//		logo.setLayoutX(380);
-//		logo.setLayoutY(50);
-//		
-//		logo.setOnMouseEntered(new EventHandler<MouseEvent>() {
-//
-//			@Override
-//			public void handle(MouseEvent event) {
-//				logo.setEffect(new DropShadow());
-//				
-//			}
-//		});
-//		
-//		logo.setOnMouseExited(new EventHandler<MouseEvent>() {
-//
-//			@Override
-//			public void handle(MouseEvent event) {
-//				logo.setEffect(null);
-//				
-//			}
-//		});
-//		
-//		mainPane.getChildren().add(logo);
-//		
-//	}
 
 }
