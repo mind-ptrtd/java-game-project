@@ -35,6 +35,7 @@ public class Main extends Application {
 	public static Pane imagePane = new Pane();
 	private static Stage stage;
 	private static Scene gameScene,startScene;
+	private static GameScreen gameScreen;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -48,7 +49,7 @@ public class Main extends Application {
 		HBox gameRoot = new HBox();
 		this.gameScene = new Scene(gameRoot);
 		GameLogic gameLogic = new GameLogic();
-		GameScreen gameScreen = new GameScreen(800, 600);
+		this.gameScreen = new GameScreen(800, 600);
 
 		//SellPopUp sellpopup = new SellPopUp();
 		//sellpopup.setVisible(false);
@@ -125,6 +126,8 @@ public class Main extends Application {
 	public static SellPopUp getSellPopUp() {
 		return sellPopUp;
 	}
-	
-	
+
+	public static GameScreen getGameScreen() {
+		return gameScreen;
+	}
 }

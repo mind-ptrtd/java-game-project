@@ -58,6 +58,7 @@ public class SellPopUp extends VBox {
 			public void handle(MouseEvent e) {
 				// GET MONEY
 				Main.getSellPopUp().setVisible(false);
+				Main.getGameScreen().requestFocus();
 			}
 		});
 	}
@@ -70,6 +71,7 @@ public class SellPopUp extends VBox {
 		noBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
 				Main.getSellPopUp().setVisible(false);
+				Main.getGameScreen().requestFocus();
 			}
 		});
 	}
