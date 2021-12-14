@@ -81,7 +81,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 	private void killFish(Fish fish) {
 		fish.isHook = false;
 		fish.isDead = true;
-		fish.fishwhere = FishWhere.HELL;
+		fish.fishwhere = FishWhere.DEAD;
 		fish.setDestroyed(true);
 		fish.upDateSprite();
 		FishingSystem.getInstance().decreaseFishCount();
@@ -103,7 +103,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 			isHook = true;
 			fishwhere = FishWhere.HOOK;
 			System.out.println("CATCH FISH : " + this.name);
-			GameObject.getInstance().pingSound.play();
+			GameObject.getInstance().catchFishSound.play();
 			
 		} else if (this.fishType == fishType.BOMB && checkHitBox()) { // BOMB ATTACH
 			// Play bomb Sound
@@ -115,7 +115,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 			for (Fish fish : FishingSystem.getInstance().getAllFishContainer()) {
 				//new Thread(()->{
 				if(fish.fishwhere == fishwhere.HOOK) {
-					fish.fishwhere = FishWhere.HELL;
+					fish.fishwhere = FishWhere.DEAD;
 					System.out.println("FISH BOMB : " + fish.name);
 					killFish(fish);
 				}
@@ -127,16 +127,16 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 			for (Fish fish : FishingSystem.getInstance().getAllFishContainer()) {
 				//new Thread(()->{
 					if(fish.fishwhere == FishWhere.HOOK) {
-						fish.fishwhere = FishWhere.HELL;	// DIE
+						fish.fishwhere = FishWhere.DEAD;	// DIE
 						System.out.println("SELL : " + fish.name);
 						killFish(fish);
 						// money += fish.price
 					}
 				//}).start();
 			}
+			GameObject.getInstance().pingSound.play();
 		}
 
-		// Swimming Area Offset = 20 (Preventing Collision edges)
 		if (!isHook && !isDead) {
 			if (isRight) {
 				move(Direction.RIGHT);

@@ -1,5 +1,6 @@
 package main;
 
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -11,6 +12,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -81,7 +83,11 @@ public class Main extends Application {
 
 		gameScreen.requestFocus();
 		stage.show();
-
+		AudioClip bgSong = GameObject.getInstance().bgSong;
+		bgSong.setCycleCount(bgSong.INDEFINITE);
+		bgSong.play();
+		
+		
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
 				gameScreen.paintComponent();

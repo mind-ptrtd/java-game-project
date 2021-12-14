@@ -59,7 +59,6 @@ public class Willy extends Entity implements Updateable, Animateable {
 			setFishing(false);
 			isFront = true;
 			upDateSprite();
-			System.out.println("Keep");
 		} else if (InputUtility.getKeyPressed(KeyCode.SPACE)) {
 			isFront = false;
 			setFishing(true);
