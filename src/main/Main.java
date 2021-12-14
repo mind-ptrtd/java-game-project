@@ -11,6 +11,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -20,6 +21,7 @@ import logic.GameObject;
 import ui.GameScreen;
 import ui.ItemBar;
 import ui.MainMenu;
+import ui.ManagerTab;
 import ui.SellPopUp;
 import ui.Storage;
 import animation.Animateable;
@@ -46,7 +48,7 @@ public class Main extends Application {
 		
 		this.stage = stage;
 		// IN GAME ---------------------- //
-		HBox gameRoot = new HBox();
+		VBox gameRoot = new VBox();
 		this.gameScene = new Scene(gameRoot);
 		GameLogic gameLogic = new GameLogic();
 		this.gameScreen = new GameScreen(800, 600);
@@ -60,9 +62,11 @@ public class Main extends Application {
 		
 		screen.getChildren().addAll(gameScreen, imagePane,sellPopUp);
 
-		ItemBar itemBar = new ItemBar();
-
-		gameRoot.getChildren().addAll(itemBar, screen);
+		//ItemBar itemBar = new ItemBar();
+		
+		ManagerTab managerTab = new ManagerTab();
+		
+		gameRoot.getChildren().addAll(managerTab, screen);
 
 		// START ---------------------- //
 		HBox startRoot = new HBox();

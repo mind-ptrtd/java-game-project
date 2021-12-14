@@ -20,7 +20,7 @@ public class ItemBar extends VBox {
 	
 	public ItemBar() {
 		
-		this.setPrefHeight(600);
+		this.setPrefHeight(400);
 		this.setAlignment(Pos.CENTER);
 		this.setBorder(new Border(new BorderStroke(Color.BISQUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
 		Storage storage = new Storage();
