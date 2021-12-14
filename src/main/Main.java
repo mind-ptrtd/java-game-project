@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import logic.FishingSystem;
 import logic.GameLogic;
 import logic.GameObject;
 import ui.GameScreen;
@@ -27,14 +28,14 @@ import fish.Fish;
 import input.InputUtility;
 
 public class Main extends Application {
-	
+
 	public Storage storage;
 	private static Game screenNow;
 	private static SellPopUp sellPopUp;
 	private static boolean isClose;
 	public static Pane imagePane = new Pane();
 	private static Stage stage;
-	private static Scene gameScene,startScene;
+	private static Scene gameScene, startScene;
 	private static GameScreen gameScreen;
 
 	public static void main(String[] args) {
@@ -43,7 +44,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) {
-		
+
 		this.stage = stage;
 		// IN GAME ---------------------- //
 		HBox gameRoot = new HBox();
@@ -51,14 +52,14 @@ public class Main extends Application {
 		GameLogic gameLogic = new GameLogic();
 		this.gameScreen = new GameScreen(800, 600);
 
-		//SellPopUp sellpopup = new SellPopUp();
-		//sellpopup.setVisible(false);
+		// SellPopUp sellpopup = new SellPopUp();
+		// sellpopup.setVisible(false);
 		Group screen = new Group();
-		
+
 		this.sellPopUp = new SellPopUp();
 		sellPopUp.setVisible(false);
-		
-		screen.getChildren().addAll(gameScreen, imagePane,sellPopUp);
+
+		screen.getChildren().addAll(gameScreen, imagePane, sellPopUp);
 
 		ItemBar itemBar = new ItemBar();
 
@@ -72,7 +73,7 @@ public class Main extends Application {
 		startRoot.getChildren().add(mainmenu);
 
 		// ---------------------------- //
-		
+
 		screenNow = Game.START;
 		stage.setScene(startScene);
 		stage.setTitle("FISH GAME");
@@ -81,32 +82,33 @@ public class Main extends Application {
 		gameScreen.requestFocus();
 		stage.show();
 
-
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
 				gameScreen.paintComponent();
 				gameLogic.logicUpdate();
-				Main.this.changeScene();
-				GameObject.getInstance().logicUpdate();
+				Main.changeScene();
+				GameObject.getInstance().objectUpdate();
 				InputUtility.updateInputState();
+				FishingSystem.fishUpdate();
 			}
 		};
 		animation.start();
 	}
+
 	public static void changeScene() {
 		if (screenNow == Game.START) {
 			stage.setScene(startScene);
-			//System.out.println("START");
-		} else if(screenNow == Game.INGAME){
+			// System.out.println("START");
+		} else if (screenNow == Game.INGAME) {
 			stage.setScene(gameScene);
-			//System.out.println("GAME");
+			// System.out.println("GAME");
 		}
-		if(isClose) {
+		if (isClose) {
 			stage.close();
-			//System.out.println("CLOSE");
+			// System.out.println("CLOSE");
 		}
-		
 	}
+
 	public static void setScreenNow(Game screenNow) {
 		Main.screenNow = screenNow;
 	}
