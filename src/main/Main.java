@@ -27,9 +27,10 @@ import fish.Fish;
 import input.InputUtility;
 
 public class Main extends Application {
-
+	
 	public Storage storage;
 	private static Game screenNow;
+	private static SellPopUp sellPopUp;
 	private static boolean isClose;
 	public static Pane imagePane = new Pane();
 	private static Stage stage;
@@ -53,10 +54,10 @@ public class Main extends Application {
 		//sellpopup.setVisible(false);
 		Group screen = new Group();
 		
-		SellPopUp sellPopUp = new SellPopUp();
+		this.sellPopUp = new SellPopUp();
 		sellPopUp.setVisible(false);
 		
-		screen.getChildren().addAll(gameScreen, imagePane, sellPopUp);
+		screen.getChildren().addAll(gameScreen, imagePane,sellPopUp);
 
 		ItemBar itemBar = new ItemBar();
 
@@ -119,6 +120,10 @@ public class Main extends Application {
 
 	public static void setClose(boolean isClose) {
 		Main.isClose = isClose;
+	}
+
+	public static SellPopUp getSellPopUp() {
+		return sellPopUp;
 	}
 	
 	
