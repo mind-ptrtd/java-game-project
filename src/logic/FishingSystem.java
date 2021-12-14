@@ -11,7 +11,7 @@ public class FishingSystem {
 	private static double globalFishHookX, globalFishHookY;
 	private static boolean globalFishing, isNearMe;
 	
-	private static int HookSize = 1;
+	private static int HookSize;
 	private static boolean isBackPackFull,isHookFull;
 	private static int fishSea,fishHook;
 	
@@ -38,29 +38,20 @@ public class FishingSystem {
 		allFishContainer.add(fish);
 	}
 	public static void fishUpdate() {
+		// Pull From Global
+		HookSize = MarketSystem.getHookSize();
+		
+		int fishHOOK = 0;
 		for (int i = allFishContainer.size() - 1; i >= 0; i--) {
 			Fish fishInLoop = allFishContainer.get(i);
-			/*
-			int fishSEA = 0;
-			
-			if(fishInLoop.getFishwhere() == FishWhere.SEA) {
-				fishSEA++;
-			} else if(fishInLoop.getFishwhere() == FishWhere.HOOK){
-				fishHOOK++;
-			} else if(fishInLoop.getFishwhere() == FishWhere.HELL) {
-				allFishContainer.remove(fishInLoop);
-			}
-			setFishSea(fishSEA);
-			setFishHook(fishHOOK);
-			*/
-			int fishHOOK = 0;
 			if(fishInLoop.getFishwhere() == FishWhere.HOOK){
-				fishHOOK++;
+				fishHOOK+=1;
 			} else if(fishInLoop.getFishwhere() == FishWhere.DEAD) {
 				allFishContainer.remove(fishInLoop);
 			}
-			setFishHook(fishHOOK);
 		}
+		System.out.println(fishHOOK);
+		setFishHook(fishHOOK);
 	}
 
 	

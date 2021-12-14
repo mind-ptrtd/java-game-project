@@ -9,7 +9,7 @@ public class LionFish extends Fish{
 		fishType = FishType.LIONFISH;
 		this.price = 150;
 		this.name = "Lion Fish";
-		this.setSpeed(2*speedFactor);
+		this.setSpeed(2*fishSpeedFactor);
 	}
 
 	@Override

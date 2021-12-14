@@ -10,7 +10,7 @@ public class BlueFish extends Fish{
 		this.price = 100;
 		this.name = "Blue Fish";
 		this.fishType = fishType.BLUEFISH;
-		this.setSpeed(1*speedFactor);
+		this.setSpeed(1*fishSpeedFactor);
 		// ADD BELOW
 		
 	}

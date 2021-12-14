@@ -17,6 +17,7 @@ import logic.Entity;
 import logic.FishingSystem;
 import logic.GameLogic;
 import logic.GameObject;
+import logic.MarketSystem;
 import logic.Updateable;
 import main.Main;
 import logic.FishingSystem;
@@ -25,8 +26,8 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 
 	protected abstract ImageView imageViewFish();
 	protected abstract boolean isNeedToRotate();
-
-	protected final static float speedFactor = 0.5f;
+	
+	protected static float fishSpeedFactor = MarketSystem.getFishSpeedFactor();
 	public static Random random = new Random();
 
 	// For Child Class
@@ -61,7 +62,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 
 	public void move(Direction dir) {
 		if (dir == Direction.RIGHT) {
-			if (x >= 800 - 32 - 30) {
+			if (x >= 800 - 32 - 40) {
 				isTurnLeft = isLeft = true;
 				isRight = false;
 				upDateSprite();
@@ -69,7 +70,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 				x += speedX;
 			}
 		} else {
-			if (x <= 0 + 30) {
+			if (x <= 0 + 40) {
 				isTurnRight = isRight = true;
 				isLeft = false;
 				upDateSprite();
@@ -93,7 +94,8 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 		fishHookX = FishingSystem.getInstance().getGlobalFishHookX();
 		fishHookY = FishingSystem.getInstance().getGlobalFishHookY();
 		isNearMe = FishingSystem.getInstance().getNearMe();
-
+		fishSpeedFactor = MarketSystem.getFishSpeedFactor();
+		
 		if (isHook) {
 			x = fishHookX;
 			y = fishHookY;
@@ -103,6 +105,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 			isHook = true;
 			fishwhere = FishWhere.HOOK;
 			System.out.println("CATCH FISH : " + this.name);
+			System.out.println("IS FULL : "+FishingSystem.getInstance().isHookFull());
 			GameObject.getInstance().catchFishSound.play();
 			
 		} else if (this.fishType == fishType.BOMB && checkHitBox()) { // BOMB ATTACH
@@ -130,6 +133,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 						fish.fishwhere = FishWhere.DEAD;	// DIE
 						System.out.println("SELL : " + fish.name);
 						killFish(fish);
+						System.out.println("YOU GOT : "+fish.price);
 						// money += fish.price
 					}
 				//}).start();

@@ -9,7 +9,7 @@ public class Carp extends Fish {
 		fishType = FishType.CARP;
 		this.price = 350;
 		this.name = "Carp";
-		this.setSpeed(3*speedFactor);
+		this.setSpeed(3*fishSpeedFactor);
 	
 	}
 

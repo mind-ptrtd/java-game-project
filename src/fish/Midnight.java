@@ -9,7 +9,7 @@ public class Midnight extends Fish{
 		fishType = FishType.MIDNIGHT;
 		this.price = 400;
 		this.name = "Midnight";
-		this.setSpeed(4*speedFactor);
+		this.setSpeed(4*fishSpeedFactor);
 	}
 
 	@Override

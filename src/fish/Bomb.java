@@ -9,7 +9,7 @@ public class Bomb extends Fish{
 		this.name = "Bomb";
 		this.setPrice(10000); // CAN'T FISH
 		this.fishType = fishType.BOMB;
-		this.setSpeed(2*speedFactor);
+		this.setSpeed(2*fishSpeedFactor);
 	}
 	
 	protected ImageView imageViewFish() {
