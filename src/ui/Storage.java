@@ -55,8 +55,8 @@ public class Storage extends GridPane {
 	 		storageCell.setOnAction(new EventHandler<ActionEvent>() {
 	 			public void handle(ActionEvent event) {
 	 				if (storageCell != null) { 
-	 					sellPopUp();
-	 					//System.out.println("ok");
+	 					// add show
+	 					System.out.println("ok");
 	 					
 	 				}
 	 				
@@ -67,36 +67,7 @@ public class Storage extends GridPane {
 		
 	}
 	
-	private void sellPopUp() {
-		Stage sellShow = new Stage();
-        sellShow.initModality(Modality.APPLICATION_MODAL);
-        //sellShow.initOwner(primaryStage);
-        VBox sellVbox = new VBox(100);
-        sellVbox.setAlignment(Pos.CENTER);
-        sellVbox.setSpacing(3.5);
-        Text sellText = new Text("Sell this item?");
-        sellText.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 20 ));
-        Button yesBut = new Button("YES");
-        yesBut.setFont(new Font(10));
-        yesBut.setPrefWidth(40);
-        yesBut.setPrefHeight(30);
-        Button noBut = new Button("NO");
-        noBut.setFont(new Font(10));
-        noBut.setPrefWidth(40);
-        noBut.setPrefHeight(30);
-//        VBox fishInfo = new VBox(20);
-//        fishInfo.setAlignment(Pos.CENTER);		
-//        Image fishImage = GameLogic.getInstance().bass_Right;
-//        BackgroundImage bgImg = new BackgroundImage(fishImage, 
-//        	    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-//        	    BackgroundPosition.DEFAULT, 
-//        	    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
-//        fishInfo.getChildren().add(bgImg);
-        sellVbox.getChildren().addAll(sellText, yesBut, noBut);
-        Scene sellScene = new Scene(sellVbox, 200, 200);
-        sellShow.setScene(sellScene);
-        sellShow.show();
-	}
+
 	
 	
 	

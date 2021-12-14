@@ -20,6 +20,7 @@ import logic.GameObject;
 import ui.GameScreen;
 import ui.ItemBar;
 import ui.MainMenu;
+import ui.SellPopUp;
 import ui.Storage;
 import animation.Animateable;
 import fish.Fish;
@@ -51,7 +52,11 @@ public class Main extends Application {
 		//SellPopUp sellpopup = new SellPopUp();
 		//sellpopup.setVisible(false);
 		Group screen = new Group();
-		screen.getChildren().addAll(gameScreen, imagePane);
+		
+		SellPopUp sellPopUp = new SellPopUp();
+		sellPopUp.setVisible(false);
+		
+		screen.getChildren().addAll(gameScreen, imagePane, sellPopUp);
 
 		ItemBar itemBar = new ItemBar();
 
