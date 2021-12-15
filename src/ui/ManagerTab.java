@@ -26,6 +26,8 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 	private Text moneyText;
 	private Button buyBtn;
 	private int moneyShow;
+	private boolean isBuy;
+	private ItemShop itemShop;
 
 	public ManagerTab() {
 		this.setAlignment(Pos.CENTER_RIGHT);
@@ -68,7 +70,13 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		});
 	}
 	public void shopUpdate() {
-		moneyShow = ShopSystem.getMoney();
+		if (isBuy) {
+			moneyShow = ShopSystem.getMoney() - itemShop.getPrice();
+		}
+		else {
+			moneyShow = ShopSystem.getMoney();
+		}
+		
 		moneyText.setText("Fish Catched: " + FishingSystem.getFishHook() + "   " + "Money: " + moneyShow + "          ");
 	}
 
@@ -82,5 +90,6 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		this.buyBtn = buyBtn;
 		
 	}
+	
 
 }
