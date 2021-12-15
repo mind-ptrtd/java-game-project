@@ -151,12 +151,12 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	}
 
 	// For Sprite Animation
-	private static final int COLUMNS = 4;
-	private static final int COUNT = 4;
-	private static final int OFFSET_X = 0;
-	private static final int OFFSET_Y = 0;
-	private static final int WIDTH = 32;
-	private static final int HEIGHT = 32;
+	private final int COLUMNS = 4;
+	private final int COUNT = 4;
+	private final int OFFSET_X = 0;
+	private final int OFFSET_Y = 0;
+	private final int WIDTH = 32;
+	private final int HEIGHT = 32;
 
 	// Handle Display
 	public void draw(GraphicsContext gc) {

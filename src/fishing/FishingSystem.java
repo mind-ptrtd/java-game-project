@@ -9,9 +9,9 @@ import shop.ShopSystem;
 public class FishingSystem {
 	private static final FishingSystem instance = new FishingSystem();
 	private static double globalWillyX, globalWillyY;
-	private static double globalFishHookX, globalFishHookY;
+	private static double globalHookX, globalHookY;
 	private static boolean isglobalFishing, isNearMe;
-
+	
 	private final ArrayList<Fish> allFishContainer = new ArrayList<Fish>();
 	private static int HookSize;
 	private static int fishHook;
@@ -91,8 +91,8 @@ public class FishingSystem {
 	}
 
 	public static void setGlobalFishHookXY(double globalFishHookX, double globalFishHookY) {
-		FishingSystem.globalFishHookX = globalFishHookX;
-		FishingSystem.globalFishHookY = globalFishHookY;
+		FishingSystem.globalHookX = globalFishHookX;
+		FishingSystem.globalHookY = globalFishHookY;
 	}
 
 	public static double getGlobalWillyX() {
@@ -100,7 +100,7 @@ public class FishingSystem {
 	}
 
 	public static double getGlobalFishHookX() {
-		return globalFishHookX;
+		return globalHookX;
 	}
 
 	public static double getGlobalWillyY() {
@@ -108,7 +108,7 @@ public class FishingSystem {
 	}
 
 	public static double getGlobalFishHookY() {
-		return globalFishHookY;
+		return globalHookY;
 	}
 
 	public static boolean getNearMe() {
