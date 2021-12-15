@@ -1,5 +1,5 @@
 package logic;
 
-public interface FishingSync {
+public interface FishingSyncAble {
 	public abstract void fishingSync();
 }
