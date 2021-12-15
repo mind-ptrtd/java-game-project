@@ -20,7 +20,7 @@ import main.Main;
 public class SellPopUp extends VBox {
 	private Text sellText;
 	private Button yesBtn,noBtn;
-	private boolean isBuy;
+	private static boolean isBuy;
 	
 
 	public SellPopUp() {
@@ -73,6 +73,7 @@ public class SellPopUp extends VBox {
 		setNoBtn(noBtn);
 		noBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
+				isBuy = false;
 				Main.getSellPopUp().setVisible(false);
 				Main.getGameScreen().requestFocus();
 			}
@@ -91,12 +92,8 @@ public class SellPopUp extends VBox {
 		this.noBtn = noBtn;
 	}
 	
-	public void setIsBuy() {
-		isBuy = false;
-	}
-	
-	public boolean getIsBuy() {
-		return this.getIsBuy();
+	public static boolean getIsBuy() {
+		return SellPopUp.isBuy;
 	}
 	
 }
