@@ -114,7 +114,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 			this.fishType = FishType.NONE; // preventing for bombing again
 			killFish(this); // kill Bomb
 
-			new Thread(() -> {
+			//new Thread(() -> {
 				for (Fish fish : FishingSystem.getInstance().getAllFishContainer()) {
 					if (fish.fishwhere == FishWhere.HOOK) {
 						fish.fishwhere = FishWhere.DEAD;
@@ -122,13 +122,13 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 						killFish(fish);
 					}
 				}
-			}).start();
+			//}).start();
 			GameObject.getInstance();
 			GameObject.bombSound.play();
 
 		} else if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // Keep Fish
 			FishingSystem.getInstance();
-			new Thread(() -> {
+			//new Thread(() -> {
 				for (Fish fish : FishingSystem.getInstance().getAllFishContainer()) {
 					if (fish.fishwhere == FishWhere.HOOK) {
 						fish.fishwhere = FishWhere.DEAD; // DIE
@@ -137,7 +137,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 						ShopSystem.setMoney(ShopSystem.getMoney() + fish.price);
 					}
 				}
-			}).start();
+			//}).start();
 			System.out.println("YOU GOT : " + ShopSystem.getMoney());
 			GameObject.getInstance();
 			GameObject.pingSound.play();

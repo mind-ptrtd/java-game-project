@@ -50,7 +50,7 @@ public class Willy extends Entity implements Updateable, Animateable {
 	// Update Logic
 	public void logicUpdate() {
 		// Pull Global to local
-		isNearMe = FishingSystem.getInstance().getNearMe();
+		isNearMe = FishingSystem.getNearMe();
 		speedX = 1.5f * ShopSystem.getWalkSpeedFactor();
 		// Push local to global
 		FishingSystem.getInstance().setGlobalXY(getX(), getY());
@@ -114,16 +114,17 @@ public class Willy extends Entity implements Updateable, Animateable {
 	private static int height;
 
 	public void setSpriteProporty(int column, int count, int offsetX, int offsetY, int width, int height) {
-		this.coloumn = column;
-		this.count = count;
-		this.offsetX = offsetX;
-		this.offsetY = offsetY;
-		this.width = width;
-		this.height = height;
+		Willy.coloumn = column;
+		Willy.count = count;
+		Willy.offsetX = offsetX;
+		Willy.offsetY = offsetY;
+		Willy.width = width;
+		Willy.height = height;
 	}
 
 	public void createFirstSprite() {
-		imageView = new ImageView(GameObject.getInstance().playerPic);
+		GameObject.getInstance();
+		imageView = new ImageView(GameObject.playerPic);
 		setSpriteProporty(1, 1, 0, 0, 32, 2 * 32);
 		imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
 		startAnimation();
@@ -133,27 +134,32 @@ public class Willy extends Entity implements Updateable, Animateable {
 		if (isDead) {
 			imageView.setImage(null);
 			animation.stop();
-			imageView.setImage(GameObject.getInstance().emptySprite);
+			GameObject.getInstance();
+			imageView.setImage(GameObject.emptySprite);
 			setSpriteProporty(0, 0, 0, 0, 0, 0);
 		} else if (isFishing) {
 			imageView.setImage(null);
 			animation.stop();
-			imageView.setImage(GameObject.getInstance().playerPic);
+			GameObject.getInstance();
+			imageView.setImage(GameObject.playerPic);
 			setSpriteProporty(4, 4, 0, 8 * 32, 32, 4 * 32);
 		} else if (isWalkLeft) {
 			imageView.setImage(null);
 			animation.stop();
-			imageView.setImage(GameObject.getInstance().playerPic);
+			GameObject.getInstance();
+			imageView.setImage(GameObject.playerPic);
 			setSpriteProporty(4, 4, 0 * 32, 6 * 32, 32, 2 * 32);
 		} else if (isWalkRight) {
 			imageView.setImage(null);
 			animation.stop();
-			imageView.setImage(GameObject.getInstance().playerPic);
+			GameObject.getInstance();
+			imageView.setImage(GameObject.playerPic);
 			setSpriteProporty(4, 4, 0 * 32, 2 * 32, 32, 2 * 32);
 		} else if (isFront) { // STAND STILL
 			imageView.setImage(null);
 			animation.stop();
-			imageView.setImage(GameObject.getInstance().playerPic);
+			GameObject.getInstance();
+			imageView.setImage(GameObject.playerPic);
 			setSpriteProporty(1, 1, 0, 0, 32, 2 * 32);
 		}
 		imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
@@ -176,7 +182,8 @@ public class Willy extends Entity implements Updateable, Animateable {
 
 	public void setFishing(boolean isFishing) {
 		this.isFishing = isFishing;
-		FishingSystem.getInstance().setFishing(isFishing); // Update Global
+		FishingSystem.getInstance();
+		FishingSystem.setFishing(isFishing); // Update Global
 	}
 
 }

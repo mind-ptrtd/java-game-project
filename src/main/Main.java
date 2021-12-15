@@ -1,21 +1,13 @@
 package main;
 
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.FishingSystem;
 import logic.GameLogic;
@@ -25,8 +17,6 @@ import ui.ItemBar;
 import ui.MainMenu;
 import ui.SellPopUp;
 import ui.Storage;
-import animation.Animateable;
-import fish.Fish;
 import input.InputUtility;
 
 public class Main extends Application {
@@ -47,18 +37,18 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
 
-		this.stage = stage;
+		Main.stage = stage;
 		// IN GAME ---------------------- //
 		HBox gameRoot = new HBox();
-		this.gameScene = new Scene(gameRoot);
+		Main.gameScene = new Scene(gameRoot);
 		GameLogic gameLogic = new GameLogic();
-		this.gameScreen = new GameScreen(800, 600);
+		Main.gameScreen = new GameScreen(800, 600);
 
 		// SellPopUp sellpopup = new SellPopUp();
 		// sellpopup.setVisible(false);
 		Group screen = new Group();
 
-		this.sellPopUp = new SellPopUp();
+		Main.sellPopUp = new SellPopUp();
 		sellPopUp.setVisible(false);
 
 		screen.getChildren().addAll(gameScreen, imagePane, sellPopUp);
@@ -69,7 +59,7 @@ public class Main extends Application {
 
 		// START ---------------------- //
 		HBox startRoot = new HBox();
-		this.startScene = new Scene(startRoot);
+		Main.startScene = new Scene(startRoot);
 
 		MainMenu mainmenu = new MainMenu();
 		startRoot.getChildren().add(mainmenu);
@@ -83,8 +73,9 @@ public class Main extends Application {
 
 		gameScreen.requestFocus();
 		stage.show();
-		AudioClip bgSong = GameObject.getInstance().bgSong;
-		bgSong.setCycleCount(bgSong.INDEFINITE);
+		GameObject.getInstance();
+		AudioClip bgSong = GameObject.bgSong;
+		bgSong.setCycleCount(AudioClip.INDEFINITE);
 		bgSong.play();
 		
 		
@@ -115,6 +106,8 @@ public class Main extends Application {
 		}
 	}
 
+	
+	// Getter-Setter
 	public static void setScreenNow(Game screenNow) {
 		Main.screenNow = screenNow;
 	}

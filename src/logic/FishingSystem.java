@@ -15,7 +15,7 @@ public class FishingSystem {
 	private static int fishSea, fishHook;
 
 	// FishSpawn
-	private static int poolSize = 20;
+	private static int poolSize = 100;
 	private static int fishCount;
 
 	public static void increaseFishCount() {

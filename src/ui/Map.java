@@ -2,7 +2,6 @@ package ui;
 
 import javafx.scene.canvas.GraphicsContext;
 import logic.IRenderable;
-import logic.GameLogic;
 import logic.GameObject;
 
 public class Map implements IRenderable{
