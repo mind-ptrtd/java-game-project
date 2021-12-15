@@ -2,6 +2,7 @@ package main;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -10,16 +11,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
-import logic.FishingSystem;
 import logic.GameLogic;
 import logic.GameObject;
+import shop.ShopSystem;
 import ui.BuyTab;
 import ui.GameScreen;
 import ui.MainMenu;
 import ui.ManagerTab;
 import ui.SellPopUp;
 import ui.Storage;
-import Shop.ShopSystem;
+import fishing.FishingSystem;
 import input.InputUtility;
 
 public class Main extends Application {
@@ -32,7 +33,7 @@ public class Main extends Application {
 	private static boolean isClose;
 	public static Pane imagePane = new Pane();
 	private static Stage stage;
-	private static Scene gameScene, startScene;
+	private static Scene gameScene, startScene, testScene;
 	private static GameScreen gameScreen;
 
 	public static void main(String[] args) {
@@ -49,31 +50,35 @@ public class Main extends Application {
 		GameLogic gameLogic = new GameLogic();
 		Main.gameScreen = new GameScreen(800, 600);
 
+		Group screen = new Group();
 		Main.sellPopUp = new SellPopUp();
 		sellPopUp.setVisible(false);
-		Group screen = new Group();
-		
+
 		Main.managerTab = new ManagerTab();
+
+		Main.buyTab = new BuyTab();
+		buyTab.setVisible(true);
+		screen.getChildren().addAll(gameScreen, imagePane, buyTab,sellPopUp);
+		// ItemBar itemBar = new ItemBar();
 		
-		Main.buyTab = new BuyTab();	
-		buyTab.setVisible(false);
-		screen.getChildren().addAll(gameScreen, buyTab, imagePane, sellPopUp);
-
-		//ItemBar itemBar = new ItemBar();
-
-		gameRoot.getChildren().addAll(managerTab, screen);
+		gameRoot.getChildren().addAll(managerTab,buyTab, screen);
 
 		// START ---------------------- //
 		HBox startRoot = new HBox();
 		Main.startScene = new Scene(startRoot);
 
-		
-		
 		MainMenu mainmenu = new MainMenu();
 		startRoot.getChildren().add(mainmenu);
 
-		
 		// ---------------------------- //
+
+		// --TEST ---------------//
+		HBox testRoot = new HBox();
+		Main.testScene = new Scene(testRoot);
+
+		BuyTab buyTab = new BuyTab();
+		testRoot.getChildren().addAll(buyTab);
+		// ------------------------//
 
 		screenNow = Game.START;
 		stage.setScene(startScene);
@@ -87,7 +92,7 @@ public class Main extends Application {
 		AudioClip bgSong = GameObject.bgSong;
 		bgSong.setCycleCount(AudioClip.INDEFINITE);
 		bgSong.play();
-		
+
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
 				gameScreen.paintComponent();
@@ -109,6 +114,8 @@ public class Main extends Application {
 		} else if (screenNow == Game.INGAME) {
 			stage.setScene(gameScene);
 			// System.out.println("GAME");
+		} else {
+			stage.setScene(testScene);
 		}
 		if (isClose) {
 			stage.close();
@@ -119,16 +126,15 @@ public class Main extends Application {
 	public static void addToPane(ImageView imageview) {
 		imagePane.getChildren().add(imageview);
 	}
-	
+
 	public static void removeFromPane(ImageView imageview) {
 		imagePane.getChildren().remove(imageview);
 	}
-	
+
 	// Getter-Setter
 	public static void setScreenNow(Game screenNow) {
 		Main.screenNow = screenNow;
 	}
-
 
 	public static void setClose(boolean isClose) {
 		Main.isClose = isClose;
@@ -149,7 +155,5 @@ public class Main extends Application {
 	public static ManagerTab getManagerTab() {
 		return managerTab;
 	}
-	
-	
-	
+
 }

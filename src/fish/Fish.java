@@ -2,9 +2,10 @@ package fish;
 
 import java.util.Random;
 
-import Shop.ShopSystem;
 import animation.Animateable;
 import animation.SpriteAnimation;
+import fishing.FishingSyncable;
+import fishing.FishingSystem;
 import input.InputUtility;
 import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
@@ -14,11 +15,10 @@ import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import logic.Direction;
 import logic.Entity;
-import logic.FishingSystem;
-import logic.FishingSyncable;
 import logic.GameObject;
 import logic.Updateable;
 import main.Main;
+import shop.ShopSystem;
 
 public abstract class Fish extends Entity implements Updateable, Animateable,FishingSyncable {
 
@@ -151,12 +151,12 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	}
 
 	// For Sprite Animation
-	private static final int COLUMNS = 4;
-	private static final int COUNT = 4;
-	private static final int OFFSET_X = 0;
-	private static final int OFFSET_Y = 0;
-	private static final int WIDTH = 32;
-	private static final int HEIGHT = 32;
+	private final int COLUMNS = 4;
+	private final int COUNT = 4;
+	private final int OFFSET_X = 0;
+	private final int OFFSET_Y = 0;
+	private final int WIDTH = 32;
+	private final int HEIGHT = 32;
 
 	// Handle Display
 	public void draw(GraphicsContext gc) {

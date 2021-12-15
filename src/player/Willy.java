@@ -1,8 +1,9 @@
 package player;
 
-import Shop.ShopSystem;
 import animation.Animateable;
 import animation.SpriteAnimation;
+import fishing.FishingSyncable;
+import fishing.FishingSystem;
 import input.InputUtility;
 import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
@@ -12,10 +13,9 @@ import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import logic.Direction;
 import logic.Entity;
-import logic.FishingSyncable;
 import logic.Updateable;
 import main.Main;
-import logic.FishingSystem;
+import shop.ShopSystem;
 import logic.GameObject;
 
 public class Willy extends Entity implements Updateable, Animateable, FishingSyncable {
@@ -117,20 +117,20 @@ public class Willy extends Entity implements Updateable, Animateable, FishingSyn
 	}
 
 	// For Sprite Animation
-	private static int coloumn;
-	private static int count;
-	private static int offsetX;
-	private static int offsetY;
-	private static int width;
-	private static int height;
+	private int column;
+	private int count;
+	private int offsetX;
+	private int offsetY;
+	private int width;
+	private int height;
 
 	public void setSpriteProporty(int column, int count, int offsetX, int offsetY, int width, int height) {
-		Willy.coloumn = column;
-		Willy.count = count;
-		Willy.offsetX = offsetX;
-		Willy.offsetY = offsetY;
-		Willy.width = width;
-		Willy.height = height;
+		this.column = column;
+		this.count = count;
+		this.offsetX = offsetX;
+		this.offsetY = offsetY;
+		this.width = width;
+		this.height = height;
 	}
 
 	public void createFirstSprite() {
@@ -173,7 +173,7 @@ public class Willy extends Entity implements Updateable, Animateable, FishingSyn
 
 	public void startAnimation() {
 		imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
-		animation = new SpriteAnimation(imageView, Duration.millis(1000), count, coloumn, offsetX, offsetY, width,
+		animation = new SpriteAnimation(imageView, Duration.millis(1000), count, column, offsetX, offsetY, width,
 				height);
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.play();

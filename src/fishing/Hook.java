@@ -1,20 +1,24 @@
-package logic;
+package fishing;
 
-import Shop.ShopSystem;
 import animation.ImageViewable;
 import input.InputUtility;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import logic.Direction;
+import logic.Entity;
+import logic.GameObject;
+import logic.Updateable;
 import main.Main;
+import shop.ShopSystem;
 
 public class Hook extends Entity implements Updateable, ImageViewable, FishingSyncable {
 	private ImageView imageView;
+	private HookState currentState;
 	private boolean isNearMe;
 	private float speedY;
 	private double willyX, willyY;
-	private HookState currentState;
 
 	public Hook() {
 		super();
@@ -106,10 +110,10 @@ public class Hook extends Entity implements Updateable, ImageViewable, FishingSy
 	}
 
 	// For Cut ImageView (Do not Have Animation)
-	private static final int offsetX = 0;
-	private static final int offsetY = 0;
-	private static final int width = 32;
-	private static final int height = 32;
+	private final int offsetX = 0;
+	private final int offsetY = 0;
+	private final int width = 32;
+	private final int height = 32;
 
 	public void createFirstSprite() {
 		imageView = new ImageView(GameObject.emptySprite);
