@@ -34,23 +34,25 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	protected String name;
 	protected int price;
 
-	private boolean isLeft, isRight;
 	private float speedX;
 	private ImageView imageView;
 	private Animation animation;
 	private boolean isHook, isDead, isTurnLeft, isTurnRight, isNearMe;
 	private double fishHookX, fishHookY;
-
-	private FishWhere fishwhere;
+	private Direction fishDirection;
+	private FishState currentState;
 
 	// Sea Level in range(7,17) Due to Height of GameScreen 600px
 	public Fish() {
-		isLeft = random.nextBoolean();
-		isRight = !isLeft;
-		z = 20;
+		if(random.nextBoolean()) {
+			fishDirection = Direction.RIGHT;
+		} else {
+			fishDirection = Direction.LEFT;
+		}
+		z = random.nextInt(100);
 		x = 20+random.nextInt(360);
 		y = 7 * 32 + random.nextInt(10 * 32);
-		fishwhere = FishWhere.SEA; // START IN SEA
+		currentState = FishState.SEA; // START IN SEA
 		createFirstSprite();
 		upDateSprite();
 	}
@@ -62,16 +64,16 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	private void move(Direction dir) {
 		if (dir == Direction.RIGHT) {
 			if (x >= 800 - 32 - 20) { // OffSet Right 20
-				isTurnLeft = isLeft = true;
-				isRight = false;
+				fishDirection = Direction.LEFT;
+				isTurnLeft = true;
 				upDateSprite();
 			} else {
 				x += speedX;
 			}
 		} else {
 			if (x <= 0 + 20) { // OffSet Left 20
-				isTurnRight = isRight = true;
-				isLeft = false;
+				fishDirection = Direction.RIGHT;
+				isTurnRight = true;
 				upDateSprite();
 			} else {
 				x -= speedX;
@@ -80,12 +82,9 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	}
 
 	private void killFish(Fish fish) {
-		fish.isHook = false;
-		fish.isDead = true;
-		fish.fishwhere = FishWhere.DEAD;
+		fish.currentState = FishState.DEAD;
 		fish.setDestroyed(true);
 		fish.upDateSprite();
-		FishingSystem.getInstance();
 		FishingSystem.decreaseFishCount();
 	}
 	public void fishingSync() {
@@ -99,41 +98,40 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	public void logicUpdate() {
 		fishingSync();
 		
-		if (isHook) {
+		if (currentState==FishState.HOOK) {
 			x = fishHookX;
 			y = fishHookY;
 		}
-		if (fishType != FishType.BOMB && !isHook && !FishingSystem.isHookFull() && checkHitBox()) {
+		if (fishType != FishType.BOMB && currentState!=FishState.HOOK && !FishingSystem.isHookFull() && checkHitBox()) {
 			// CATCH FISH
 			isHook = true;
-			fishwhere = FishWhere.HOOK;
+			currentState = FishState.HOOK;
 			System.out.println("CATCH FISH : " + this.name);
 			System.out.println("IS FULL : " + FishingSystem.isHookFull());
 			GameObject.catchFishSound.play();
 
-		} else if (this.fishType == FishType.BOMB && checkHitBox()) { // BOMB ATTACH
+		} else if (fishType == FishType.BOMB && checkHitBox()) { // BOMB ATTACH
 			x = 200;
 			y = 0;
-			this.fishType = FishType.NONE; // preventing for bombing again
+			fishType = FishType.NONE; // preventing for bombing again
 			killFish(this); // kill Bomb
 
 			//new Thread(() -> {
 				for (Fish fish : FishingSystem.getInstance().getAllFishContainer()) {
-					if (fish.fishwhere == FishWhere.HOOK) {
-						fish.fishwhere = FishWhere.DEAD;
+					if (fish.currentState == FishState.HOOK) {
+						fish.currentState = FishState.DEAD;
 						System.out.println("FISH BOMB : " + fish.name);
 						killFish(fish);
 					}
 				}
 			//}).start();
-			GameObject.getInstance();
 			GameObject.bombSound.play();
 
 		} else if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // Keep Fish
 			//new Thread(() -> {
 				for (Fish fish : FishingSystem.getInstance().getAllFishContainer()) {
-					if (fish.fishwhere == FishWhere.HOOK) {
-						fish.fishwhere = FishWhere.DEAD; // DIE
+					if (fish.currentState == FishState.HOOK) {
+						fish.currentState = FishState.DEAD; // DIE
 						System.out.println("SELL : " + fish.name);
 						killFish(fish);
 						ShopSystem.setMoney(ShopSystem.getMoney() + fish.price);
@@ -145,7 +143,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 		}
 
 		if (!isHook && !isDead) {
-			if (isRight) {
+			if (fishDirection == Direction.RIGHT) {
 				move(Direction.RIGHT);
 			} else {
 				move(Direction.LEFT);
@@ -178,7 +176,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	}
 
 	public void upDateSprite() {
-		if (isDead) { // Dead Fish when Bomb or Sell
+		if (currentState == FishState.DEAD) { // Dead Fish when Bomb or Sell
 			imageView.setImage(null);
 			animation.stop();
 			GameObject.getInstance();
@@ -198,7 +196,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 		}
 		imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
 		if (isNeedToRotate()) {
-			if (isRight) {
+			if (fishDirection == Direction.RIGHT) {
 				imageView.setRotate(45);
 			} else {
 				imageView.setRotate(-45);
@@ -208,7 +206,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	}
 
 	public void startAnimation() {
-		if (!isDead) { // CheckAgain
+		if (currentState != FishState.DEAD) { // CheckAgain
 			animation = new SpriteAnimation(imageView, Duration.millis(1000), COUNT, COLUMNS, OFFSET_X, OFFSET_Y, WIDTH,
 					HEIGHT);
 			animation.setCycleCount(Animation.INDEFINITE);
@@ -222,15 +220,12 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 		this.speedX = speed;
 	}
 	
-	public FishWhere getFishwhere() {
-		return fishwhere;
+	public FishState getFishwhere() {
+		return currentState;
 	}
 
-	public boolean getLeft() {
-		return isLeft;
+	public Direction getFishDirection() {
+		return fishDirection;
 	}
-
-	public boolean getRight() {
-		return isRight;
-	}
+	
 }

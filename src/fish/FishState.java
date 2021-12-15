@@ -1,6 +1,6 @@
 package fish;
 
-public enum FishWhere {
+public enum FishState {
 	SEA,
 	HOOK,
 	DEAD

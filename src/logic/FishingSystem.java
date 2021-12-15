@@ -3,7 +3,7 @@ package logic;
 import java.util.ArrayList;
 
 import fish.Fish;
-import fish.FishWhere;
+import fish.FishState;
 
 public class FishingSystem {
 	private static final FishingSystem instance = new FishingSystem();
@@ -11,13 +11,29 @@ public class FishingSystem {
 	private static double globalFishHookX, globalFishHookY;
 	private static boolean isglobalFishing, isNearMe;
 
+	private final ArrayList<Fish> allFishContainer = new ArrayList<Fish>();
 	private static int HookSize;
 	private static int fishHook;
-
-	// FishSpawn
-	private static int poolSize = 100;
 	private static int fishCount;
+	private static int poolSize = 100;
+	
+	
 
+	public static void fishUpdate() {
+		// Pull From Global
+		HookSize = ShopSystem.getHookSize();
+		int fishHook = 0;
+		for (int i = getInstance().getAllFishContainer().size() - 1; i >= 0; i--) {
+			Fish fishInLoop = getInstance().getAllFishContainer().get(i);
+			if (fishInLoop.getFishwhere() == FishState.HOOK) {
+				fishHook += 1;
+			} else if (fishInLoop.getFishwhere() == FishState.DEAD) {
+				getInstance().getAllFishContainer().remove(fishInLoop);
+			}
+		}
+		// System.out.println(fishHOOK);
+		setFishHook(fishHook);
+	}
 	public static void increaseFishCount() {
 		fishCount++;
 	}
@@ -26,33 +42,11 @@ public class FishingSystem {
 		fishCount--;
 	}
 
-	// FISH HOOK ------------------------------------//
-
 	public static boolean isHookFull() {
 		return fishHook >= HookSize;
 	}
 
-	// FISH CONTAINER
-	private final ArrayList<Fish> allFishContainer = new ArrayList<Fish>();
-
-	public static void fishUpdate() {
-		// Pull From Global
-		HookSize = ShopSystem.getHookSize();
-
-		int fishHOOK = 0;
-		for (int i = getInstance().getAllFishContainer().size() - 1; i >= 0; i--) {
-			Fish fishInLoop = getInstance().getAllFishContainer().get(i);
-			if (fishInLoop.getFishwhere() == FishWhere.HOOK) {
-				fishHOOK += 1;
-			} else if (fishInLoop.getFishwhere() == FishWhere.DEAD) {
-				getInstance().getAllFishContainer().remove(fishInLoop);
-			}
-		}
-		// System.out.println(fishHOOK);
-		setFishHook(fishHOOK);
-	}
-
-	// -------------------------//
+	// -------GETTER-SETTER---------//
 
 	public static void setHookSize(int hookSize) {
 		HookSize = hookSize;
@@ -93,7 +87,6 @@ public class FishingSystem {
 	public static void setGlobalWillyXY(double x, double y) {
 		FishingSystem.globalWillyX = x;
 		FishingSystem.globalWillyY = y;
-		System.out.println(x+" "+y);
 	}
 
 	public static void setGlobalFishHookXY(double globalFishHookX, double globalFishHookY) {

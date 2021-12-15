@@ -1,6 +1,7 @@
 package fish;
 
 import javafx.scene.image.ImageView;
+import logic.Direction;
 import logic.GameObject;
 
 public class Carp extends Fish {
@@ -15,7 +16,7 @@ public class Carp extends Fish {
 
 	@Override
 	public ImageView imageViewFish() {
-		if(getRight()) {
+		if(getFishDirection()==Direction.RIGHT) {
 			return new ImageView(GameObject.carp_Right);
 		} else {
 			return new ImageView(GameObject.carp_Left);

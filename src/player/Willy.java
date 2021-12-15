@@ -18,19 +18,20 @@ import logic.FishingSystem;
 import logic.GameObject;
 import logic.ShopSystem;
 
-public class Willy extends Entity implements Updateable, Animateable,FishingSyncable {
+public class Willy extends Entity implements Updateable, Animateable, FishingSyncable {
 	private ImageView imageView;
 	private Animation animation;
-	private boolean isWalkLeft, isWalkRight, isFishing, isDead, isFront, isNearMe;
+	private boolean isNearMe;
 	private float speedX;
+	private static WillyState currentState;
 
 	public Willy() {
 		super();
 		x = 400;
 		y = 120;
-		z = 10;
+		z = 100;
 		speedX = 1.5f;
-		isFront = true;
+		currentState = WillyState.FRONT;
 		createFirstSprite();
 		upDateSprite();
 	}
@@ -47,57 +48,59 @@ public class Willy extends Entity implements Updateable, Animateable,FishingSync
 			}
 		}
 	}
+
 	public void fishingSync() {
 		// Pull Global to local
 		isNearMe = FishingSystem.getNearMe();
 		speedX = 1.5f * ShopSystem.getWalkSpeedFactor();
 		// Push local to global
 		FishingSystem.setGlobalWillyXY(getX(), getY());
+		if(currentState == WillyState.FISHING) { 
+			FishingSystem.setGlobalFishing(true); 		
+		} else {
+			FishingSystem.setGlobalFishing(false);
+		}
 	}
+
 	// Update Logic
 	public void logicUpdate() {
 		fishingSync();
-		
+
 		// Control
-		if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // keep Hook
-			isWalkLeft = isWalkRight = false;
-			isFront = true;
-			setFishing(false);
+		if (currentState == WillyState.FISHING && isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // keep Hook
+			currentState = WillyState.FRONT;
+			FishingSystem.setGlobalFishing(false);
 			upDateSprite();
-		} else if (InputUtility.getKeyPressed(KeyCode.SPACE)) { // Go Fishing
-			isWalkLeft = isWalkRight = false;
-			isFront = false;
-			setFishing(true);
+		} else if (currentState != WillyState.FISHING && InputUtility.getKeyPressed(KeyCode.SPACE)) { // Go Fishing
+			currentState = WillyState.FISHING;
+			FishingSystem.setGlobalFishing(true); 
 			upDateSprite();
 		} else {
 			// MOVE RIGHT
-			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && isWalkRight && InputUtility.getKeyPressed(KeyCode.D)
+			if (currentState == WillyState.WALKRIGHT && InputUtility.getKeyPressed(KeyCode.D)
 					&& !InputUtility.getKeyPressed(KeyCode.SPACE)) {
 				move(Direction.RIGHT);
 			}
-			if ((isWalkLeft || isFront) && !InputUtility.getKeyPressed(KeyCode.SPACE)
-					&& InputUtility.getKeyPressed(KeyCode.D) && !InputUtility.getKeyPressed(KeyCode.SPACE)) {
+			if (currentState != WillyState.FISHING && currentState != WillyState.WALKRIGHT
+					&& InputUtility.getKeyPressed(KeyCode.D)) {
 				move(Direction.RIGHT);
-				isWalkRight = true;
-				isFront = isWalkLeft = false;
+				currentState = WillyState.WALKRIGHT;
 				upDateSprite();
 			}
 			// MOVE LEFT
-			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && isWalkLeft && InputUtility.getKeyPressed(KeyCode.A)
-					&& !InputUtility.getKeyPressed(KeyCode.SPACE)) {
+			if (currentState == WillyState.WALKLEFT && InputUtility.getKeyPressed(KeyCode.A)) {
 				move(Direction.LEFT);
 			}
-			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && (isWalkRight || isFront)
+			if (currentState != WillyState.FISHING && currentState != WillyState.WALKLEFT
 					&& InputUtility.getKeyPressed(KeyCode.A)) {
 				move(Direction.LEFT);
-				isWalkLeft = true;
-				isFront = isWalkRight = false;
+				currentState = WillyState.WALKLEFT;
 				upDateSprite();
 			}
 			// RESET STAND AFTER WALK
-			if (!InputUtility.getKeyPressed(KeyCode.A) && !InputUtility.getKeyPressed(KeyCode.D) && !isFishing) {
-				isWalkLeft = isWalkRight = false;
-				isFront = true;
+			if (currentState != WillyState.FISHING && !InputUtility.getKeyPressed(KeyCode.A)
+					&& !InputUtility.getKeyPressed(KeyCode.D)) {
+				currentState = WillyState.FRONT;
 				upDateSprite();
 			}
 		}
@@ -139,31 +142,25 @@ public class Willy extends Entity implements Updateable, Animateable,FishingSync
 	}
 
 	public void upDateSprite() {
-		if (isDead) {
-			imageView.setImage(null);
-			animation.stop();
-			GameObject.getInstance();
-			imageView.setImage(GameObject.emptySprite);
-			setSpriteProporty(0, 0, 0, 0, 0, 0);
-		} else if (isFishing) {
+		if (currentState == WillyState.FISHING) {
 			imageView.setImage(null);
 			animation.stop();
 			GameObject.getInstance();
 			imageView.setImage(GameObject.playerPic);
 			setSpriteProporty(4, 4, 0, 8 * 32, 32, 4 * 32);
-		} else if (isWalkLeft) {
+		} else if (currentState == WillyState.WALKLEFT) {
 			imageView.setImage(null);
 			animation.stop();
 			GameObject.getInstance();
 			imageView.setImage(GameObject.playerPic);
 			setSpriteProporty(4, 4, 0 * 32, 6 * 32, 32, 2 * 32);
-		} else if (isWalkRight) {
+		} else if (currentState == WillyState.WALKRIGHT) {
 			imageView.setImage(null);
 			animation.stop();
 			GameObject.getInstance();
 			imageView.setImage(GameObject.playerPic);
 			setSpriteProporty(4, 4, 0 * 32, 2 * 32, 32, 2 * 32);
-		} else if (isFront) { // STAND STILL
+		} else if (currentState == WillyState.FRONT) { // STAND STILL
 			imageView.setImage(null);
 			animation.stop();
 			GameObject.getInstance();
@@ -176,18 +173,10 @@ public class Willy extends Entity implements Updateable, Animateable,FishingSync
 
 	public void startAnimation() {
 		imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
-		if (!isDead) {
-			animation = new SpriteAnimation(imageView, Duration.millis(1000), count, coloumn, offsetX, offsetY, width,
-					height);
-			animation.setCycleCount(Animation.INDEFINITE);
-			animation.play();
-		}
-	}
-
-	// Getter - Setter
-	public void setFishing(boolean isFishing) {
-		this.isFishing = isFishing;
-		FishingSystem.setGlobalFishing(isFishing); // Update Global
+		animation = new SpriteAnimation(imageView, Duration.millis(1000), count, coloumn, offsetX, offsetY, width,
+				height);
+		animation.setCycleCount(Animation.INDEFINITE);
+		animation.play();
 	}
 
 }
