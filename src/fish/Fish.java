@@ -137,7 +137,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable {
 						ShopSystem.setMoney(ShopSystem.getMoney() + fish.price);
 					}
 				}
-			//}).start();
+			//).start();
 			System.out.println("YOU GOT : " + ShopSystem.getMoney());
 			GameObject.getInstance();
 			GameObject.pingSound.play();
