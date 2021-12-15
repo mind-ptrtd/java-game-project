@@ -57,11 +57,10 @@ public class Main extends Application {
 		Main.managerTab = new ManagerTab();
 
 		Main.buyTab = new BuyTab();
-		buyTab.setVisible(true);
+		buyTab.setVisible(false);
 		screen.getChildren().addAll(gameScreen, imagePane, buyTab,sellPopUp);
-		// ItemBar itemBar = new ItemBar();
 		
-		gameRoot.getChildren().addAll(managerTab,buyTab, screen);
+		gameRoot.getChildren().addAll(managerTab, screen);
 
 		// START ---------------------- //
 		HBox startRoot = new HBox();
