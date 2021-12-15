@@ -8,18 +8,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import main.Main;
 
-public class FishHook extends Entity implements Updateable, ImageViewable, FishingSyncable {
+public class Hook extends Entity implements Updateable, ImageViewable, FishingSyncable {
 	private ImageView imageView;
 	private boolean isNearMe;
 	private float speedY;
 	private double willyX, willyY;
-	private FishHookState currentState;
+	private HookState currentState;
 
-	public FishHook() {
+	public Hook() {
 		super();
 		z = 100;
 		speedY = 2;
-		currentState = FishHookState.KEEP;
+		currentState = HookState.KEEP;
 		createFirstSprite();
 		upDateSprite();
 	}
@@ -37,7 +37,7 @@ public class FishHook extends Entity implements Updateable, ImageViewable, Fishi
 	}
 
 	private void updateNear() {
-		if (currentState == FishHookState.FISHING
+		if (currentState == HookState.FISHING
 				&& Math.abs(FishingSystem.getGlobalWillyY() + 3 * 32 - getY()) <= 10) { // Near
 			isNearMe = true;
 		} else {
@@ -63,31 +63,31 @@ public class FishHook extends Entity implements Updateable, ImageViewable, Fishi
 	public void logicUpdate() {
 		fishingSync();
 		updateNear();
-		if (currentState == FishHookState.KEEP) {
+		if (currentState == HookState.KEEP) {
 			x = willyX; 
 			y = willyY;
 		}
 		updateNear();
 		// CONTROL
-		if (currentState == FishHookState.KEEP && InputUtility.getKeyPressed(KeyCode.SPACE)) { // Fishing Show Hook
+		if (currentState == HookState.KEEP && InputUtility.getKeyPressed(KeyCode.SPACE)) { // Fishing Show Hook
 			x = willyX;
 			y = willyY + 3 * 32; // Willy sprites Height 3 block of 32 bits
-			currentState = FishHookState.FISHING;
+			currentState = HookState.FISHING;
 			isNearMe = true;
 			upDateSprite();
 			//System.out.println("SHOW");
-		} else if (currentState == FishHookState.FISHING && isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // Keep
+		} else if (currentState == HookState.FISHING && isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // Keep
 			x = willyX;
 			y = willyY;
-			currentState = FishHookState.KEEP;
+			currentState = HookState.KEEP;
 			isNearMe = false;
 			//System.out.println("KEEP");
 			upDateSprite();
 		} else { // MOVEMENT
-			if (currentState == FishHookState.FISHING && InputUtility.getKeyPressed(KeyCode.S)) { // Go Down
+			if (currentState == HookState.FISHING && InputUtility.getKeyPressed(KeyCode.S)) { // Go Down
 				move(Direction.DOWN);
 			}
-			if (currentState == FishHookState.FISHING && InputUtility.getKeyPressed(KeyCode.W)) { // Go Up
+			if (currentState == HookState.FISHING && InputUtility.getKeyPressed(KeyCode.W)) { // Go Up
 				move(Direction.UP);
 			}
 		}
@@ -115,11 +115,11 @@ public class FishHook extends Entity implements Updateable, ImageViewable, Fishi
 	}
 
 	public void upDateSprite() {
-		if (currentState == FishHookState.KEEP) { // Hide Hook
+		if (currentState == HookState.KEEP) { // Hide Hook
 			imageView.setImage(null);
 			imageView = new ImageView(GameObject.emptySprite);
 		}
-		if (currentState == FishHookState.FISHING) { // Show Hook
+		if (currentState == HookState.FISHING) { // Show Hook
 			imageView.setImage(null);
 			imageView = new ImageView(GameObject.fishHook);
 		}

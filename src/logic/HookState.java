@@ -1,6 +1,6 @@
 package logic;
 
-public enum FishHookState {
+public enum HookState {
 	FISHING,
 	KEEP
 }

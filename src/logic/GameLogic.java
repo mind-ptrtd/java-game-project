@@ -9,7 +9,7 @@ import ui.Map;
 
 public class GameLogic {
 	private List<Entity> gameLogicContainer = new ArrayList<Entity>();
-	public Random random = new Random();
+	private final Random RANDOM = new Random();
 	private float spawnTimer;
 
 	public GameLogic() {
@@ -23,7 +23,7 @@ public class GameLogic {
 		Willy player = new Willy();
 		this.addNewObject(player);
 
-		FishHook fishHook = new FishHook();
+		Hook fishHook = new Hook();
 		this.addNewObject(fishHook);
 	}
 
@@ -33,7 +33,7 @@ public class GameLogic {
 	}
 
 	private void initializeFish() {
-		int numberOfFish = 10 + random.nextInt(10);
+		int numberOfFish = 10 + RANDOM.nextInt(10);
 		for (int i = 0; i < numberOfFish; i++) {
 			addNewObject(FishRandomizer());
 		}
@@ -43,7 +43,7 @@ public class GameLogic {
 		ArrayList<FishType> allFishType = new ArrayList<FishType>(
 				List.of(FishType.BLUEFISH, FishType.TUNA, FishType.TRASH, FishType.CARP, FishType.BASS,
 						FishType.LIONFISH, FishType.MIDNIGHT, FishType.RAINBOWTROUT, FishType.SQUID, FishType.BOMB));
-		int randIdx = random.nextInt(allFishType.size());
+		int randIdx = RANDOM.nextInt(allFishType.size());
 		FishType newFishType = allFishType.get(randIdx);
 		switch (newFishType) {
 		case BLUEFISH:

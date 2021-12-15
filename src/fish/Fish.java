@@ -27,7 +27,6 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	protected abstract boolean isNeedToRotate();
 
 	protected static float fishSpeedFactor = ShopSystem.getFishSpeedFactor();
-	public static Random random = new Random();
 
 	// For Child Class
 	protected FishType fishType;
@@ -41,17 +40,18 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	private double fishHookX, fishHookY;
 	private Direction fishDirection;
 	private FishState currentState;
+	private final Random RANDOM = new Random();
 
 	// Sea Level in range(7,17) Due to Height of GameScreen 600px
 	public Fish() {
-		if(random.nextBoolean()) {
+		if(RANDOM.nextBoolean()) {
 			fishDirection = Direction.RIGHT;
 		} else {
 			fishDirection = Direction.LEFT;
 		}
-		z = random.nextInt(100);
-		x = 20+random.nextInt(360);
-		y = 7 * 32 + random.nextInt(10 * 32);
+		z = RANDOM.nextInt(100);
+		x = 20+RANDOM.nextInt(360);
+		y = 7 * 32 + RANDOM.nextInt(10 * 32);
 		currentState = FishState.SEA; // START IN SEA
 		createFirstSprite();
 		upDateSprite();
