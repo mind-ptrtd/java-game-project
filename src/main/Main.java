@@ -13,7 +13,6 @@ import logic.FishingSystem;
 import logic.GameLogic;
 import logic.GameObject;
 import ui.GameScreen;
-import ui.ItemBar;
 import ui.MainMenu;
 import ui.SellPopUp;
 import ui.Storage;
@@ -53,9 +52,9 @@ public class Main extends Application {
 
 		screen.getChildren().addAll(gameScreen, imagePane, sellPopUp);
 
-		ItemBar itemBar = new ItemBar();
+		//ItemBar itemBar = new ItemBar();
 
-		gameRoot.getChildren().addAll(itemBar, screen);
+		gameRoot.getChildren().addAll(screen);
 
 		// START ---------------------- //
 		HBox startRoot = new HBox();
@@ -68,8 +67,9 @@ public class Main extends Application {
 
 		screenNow = Game.START;
 		stage.setScene(startScene);
-		stage.setTitle("FISH GAME");
+		stage.setTitle("FISHING VALLEY");
 		stage.setResizable(false);
+		stage.getIcons().add(GameObject.icon);
 
 		gameScreen.requestFocus();
 		stage.show();
@@ -77,7 +77,6 @@ public class Main extends Application {
 		AudioClip bgSong = GameObject.bgSong;
 		bgSong.setCycleCount(AudioClip.INDEFINITE);
 		bgSong.play();
-		
 		
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
