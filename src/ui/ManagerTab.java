@@ -41,7 +41,7 @@ public class ManagerTab extends HBox {
 	}
 
 	private void initMoneyText() {
-		Text moneyText = new Text("Money: " + ShopSystem.getMoney() + "       ");
+		Text moneyText = new Text("Fish Catched: " + "Money: " + ShopSystem.getMoney() + "       ");
 		// will be changing to sum of fish price soon
 		moneyText.setFont(Font.font("Comic Sans Ms", FontWeight.LIGHT, FontPosture.REGULAR, 18));
 		moneyText.setFill(Color.LIGHTGOLDENRODYELLOW);
@@ -59,7 +59,7 @@ public class ManagerTab extends HBox {
 		setBuyBtn(buyBtn);
 		buyBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
-				Main.getSellPopUp().setVisible(true);
+				Main.getBuyTab().setVisible(true);
 				Main.getGameScreen().requestFocus();
 			}
 		});

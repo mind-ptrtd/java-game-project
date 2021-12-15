@@ -43,6 +43,7 @@ public class BuyItem extends Button {
 		WritableImage icon = new WritableImage(itemShop.getImage().getPixelReader(),0,0,32,32);
 
 		this.draw(icon);
+		
 	
 	
 	}
