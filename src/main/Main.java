@@ -18,6 +18,7 @@ import ui.MainMenu;
 import ui.ManagerTab;
 import ui.SellPopUp;
 import ui.Storage;
+import Shop.ShopSystem;
 import input.InputUtility;
 
 public class Main extends Application {
@@ -25,6 +26,7 @@ public class Main extends Application {
 	public Storage storage;
 	private static Game screenNow;
 	private static SellPopUp sellPopUp;
+	private static ManagerTab managerTab;
 	private static BuyTab buyTab;
 	private static boolean isClose;
 	public static Pane imagePane = new Pane();
@@ -49,15 +51,11 @@ public class Main extends Application {
 		// SellPopUp sellpopup = new SellPopUp();
 		// sellpopup.setVisible(false);
 		Group screen = new Group();
-
 		
-		ManagerTab managerTab = new ManagerTab();
+		Main.managerTab = new ManagerTab();
 		
-		BuyTab buyTab = new BuyTab();
-		
-		Main.buyTab = new BuyTab();
+		Main.buyTab = new BuyTab();	
 		buyTab.setVisible(false);
-
 		screen.getChildren().addAll(gameScreen, imagePane, managerTab, buyTab);
 
 		//ItemBar itemBar = new ItemBar();
@@ -95,6 +93,7 @@ public class Main extends Application {
 				GameObject.getInstance().objectUpdate();
 				InputUtility.updateInputState();
 				FishingSystem.fishUpdate();
+				ShopSystem.shopUpdate();
 			}
 		};
 		animation.start();
@@ -139,8 +138,15 @@ public class Main extends Application {
 	public static GameScreen getGameScreen() {
 		return gameScreen;
 	}
-	
+
 	public static BuyTab getBuyTab() {
 		return buyTab;
 	}
+
+	public static ManagerTab getManagerTab() {
+		return managerTab;
+	}
+	
+	
+	
 }

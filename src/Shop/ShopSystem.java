@@ -1,13 +1,19 @@
-package logic;
+package Shop;
+
+import main.Main;
 
 public class ShopSystem {
 	private static float fishSpeedFactor = 0.5f;
 	private static float walkSpeedFactor = 1f;
 	private static float hookSpeedFactor = 1f;
 	private static int HookSize = 100;
-
 	private static int money;
-
+	
+	public static void shopUpdate() {
+		Main.getManagerTab().shopUpdate();
+		// WANT TO UPDATE ADD IT HERE
+	} 
+	
 	// ----------------------------//
 	public static int getMoney() {
 		return money;
@@ -48,4 +54,5 @@ public class ShopSystem {
 	public static void setHookSize(int hookSize) {
 		HookSize = hookSize;
 	}
+	
 }

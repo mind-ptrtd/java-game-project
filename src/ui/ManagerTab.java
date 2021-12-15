@@ -1,5 +1,7 @@
 package ui;
 
+import Shop.ShopSystem;
+import Shop.ShopUpdateable;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -17,13 +19,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import logic.ShopSystem;
 import main.Main;
 
-public class ManagerTab extends HBox {
+public class ManagerTab extends HBox implements ShopUpdateable {
 	private Text moneyText;
 	private Button buyBtn;
+	private int moneyShow;
 
 	public ManagerTab() {
 		this.setAlignment(Pos.CENTER_RIGHT);
@@ -41,7 +42,7 @@ public class ManagerTab extends HBox {
 	}
 
 	private void initMoneyText() {
-		Text moneyText = new Text("Fish Catched: " + "Money: " + ShopSystem.getMoney() + "       ");
+		Text moneyText = new Text();
 		// will be changing to sum of fish price soon
 		moneyText.setFont(Font.font("Comic Sans Ms", FontWeight.LIGHT, FontPosture.REGULAR, 18));
 		moneyText.setFill(Color.LIGHTGOLDENRODYELLOW);
@@ -60,12 +61,17 @@ public class ManagerTab extends HBox {
 		buyBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
 				Main.getBuyTab().setVisible(true);
+				//System.out.println("CLICKED");
 				Main.getGameScreen().requestFocus();
 			}
 		});
 	}
+	public void shopUpdate() {
+		moneyShow = ShopSystem.getMoney();
+		moneyText.setText("Fish Catched: " + "Money: " + moneyShow + "       ");
+	}
 
-
+	// Getter-Setter
 	private void setMoneyText(Text moneyText) {
 		this.moneyText = moneyText;
 		
@@ -75,4 +81,5 @@ public class ManagerTab extends HBox {
 		this.buyBtn = buyBtn;
 		
 	}
+
 }

@@ -1,5 +1,6 @@
 package player;
 
+import Shop.ShopSystem;
 import animation.Animateable;
 import animation.SpriteAnimation;
 import input.InputUtility;
@@ -16,7 +17,6 @@ import logic.Updateable;
 import main.Main;
 import logic.FishingSystem;
 import logic.GameObject;
-import logic.ShopSystem;
 
 public class Willy extends Entity implements Updateable, Animateable, FishingSyncable {
 	private ImageView imageView;

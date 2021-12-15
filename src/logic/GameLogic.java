@@ -8,7 +8,7 @@ import player.Willy;
 import ui.Map;
 
 public class GameLogic {
-	private List<Entity> gameLogicContainer = new ArrayList<Entity>();
+	private final List<Entity> gameLogicContainer = new ArrayList<Entity>();
 	private final Random RANDOM = new Random();
 	private float spawnTimer;
 

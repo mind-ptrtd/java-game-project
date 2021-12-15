@@ -2,6 +2,7 @@ package fish;
 
 import java.util.Random;
 
+import Shop.ShopSystem;
 import animation.Animateable;
 import animation.SpriteAnimation;
 import input.InputUtility;
@@ -16,7 +17,6 @@ import logic.Entity;
 import logic.FishingSystem;
 import logic.FishingSyncable;
 import logic.GameObject;
-import logic.ShopSystem;
 import logic.Updateable;
 import main.Main;
 
@@ -105,8 +105,8 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 		if (fishType != FishType.BOMB && currentState!=FishState.HOOK && !FishingSystem.isHookFull() && checkHitBox()) {
 			// CATCH FISH
 			currentState = FishState.HOOK;
-			System.out.println("CATCH FISH : " + this.name);
-			System.out.println("IS FULL : " + FishingSystem.isHookFull());
+			//System.out.println("CATCH FISH : " + this.name);
+			//System.out.println("IS FULL : " + FishingSystem.isHookFull());
 			GameObject.catchFishSound.play();
 
 		} else if (fishType == FishType.BOMB && checkHitBox()) { // BOMB ATTACH
@@ -131,13 +131,13 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 				for (Fish fish : FishingSystem.getInstance().getAllFishContainer()) {
 					if (fish.currentState == FishState.HOOK) {
 						fish.currentState = FishState.DEAD; // DIE
-						System.out.println("SELL : " + fish.name);
+						//System.out.println("SELL : " + fish.name);
 						killFish(fish);
 						ShopSystem.setMoney(ShopSystem.getMoney() + fish.price);
 					}
 				}
 			//}).start();
-			System.out.println("YOU GOT : " + ShopSystem.getMoney());
+			//System.out.println("YOU GOT : " + ShopSystem.getMoney());
 			GameObject.pingSound.play();
 		}
 

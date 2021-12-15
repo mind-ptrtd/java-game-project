@@ -1,5 +1,6 @@
 package logic;
 
+import Shop.ShopSystem;
 import animation.ImageViewable;
 import input.InputUtility;
 import javafx.geometry.Rectangle2D;

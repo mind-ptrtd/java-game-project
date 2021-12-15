@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 
+import Shop.ShopSystem;
 import fish.Fish;
 import fish.FishState;
 
