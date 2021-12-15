@@ -1,16 +1,13 @@
 package animation;
 
-import javafx.scene.image.ImageView;
-import logic.Entity;
-import main.Main;
 public interface ImageViewable {
-	// for Classify
+	// Use ImageView Method To Show (instead of Draw(gc))
 	public abstract void createFirstSprite();
 	public abstract void upDateSprite();
 	public abstract void upDateImageView();
 	/*
-	    Main.removeFromPane(imageView);
+		Main.removeFromPane(imageView);
 		imageView.relocate(getX(), getY());
 		Main.addToPane(imageView);
-	 */
+	*/
 }

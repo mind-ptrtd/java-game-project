@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.media.AudioClip;
 
 public class GameObject {
@@ -13,7 +14,7 @@ public class GameObject {
 	private ArrayList<IRenderable> entities;
 	private Comparator<IRenderable> comparator;
 
-	public static Image map, playerPic, emptySprite, fishHook,bomb;
+	public static Image map, playerPic, emptySprite, fishHook,bomb,title,newBtn,exitBtn,icon;
 	public static AudioClip bombSound,pingSound,catchFishSound,bgSong;
 	public static Image blueFish_Right, blueFish_Left, tuna_Right, tuna_Left, trash_Right, trash_Left, bass_Right,
 			bass_Left, carp_Right, carp_Left, lionFish_Right, lionFish_Left, midNight_Right, midNight_Left, squid_Right,
@@ -63,6 +64,9 @@ public class GameObject {
 		emptySprite = new Image(ClassLoader.getSystemResource("EmptySprite.png").toString());
 		fishHook = new Image(ClassLoader.getSystemResource("fishHook.png").toString(), 32, 32, false, false);
 		bomb = new Image(ClassLoader.getSystemResource("Bomb.png").toString());
+		title = new Image(ClassLoader.getSystemResource("title.png").toString());
+		newBtn = new Image(ClassLoader.getSystemResource("newBtn.png").toString());
+		exitBtn = new Image(ClassLoader.getSystemResource("exitBtn.png").toString());
 		
 		// Sound
 		bombSound = new AudioClip(ClassLoader.getSystemResource("BombSound.wav").toString());
@@ -73,6 +77,9 @@ public class GameObject {
 		pingSound.setVolume(0.2);
 		catchFishSound.setVolume(0.1);
 		bgSong.setVolume(0.2);
+		
+		// Icon
+		icon = new WritableImage(blueFish_Right.getPixelReader(), 0, 0, 32, 32);
 	}
 
 	public void add(IRenderable entity) {

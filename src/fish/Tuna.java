@@ -4,7 +4,6 @@ import javafx.scene.image.ImageView;
 import logic.GameObject;
 
 public class Tuna extends Fish {
-	public int kokdafaff;
 	public Tuna() {
 		super();
 		fishType = FishType.TUNA;
@@ -17,9 +16,9 @@ public class Tuna extends Fish {
 	@Override
 	public ImageView imageViewFish() {
 		if(isRight) {
-			return new ImageView(GameObject.getInstance().tuna_Right);
+			return new ImageView(GameObject.tuna_Right);
 		} else {
-			return new ImageView(GameObject.getInstance().tuna_Left);
+			return new ImageView(GameObject.tuna_Left);
 		}
 	}
 	@Override

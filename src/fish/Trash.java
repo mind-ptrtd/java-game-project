@@ -16,9 +16,9 @@ public class Trash extends Fish{
 	@Override
 	public ImageView imageViewFish() {
 		if(isRight) {
-			return new ImageView(GameObject.getInstance().trash_Right);
+			return new ImageView(GameObject.trash_Right);
 		} else {
-			return new ImageView(GameObject.getInstance().trash_Left);
+			return new ImageView(GameObject.trash_Left);
 		}
 	}
 	@Override

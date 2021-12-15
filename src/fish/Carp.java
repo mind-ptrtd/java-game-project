@@ -16,9 +16,9 @@ public class Carp extends Fish {
 	@Override
 	public ImageView imageViewFish() {
 		if(isRight) {
-			return new ImageView(GameObject.getInstance().carp_Right);
+			return new ImageView(GameObject.carp_Right);
 		} else {
-			return new ImageView(GameObject.getInstance().carp_Left);
+			return new ImageView(GameObject.carp_Left);
 		}
 	}
 	@Override

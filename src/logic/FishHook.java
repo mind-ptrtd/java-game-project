@@ -1,26 +1,17 @@
 package logic;
 
-import java.util.ArrayList;
-
-import animation.Animateable;
 import animation.ImageViewable;
-import animation.SpriteAnimation;
-import fish.Fish;
 import input.InputUtility;
-import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.util.Duration;
 import main.Main;
 
 public class FishHook extends Entity implements Updateable, ImageViewable {
 	private ImageView imageView;
-	private Animation animation;
 	private boolean isNearMe, isFishing;
-	private double willyX, willyY;
-	private float speedX, speedY;
+	private float speedY;
 
 	public FishHook() {
 		super();
@@ -43,6 +34,7 @@ public class FishHook extends Entity implements Updateable, ImageViewable {
 			}
 		}
 	}
+
 	public void updateNear() {
 		if (isFishing && Math.abs(FishingSystem.getInstance().getGlobalWillyY() + 3 * 32 - getY()) <= 10) { // Near
 			isNearMe = true;
@@ -50,15 +42,16 @@ public class FishHook extends Entity implements Updateable, ImageViewable {
 			isNearMe = false;
 		}
 	}
+
 	// Update Logic
 	public void logicUpdate() {
 		// Pull Global to local
 		double willyX = FishingSystem.getInstance().getGlobalWillyX();
-		double willyY = FishingSystem.getInstance().getGlobalWillyY(); // under his Willy's Feet
-		speedY = 2 * ShopSystem.getHookSpeedFactor();
+		double willyY = FishingSystem.getInstance().getGlobalWillyY(); // Update Willy Pos
+		speedY = 2 * ShopSystem.getHookSpeedFactor(); // Set Speed Rely on GlobalSpeed ()
 		// Push local to global
-		FishingSystem.getInstance().setGlobalFishHookXY(getX(), getY());
-		FishingSystem.getInstance().setNearMe(isNearMe);
+		FishingSystem.setGlobalFishHookXY(getX(), getY());
+		FishingSystem.setNearMe(isNearMe);
 
 		if (!isFishing) {
 			x = willyX;
@@ -97,40 +90,30 @@ public class FishHook extends Entity implements Updateable, ImageViewable {
 		Main.addToPane(imageView);
 	}
 
-	// For CUT IMAGE (Do not Have Animation)
-	private static int offsetX;
-	private static int offsetY;
-	private static int width;
-	private static int height;
-	
-	public void setSpriteProporty(int offsetX, int offsetY, int width, int height) {
-		this.offsetX = offsetX;
-		this.offsetY = offsetY;
-		this.width = width;
-		this.height = height;
-	}
-	
+	// For Cut ImageView (Do not Have Animation)
+	private static final int offsetX = 0;
+	private static final int offsetY = 0;
+	private static final int width = 32;
+	private static final int height = 32;
+
 	public void createFirstSprite() {
-		imageView = new ImageView(GameObject.getInstance().emptySprite);
-		setSpriteProporty(0,0,32,32);
+		GameObject.getInstance();
+		imageView = new ImageView(GameObject.emptySprite);
 	}
 
 	public void upDateSprite() {
 		if (!isFishing) { // Hide Hook
 			imageView.setImage(null);
-			imageView.setImage(GameObject.getInstance().emptySprite);
-			setSpriteProporty(0,0,32,32);
+			GameObject.getInstance();
+			imageView.setImage(GameObject.emptySprite);
 		}
 		if (isFishing) { // Show Hook
 			imageView.setImage(null);
-			imageView.setImage(GameObject.getInstance().fishHook);
-			setSpriteProporty(0,0,32,32);
+			GameObject.getInstance();
+			imageView.setImage(GameObject.fishHook);
 		}
+		// Cut ImageView
 		imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
-	}
-
-	public ImageView getImageView() {
-		return imageView;
 	}
 
 	public void setImageView(ImageView imageView) {

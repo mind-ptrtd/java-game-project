@@ -1,33 +1,22 @@
 package main;
 
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.FishingSystem;
 import logic.GameLogic;
 import logic.GameObject;
 import ui.GameScreen;
-import ui.ItemBar;
 import ui.MainMenu;
 import ui.ManagerTab;
 import ui.SellPopUp;
 import ui.Storage;
-import animation.Animateable;
-import fish.Fish;
 import input.InputUtility;
 
 public class Main extends Application {
@@ -48,31 +37,29 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
 
-		this.stage = stage;
+		Main.stage = stage;
 		// IN GAME ---------------------- //
-		VBox gameRoot = new VBox();
-		this.gameScene = new Scene(gameRoot);
+		HBox gameRoot = new HBox();
+		Main.gameScene = new Scene(gameRoot);
 		GameLogic gameLogic = new GameLogic();
-		this.gameScreen = new GameScreen(800, 600);
+		Main.gameScreen = new GameScreen(800, 600);
 
 		// SellPopUp sellpopup = new SellPopUp();
 		// sellpopup.setVisible(false);
 		Group screen = new Group();
 
-		this.sellPopUp = new SellPopUp();
+		Main.sellPopUp = new SellPopUp();
 		sellPopUp.setVisible(false);
 
 		screen.getChildren().addAll(gameScreen, imagePane, sellPopUp);
 
 		//ItemBar itemBar = new ItemBar();
-		
-		ManagerTab managerTab = new ManagerTab();
-		
-		gameRoot.getChildren().addAll(managerTab, screen);
+
+		gameRoot.getChildren().addAll(screen);
 
 		// START ---------------------- //
 		HBox startRoot = new HBox();
-		this.startScene = new Scene(startRoot);
+		Main.startScene = new Scene(startRoot);
 
 		MainMenu mainmenu = new MainMenu();
 		startRoot.getChildren().add(mainmenu);
@@ -81,15 +68,16 @@ public class Main extends Application {
 
 		screenNow = Game.START;
 		stage.setScene(startScene);
-		stage.setTitle("FISH GAME");
+		stage.setTitle("FISHING VALLEY");
 		stage.setResizable(false);
+		stage.getIcons().add(GameObject.icon);
 
 		gameScreen.requestFocus();
 		stage.show();
-		AudioClip bgSong = GameObject.getInstance().bgSong;
-		bgSong.setCycleCount(bgSong.INDEFINITE);
+		GameObject.getInstance();
+		AudioClip bgSong = GameObject.bgSong;
+		bgSong.setCycleCount(AudioClip.INDEFINITE);
 		bgSong.play();
-		
 		
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
@@ -118,6 +106,8 @@ public class Main extends Application {
 		}
 	}
 
+	
+	// Getter-Setter
 	public static void setScreenNow(Game screenNow) {
 		Main.screenNow = screenNow;
 	}

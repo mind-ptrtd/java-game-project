@@ -15,9 +15,9 @@ public class RainbowTrout extends Fish {
 	@Override
 	public ImageView imageViewFish() {
 		if(isRight) {
-			return new ImageView(GameObject.getInstance().rainbowTrout_Right);
+			return new ImageView(GameObject.rainbowTrout_Right);
 		} else {
-			return new ImageView(GameObject.getInstance().rainbowTrout_Left);
+			return new ImageView(GameObject.rainbowTrout_Left);
 		}
 	}
 	@Override
