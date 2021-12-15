@@ -12,8 +12,10 @@ import javafx.stage.Stage;
 import logic.FishingSystem;
 import logic.GameLogic;
 import logic.GameObject;
+import ui.BuyTab;
 import ui.GameScreen;
 import ui.MainMenu;
+import ui.ManagerTab;
 import ui.SellPopUp;
 import ui.Storage;
 import input.InputUtility;
@@ -23,6 +25,7 @@ public class Main extends Application {
 	public Storage storage;
 	private static Game screenNow;
 	private static SellPopUp sellPopUp;
+	private static BuyTab buyTab;
 	private static boolean isClose;
 	public static Pane imagePane = new Pane();
 	private static Stage stage;
@@ -47,10 +50,15 @@ public class Main extends Application {
 		// sellpopup.setVisible(false);
 		Group screen = new Group();
 
-		Main.sellPopUp = new SellPopUp();
-		sellPopUp.setVisible(false);
+		
+		ManagerTab managerTab = new ManagerTab();
+		
+		BuyTab buyTab = new BuyTab();
+		
+		Main.buyTab = new BuyTab();
+		buyTab.setVisible(false);
 
-		screen.getChildren().addAll(gameScreen, imagePane, sellPopUp);
+		screen.getChildren().addAll(gameScreen, imagePane, managerTab, buyTab);
 
 		//ItemBar itemBar = new ItemBar();
 
@@ -63,6 +71,7 @@ public class Main extends Application {
 		MainMenu mainmenu = new MainMenu();
 		startRoot.getChildren().add(mainmenu);
 
+		
 		// ---------------------------- //
 
 		screenNow = Game.START;
@@ -129,5 +138,9 @@ public class Main extends Application {
 
 	public static GameScreen getGameScreen() {
 		return gameScreen;
+	}
+	
+	public static BuyTab getBuyTab() {
+		return buyTab;
 	}
 }
