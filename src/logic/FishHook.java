@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import main.Main;
 
-public class FishHook extends Entity implements Updateable, ImageViewable,FishingSyncAble {
+public class FishHook extends Entity implements Updateable, ImageViewable,FishingSyncable {
 	private ImageView imageView;
 	private boolean isNearMe, isFishing;
 	private float speedY;

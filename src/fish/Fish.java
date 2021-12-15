@@ -14,13 +14,13 @@ import javafx.util.Duration;
 import logic.Direction;
 import logic.Entity;
 import logic.FishingSystem;
-import logic.FishingSyncAble;
+import logic.FishingSyncable;
 import logic.GameObject;
 import logic.ShopSystem;
 import logic.Updateable;
 import main.Main;
 
-public abstract class Fish extends Entity implements Updateable, Animateable,FishingSyncAble {
+public abstract class Fish extends Entity implements Updateable, Animateable,FishingSyncable {
 
 	protected abstract ImageView imageViewFish();
 

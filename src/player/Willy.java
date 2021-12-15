@@ -11,14 +11,14 @@ import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import logic.Direction;
 import logic.Entity;
-import logic.FishingSyncAble;
+import logic.FishingSyncable;
 import logic.Updateable;
 import main.Main;
 import logic.FishingSystem;
 import logic.GameObject;
 import logic.ShopSystem;
 
-public class Willy extends Entity implements Updateable, Animateable,FishingSyncAble {
+public class Willy extends Entity implements Updateable, Animateable,FishingSyncable {
 	private ImageView imageView;
 	private Animation animation;
 	private boolean isWalkLeft, isWalkRight, isFishing, isDead, isFront, isNearMe;
