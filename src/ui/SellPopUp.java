@@ -59,6 +59,7 @@ public class SellPopUp extends VBox {
 				// GET MONEY
 				Main.getSellPopUp().setVisible(false);
 				Main.getGameScreen().requestFocus();
+			
 			}
 		});
 	}

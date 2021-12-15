@@ -8,9 +8,8 @@ public class ItemShop {
 	private String itemName;
 	private Image image;
 	private int price;
-	private int income;
 
-	ItemShop(String itemName){
+	public ItemShop(String itemName){
 		switch(itemName) {
 			case "Fish Speed" :	image = GameObject.blueFish_Right;	price = 1000;	break;
 			case "Hook Speed" : image = GameObject.fishHook; 	price = 1900; 	break;
@@ -33,10 +32,6 @@ public class ItemShop {
 
 	public Image getImage() {
 		return image;
-	}
-
-	public int getIncome() {
-		return income;
 	}
 
 	public String getPriceText() {

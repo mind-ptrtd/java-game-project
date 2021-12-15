@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import logic.FishingSystem;
@@ -43,29 +44,31 @@ public class Main extends Application {
 
 		Main.stage = stage;
 		// IN GAME ---------------------- //
-		HBox gameRoot = new HBox();
+		VBox gameRoot = new VBox();
 		Main.gameScene = new Scene(gameRoot);
 		GameLogic gameLogic = new GameLogic();
 		Main.gameScreen = new GameScreen(800, 600);
 
-		// SellPopUp sellpopup = new SellPopUp();
-		// sellpopup.setVisible(false);
+		Main.sellPopUp = new SellPopUp();
+		sellPopUp.setVisible(false);
 		Group screen = new Group();
 		
 		Main.managerTab = new ManagerTab();
 		
 		Main.buyTab = new BuyTab();	
 		buyTab.setVisible(false);
-		screen.getChildren().addAll(gameScreen, imagePane, managerTab, buyTab);
+		screen.getChildren().addAll(gameScreen, buyTab, imagePane, sellPopUp);
 
 		//ItemBar itemBar = new ItemBar();
 
-		gameRoot.getChildren().addAll(screen);
+		gameRoot.getChildren().addAll(managerTab, screen);
 
 		// START ---------------------- //
 		HBox startRoot = new HBox();
 		Main.startScene = new Scene(startRoot);
 
+		
+		
 		MainMenu mainmenu = new MainMenu();
 		startRoot.getChildren().add(mainmenu);
 
