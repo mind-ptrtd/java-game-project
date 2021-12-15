@@ -37,7 +37,6 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		
 		initMoneyText();
 		initBuyBtn();
-		
 		this.getChildren().addAll(moneyText, buyBtn, space);
 	}
 
@@ -60,9 +59,15 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		setBuyBtn(buyBtn);
 		buyBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
-				Main.getBuyTab().setVisible(true);
-				//System.out.println("CLICKED");
-				Main.getGameScreen().requestFocus();
+				if(!Main.getBuyTab().isVisible()) {
+					Main.getBuyTab().setVisible(true);
+					//System.out.println("CLICKED");
+					Main.getGameScreen().requestFocus();
+				} else {
+					Main.getBuyTab().setVisible(false);
+					//System.out.println("CLICKED");
+					Main.getGameScreen().requestFocus();
+				}
 			}
 		});
 	}
