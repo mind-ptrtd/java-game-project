@@ -37,7 +37,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	private float speedX;
 	private ImageView imageView;
 	private Animation animation;
-	private boolean isHook, isDead, isTurnLeft, isTurnRight, isNearMe;
+	private boolean isNeedToTurn, isNearMe;
 	private double fishHookX, fishHookY;
 	private Direction fishDirection;
 	private FishState currentState;
@@ -65,7 +65,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 		if (dir == Direction.RIGHT) {
 			if (x >= 800 - 32 - 20) { // OffSet Right 20
 				fishDirection = Direction.LEFT;
-				isTurnLeft = true;
+				isNeedToTurn = true;
 				upDateSprite();
 			} else {
 				x += speedX;
@@ -73,7 +73,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 		} else {
 			if (x <= 0 + 20) { // OffSet Left 20
 				fishDirection = Direction.RIGHT;
-				isTurnRight = true;
+				isNeedToTurn = true;
 				upDateSprite();
 			} else {
 				x -= speedX;
@@ -104,7 +104,6 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 		}
 		if (fishType != FishType.BOMB && currentState!=FishState.HOOK && !FishingSystem.isHookFull() && checkHitBox()) {
 			// CATCH FISH
-			isHook = true;
 			currentState = FishState.HOOK;
 			System.out.println("CATCH FISH : " + this.name);
 			System.out.println("IS FULL : " + FishingSystem.isHookFull());
@@ -142,7 +141,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 			GameObject.pingSound.play();
 		}
 
-		if (!isHook && !isDead) {
+		if (currentState == FishState.SEA) {
 			if (fishDirection == Direction.RIGHT) {
 				move(Direction.RIGHT);
 			} else {
@@ -182,17 +181,11 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 			GameObject.getInstance();
 			imageView.setImage(GameObject.emptySprite);
 		}
-		if (isTurnRight) { // TurnRight
+		if (isNeedToTurn) { // U-Turn
 			imageView.setImage(null);
 			animation.stop();
 			imageView = imageViewFish();
-			isTurnRight = false;
-		}
-		if (isTurnLeft) { // TurnLeft
-			imageView.setImage(null);
-			animation.stop();
-			imageView = imageViewFish();
-			isTurnLeft = false;
+			isNeedToTurn = false;
 		}
 		imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
 		if (isNeedToRotate()) {
