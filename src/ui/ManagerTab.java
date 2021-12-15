@@ -19,6 +19,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import logic.FishingSystem;
 import main.Main;
 
 public class ManagerTab extends HBox implements ShopUpdateable {
@@ -68,7 +69,7 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 	}
 	public void shopUpdate() {
 		moneyShow = ShopSystem.getMoney();
-		moneyText.setText("Fish Catched: " + "Money: " + moneyShow + "       ");
+		moneyText.setText("Fish Catched: " + FishingSystem.getFishHook() + "   " + "Money: " + moneyShow + "          ");
 	}
 
 	// Getter-Setter

@@ -47,7 +47,7 @@ public class BuyItem extends Button {
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
 				Main.getSellPopUp().setVisible(true);
-				Main.getGameScreen().requestFocus();
+				//Main.getGameScreen().requestFocus();
 			
 			}
 		});
