@@ -18,6 +18,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import logic.ShopSystem;
 import main.Main;
 
 public class ManagerTab extends HBox {
@@ -26,7 +27,7 @@ public class ManagerTab extends HBox {
 
 	public ManagerTab() {
 		this.setAlignment(Pos.CENTER_RIGHT);
-		this.setPrefWidth(700);
+		this.setPrefWidth(800);
 		this.setPrefHeight(50);
 		this.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
 		this.setBackground(new Background(new BackgroundFill(Color.DIMGRAY, null, null)));
@@ -40,7 +41,7 @@ public class ManagerTab extends HBox {
 	}
 
 	private void initMoneyText() {
-		Text moneyText = new Text("Money: " + "100" + "       ");
+		Text moneyText = new Text("Money: " + ShopSystem.getMoney() + "       ");
 		// will be changing to sum of fish price soon
 		moneyText.setFont(Font.font("Comic Sans Ms", FontWeight.LIGHT, FontPosture.REGULAR, 18));
 		moneyText.setFill(Color.LIGHTGOLDENRODYELLOW);

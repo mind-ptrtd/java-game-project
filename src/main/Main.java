@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import logic.FishingSystem;
 import logic.GameLogic;
 import logic.GameObject;
+import ui.BuyTab;
 import ui.GameScreen;
 import ui.MainMenu;
 import ui.ManagerTab;
@@ -50,8 +51,11 @@ public class Main extends Application {
 
 		Main.sellPopUp = new SellPopUp();
 		sellPopUp.setVisible(false);
+		
+		ManagerTab managerTab = new ManagerTab();
+		BuyTab buyTab = new BuyTab();
 
-		screen.getChildren().addAll(gameScreen, imagePane, sellPopUp);
+		screen.getChildren().addAll(gameScreen, imagePane, sellPopUp, managerTab, buyTab);
 
 		//ItemBar itemBar = new ItemBar();
 
