@@ -21,7 +21,7 @@ public class Hook extends Entity implements Updateable, ImageViewable, FishingSy
 		speedY = 2;
 		currentState = HookState.KEEP;
 		createFirstSprite();
-		upDateSprite();
+		updateSprite();
 	}
 
 	private void move(Direction dir) {
@@ -74,7 +74,7 @@ public class Hook extends Entity implements Updateable, ImageViewable, FishingSy
 			y = willyY + 3 * 32; // Willy sprites Height 3 block of 32 bits
 			currentState = HookState.FISHING;
 			isNearMe = true;
-			upDateSprite();
+			updateSprite();
 			//System.out.println("SHOW");
 		} else if (currentState == HookState.FISHING && isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // Keep
 			x = willyX;
@@ -82,7 +82,7 @@ public class Hook extends Entity implements Updateable, ImageViewable, FishingSy
 			currentState = HookState.KEEP;
 			isNearMe = false;
 			//System.out.println("KEEP");
-			upDateSprite();
+			updateSprite();
 		} else { // MOVEMENT
 			if (currentState == HookState.FISHING && InputUtility.getKeyPressed(KeyCode.S)) { // Go Down
 				move(Direction.DOWN);
@@ -95,10 +95,10 @@ public class Hook extends Entity implements Updateable, ImageViewable, FishingSy
 
 	// Draw On Screen
 	public void draw(GraphicsContext gc) {
-		upDateImageView();
+		updateImageView();
 	}
 
-	public void upDateImageView() {
+	public void updateImageView() {
 		Main.removeFromPane(imageView);
 		imageView.relocate(getX(), getY());
 		Main.addToPane(imageView);
@@ -114,7 +114,7 @@ public class Hook extends Entity implements Updateable, ImageViewable, FishingSy
 		imageView = new ImageView(GameObject.emptySprite);
 	}
 
-	public void upDateSprite() {
+	public void updateSprite() {
 		if (currentState == HookState.KEEP) { // Hide Hook
 			imageView.setImage(null);
 			imageView = new ImageView(GameObject.emptySprite);

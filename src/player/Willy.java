@@ -33,7 +33,7 @@ public class Willy extends Entity implements Updateable, Animateable, FishingSyn
 		speedX = 1.5f;
 		currentState = WillyState.FRONT;
 		createFirstSprite();
-		upDateSprite();
+		updateSprite();
 	}
 
 	// margin 20
@@ -70,11 +70,11 @@ public class Willy extends Entity implements Updateable, Animateable, FishingSyn
 		if (currentState == WillyState.FISHING && isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // keep Hook
 			currentState = WillyState.FRONT;
 			FishingSystem.setGlobalFishing(false);
-			upDateSprite();
+			updateSprite();
 		} else if (currentState != WillyState.FISHING && InputUtility.getKeyPressed(KeyCode.SPACE)) { // Go Fishing
 			currentState = WillyState.FISHING;
 			FishingSystem.setGlobalFishing(true); 
-			upDateSprite();
+			updateSprite();
 		} else {
 			// MOVE RIGHT
 			if (currentState == WillyState.WALKRIGHT && InputUtility.getKeyPressed(KeyCode.D)
@@ -85,7 +85,7 @@ public class Willy extends Entity implements Updateable, Animateable, FishingSyn
 					&& InputUtility.getKeyPressed(KeyCode.D)) {
 				move(Direction.RIGHT);
 				currentState = WillyState.WALKRIGHT;
-				upDateSprite();
+				updateSprite();
 			}
 			// MOVE LEFT
 			if (currentState == WillyState.WALKLEFT && InputUtility.getKeyPressed(KeyCode.A)) {
@@ -95,22 +95,22 @@ public class Willy extends Entity implements Updateable, Animateable, FishingSyn
 					&& InputUtility.getKeyPressed(KeyCode.A)) {
 				move(Direction.LEFT);
 				currentState = WillyState.WALKLEFT;
-				upDateSprite();
+				updateSprite();
 			}
 			// RESET STAND AFTER WALK
 			if (currentState != WillyState.FISHING && !InputUtility.getKeyPressed(KeyCode.A)
 					&& !InputUtility.getKeyPressed(KeyCode.D)) {
 				currentState = WillyState.FRONT;
-				upDateSprite();
+				updateSprite();
 			}
 		}
 	}
 
 	public void draw(GraphicsContext gc) {
-		upDateImageView();
+		updateImageView();
 	}
 
-	public void upDateImageView() {
+	public void updateImageView() {
 		Main.removeFromPane(imageView);
 		imageView.relocate(getX(), getY());
 		Main.addToPane(imageView);
@@ -141,7 +141,7 @@ public class Willy extends Entity implements Updateable, Animateable, FishingSyn
 		startAnimation();
 	}
 
-	public void upDateSprite() {
+	public void updateSprite() {
 		if (currentState == WillyState.FISHING) {
 			imageView.setImage(null);
 			animation.stop();

@@ -54,7 +54,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 		y = 7 * 32 + RANDOM.nextInt(10 * 32);
 		currentState = FishState.SEA; // START IN SEA
 		createFirstSprite();
-		upDateSprite();
+		updateSprite();
 	}
 	
 	private boolean checkHitBox() { // Near Hook Count as Catch (HITBOX 20*30)
@@ -66,7 +66,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 			if (x >= 800 - 32 - 20) { // OffSet Right 20
 				fishDirection = Direction.LEFT;
 				isNeedToTurn = true;
-				upDateSprite();
+				updateSprite();
 			} else {
 				x += speedX;
 			}
@@ -74,7 +74,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 			if (x <= 0 + 20) { // OffSet Left 20
 				fishDirection = Direction.RIGHT;
 				isNeedToTurn = true;
-				upDateSprite();
+				updateSprite();
 			} else {
 				x -= speedX;
 			}
@@ -84,7 +84,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	private void killFish(Fish fish) {
 		fish.currentState = FishState.DEAD;
 		fish.setDestroyed(true);
-		fish.upDateSprite();
+		fish.updateSprite();
 		FishingSystem.decreaseFishCount();
 	}
 	public void fishingSync() {
@@ -160,10 +160,10 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 
 	// Handle Display
 	public void draw(GraphicsContext gc) {
-		upDateImageView();
+		updateImageView();
 	}
 
-	public void upDateImageView() {
+	public void updateImageView() {
 		Main.removeFromPane(imageView);
 		imageView.relocate(getX(), getY());
 		Main.addToPane(imageView);
@@ -174,7 +174,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 		imageView = imageViewFish();
 	}
 
-	public void upDateSprite() {
+	public void updateSprite() {
 		if (currentState == FishState.DEAD) { // Dead Fish when Bomb or Sell
 			imageView.setImage(null);
 			animation.stop();
