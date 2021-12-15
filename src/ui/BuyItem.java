@@ -1,6 +1,7 @@
 package ui;
 
 import fish.Fish;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
@@ -19,7 +20,9 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import logic.GameObject;
+import main.Main;
 import ui.ItemShop;
 
 public class BuyItem extends Button {
@@ -36,13 +39,18 @@ public class BuyItem extends Button {
 				CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		itemShop = new ItemShop(item);
-			// try //
-//		String itemImagePath = ClassLoader.getSystemResource(itemShop.getUrl()).toString();
-//			// ImageView itemImage = new ImageView(itemImagePath);
-//		ImageView imageView = new ImageView(new Image(itemImagePath));
 		WritableImage icon = new WritableImage(itemShop.getImage().getPixelReader(),0,0,32,32);
 
 		this.draw(icon);
+		this.setTooltip();
+		
+		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				Main.getSellPopUp().setVisible(true);
+				Main.getGameScreen().requestFocus();
+			
+			}
+		});
 		
 	
 	
@@ -64,41 +72,26 @@ public class BuyItem extends Button {
 		this.isDrawn = isDrawn;
 	}
 			
-			
-			
-			
-			
-			
-		
+	// need to be fixed
 	
-	public void highlight() {
-		// TODO 
-		this.setBackground(new Background(new BackgroundFill(Color.LIMEGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-		}
+	private void setTooltip() {
+		Tooltip	tooltip = new Tooltip();
+		tooltip.setFont(new Font(12));
+		tooltip.setText(itemShop.getItemName() + itemShop.getPriceText());
+		this.setOnMouseMoved((MouseEvent e) -> {
+			if (itemShop.getItemName() != null) {
+				tooltip.show(this, e.getScreenX(), e.getScreenY()+10);	
+			}
+		});
 		
-	public void unhighlight() {
-			// TODO
-		this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-		}
-		
-		
-		
-//	private void setTooltip() {
-//		Tooltip	tooltip = new Tooltip();
-//		tooltip.setFont(new Font(12));
-//		
-//		if (cropBf isDrawn()) {
-//			
-//		}
-//		tooltip.setText(+ object.getPrice() + item.getIncomeText());
-//		this.setOnMouseMoved((MouseEvent e) -> {
-//			if (item != null)
-//			tooltip.show(this, e.getScreenX(), e.getScreenY()+10);
-//		});
-//		this.setOnMouseExited((MouseEvent e) -> {
-//			tooltip.hide();
-//		});		
-//	}
+		this.setOnMouseExited((MouseEvent e) -> {
+			tooltip.hide();
+		});		
+	}
+	
+	
+
+
 
 		
 
