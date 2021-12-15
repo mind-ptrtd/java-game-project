@@ -2,9 +2,10 @@ package fish;
 
 import java.util.Random;
 
-import Shop.ShopSystem;
 import animation.Animateable;
 import animation.SpriteAnimation;
+import fishing.FishingSyncable;
+import fishing.FishingSystem;
 import input.InputUtility;
 import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
@@ -14,11 +15,10 @@ import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import logic.Direction;
 import logic.Entity;
-import logic.FishingSystem;
-import logic.FishingSyncable;
 import logic.GameObject;
 import logic.Updateable;
 import main.Main;
+import shop.ShopSystem;
 
 public abstract class Fish extends Entity implements Updateable, Animateable,FishingSyncable {
 

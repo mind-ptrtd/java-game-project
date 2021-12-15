@@ -1,10 +1,10 @@
-package logic;
+package fishing;
 
 import java.util.ArrayList;
 
-import Shop.ShopSystem;
 import fish.Fish;
 import fish.FishState;
+import shop.ShopSystem;
 
 public class FishingSystem {
 	private static final FishingSystem instance = new FishingSystem();

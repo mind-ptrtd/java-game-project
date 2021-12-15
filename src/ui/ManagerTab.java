@@ -1,7 +1,5 @@
 package ui;
 
-import Shop.ShopSystem;
-import Shop.ShopUpdateable;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -20,6 +18,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import main.Main;
+import shop.ShopSystem;
+import shop.ShopUpdateable;
 
 public class ManagerTab extends HBox implements ShopUpdateable {
 	private Text moneyText;

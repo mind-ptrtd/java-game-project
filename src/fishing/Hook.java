@@ -1,13 +1,17 @@
-package logic;
+package fishing;
 
-import Shop.ShopSystem;
 import animation.ImageViewable;
 import input.InputUtility;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import logic.Direction;
+import logic.Entity;
+import logic.GameObject;
+import logic.Updateable;
 import main.Main;
+import shop.ShopSystem;
 
 public class Hook extends Entity implements Updateable, ImageViewable, FishingSyncable {
 	private ImageView imageView;

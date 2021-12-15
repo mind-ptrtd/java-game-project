@@ -9,16 +9,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
-import logic.FishingSystem;
 import logic.GameLogic;
 import logic.GameObject;
+import shop.ShopSystem;
 import ui.BuyTab;
 import ui.GameScreen;
 import ui.MainMenu;
 import ui.ManagerTab;
 import ui.SellPopUp;
 import ui.Storage;
-import Shop.ShopSystem;
+import fishing.FishingSystem;
 import input.InputUtility;
 
 public class Main extends Application {

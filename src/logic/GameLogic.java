@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import fish.*;
+import fishing.FishingSystem;
+import fishing.Hook;
 import player.Willy;
 import ui.Map;
 

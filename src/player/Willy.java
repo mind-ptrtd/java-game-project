@@ -1,8 +1,9 @@
 package player;
 
-import Shop.ShopSystem;
 import animation.Animateable;
 import animation.SpriteAnimation;
+import fishing.FishingSyncable;
+import fishing.FishingSystem;
 import input.InputUtility;
 import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
@@ -12,10 +13,9 @@ import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import logic.Direction;
 import logic.Entity;
-import logic.FishingSyncable;
 import logic.Updateable;
 import main.Main;
-import logic.FishingSystem;
+import shop.ShopSystem;
 import logic.GameObject;
 
 public class Willy extends Entity implements Updateable, Animateable, FishingSyncable {
