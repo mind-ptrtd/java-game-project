@@ -10,7 +10,7 @@ public class Tuna extends Fish {
 		fishType = FishType.TUNA;
 		this.price = 200;
 		this.name = "Tuna";
-		this.setSpeed(2*speedFactor);
+		this.setSpeed(2*fishSpeedFactor);
 		// ADD BELOW
 	}
 

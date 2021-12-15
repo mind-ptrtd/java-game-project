@@ -15,6 +15,7 @@ import logic.Updateable;
 import main.Main;
 import logic.FishingSystem;
 import logic.GameObject;
+import logic.ShopSystem;
 
 public class Willy extends Entity implements Updateable, Animateable {
 	private ImageView imageView;
@@ -36,7 +37,7 @@ public class Willy extends Entity implements Updateable, Animateable {
 	// margin 20
 	public void move(Direction dir) {
 		if (dir == Direction.RIGHT) {
-			if (x <= 800 - 32 - 20) { // 60 is OK
+			if (x <= 800 - 32 - 20) { 
 				x += speedX;
 			}
 		} else {
@@ -50,6 +51,7 @@ public class Willy extends Entity implements Updateable, Animateable {
 	public void logicUpdate() {
 		// Pull Global to local
 		isNearMe = FishingSystem.getInstance().getNearMe();
+		speedX = 1.5f * ShopSystem.getWalkSpeedFactor();
 		// Push local to global
 		FishingSystem.getInstance().setGlobalXY(getX(), getY());
 
@@ -59,27 +61,26 @@ public class Willy extends Entity implements Updateable, Animateable {
 			setFishing(false);
 			isFront = true;
 			upDateSprite();
-			System.out.println("Keep");
 		} else if (InputUtility.getKeyPressed(KeyCode.SPACE)) {
 			isFront = false;
 			setFishing(true);
 			upDateSprite();
 		} else {
 			// MOVE RIGHT
-			if (isWalkRight && InputUtility.getKeyPressed(KeyCode.D)) {
+			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && isWalkRight && InputUtility.getKeyPressed(KeyCode.D) && !InputUtility.getKeyPressed(KeyCode.SPACE)) {
 				move(Direction.RIGHT);
 			}
-			if ((isWalkLeft || isFront) && InputUtility.getKeyPressed(KeyCode.D)) {
+			if ((isWalkLeft || isFront) && !InputUtility.getKeyPressed(KeyCode.SPACE) && InputUtility.getKeyPressed(KeyCode.D) && !InputUtility.getKeyPressed(KeyCode.SPACE)) {
 				move(Direction.RIGHT);
 				isWalkRight = true;
 				isFront = isWalkLeft = false;
 				upDateSprite();
 			}
 			// MOVE LEFT
-			if (isWalkLeft && InputUtility.getKeyPressed(KeyCode.A)) {
+			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && isWalkLeft && InputUtility.getKeyPressed(KeyCode.A) && !InputUtility.getKeyPressed(KeyCode.SPACE)) {
 				move(Direction.LEFT);
 			}
-			if ((isWalkRight || isFront) && InputUtility.getKeyPressed(KeyCode.A)) {
+			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && (isWalkRight || isFront) && InputUtility.getKeyPressed(KeyCode.A)) {
 				move(Direction.LEFT);
 				isWalkLeft = true;
 				isFront = isWalkRight = false;

@@ -85,6 +85,10 @@ public class GameLogic {
 	protected void addNewObject(Entity entity) {
 		gameObjectContainer.add(entity);
 		GameObject.getInstance().add(entity);
+		if(entity instanceof Fish) {
+			FishingSystem.getAllFishContainer().add((Fish)(entity));
+		}
+
 	}
 	// Handle Logic among Updateble
 	public void logicUpdate() {

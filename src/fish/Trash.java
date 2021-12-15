@@ -9,7 +9,7 @@ public class Trash extends Fish{
 		fishType = FishType.TRASH;
 		this.price = 0;
 		this.name = "Trash";
-		this.setSpeed(2*speedFactor);
+		this.setSpeed(2*fishSpeedFactor);
 		// ADD BELOW
 	}
 

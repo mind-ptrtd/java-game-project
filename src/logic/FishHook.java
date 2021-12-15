@@ -55,6 +55,7 @@ public class FishHook extends Entity implements Updateable, ImageViewable {
 		// Pull Global to local
 		double willyX = FishingSystem.getInstance().getGlobalWillyX();
 		double willyY = FishingSystem.getInstance().getGlobalWillyY(); // under his Willy's Feet
+		speedY = 2 * ShopSystem.getHookSpeedFactor();
 		// Push local to global
 		FishingSystem.getInstance().setGlobalFishHookXY(getX(), getY());
 		FishingSystem.getInstance().setNearMe(isNearMe);

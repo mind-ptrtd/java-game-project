@@ -9,7 +9,7 @@ public class Bass extends Fish {
 		fishType =FishType.BASS;
 		this.price = 500;
 		this.name = "Bass";
-		this.setSpeed(7*speedFactor);
+		this.setSpeed(7*fishSpeedFactor);
 	}
 
 	@Override
