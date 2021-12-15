@@ -16,8 +16,6 @@ public class FishHook extends Entity implements Updateable, ImageViewable,Fishin
 
 	public FishHook() {
 		super();
-		x = FishingSystem.getInstance().getGlobalWillyX();
-		y = FishingSystem.getInstance().getGlobalWillyY(); // under his Willy's Feet
 		z = 30;
 		speedY = 2;
 		createFirstSprite();
@@ -37,7 +35,7 @@ public class FishHook extends Entity implements Updateable, ImageViewable,Fishin
 	}
 
 	private void updateNear() {
-		if (isFishing && Math.abs(FishingSystem.getInstance().getGlobalWillyY() + 3 * 32 - getY()) <= 10) { // Near
+		if (isFishing && Math.abs(FishingSystem.getGlobalWillyY() + 3 * 32 - getY()) <= 10) { // Near
 			isNearMe = true;
 		} else {
 			isNearMe = false;
@@ -45,8 +43,9 @@ public class FishHook extends Entity implements Updateable, ImageViewable,Fishin
 	}
 	public void fishingSync() {
 		// Pull Global to local
-		willyX = FishingSystem.getInstance().getGlobalWillyX();
-		willyY = FishingSystem.getInstance().getGlobalWillyY(); // Update Willy Pos
+		willyX = FishingSystem.getGlobalWillyX();
+		willyY = FishingSystem.getGlobalWillyY(); // Update Willy Pos
+
 		speedY = 2 * ShopSystem.getHookSpeedFactor(); // Set Speed Rely on GlobalSpeed ()
 		// Push local to global
 		FishingSystem.setGlobalFishHookXY(getX(), getY());
@@ -58,20 +57,31 @@ public class FishHook extends Entity implements Updateable, ImageViewable,Fishin
 		fishingSync();
 		
 		if (!isFishing) {
+			x = 200;
+			y = 200;
+			/*
 			x = willyX;
 			y = willyY;
+			*/
 		}
 		updateNear();
 		// CONTROL
 		if (!isFishing && InputUtility.getKeyPressed(KeyCode.SPACE)) { // Fishing Show Hook
+			x = 200;
+			y = 200;
 			x = willyX;
 			y = willyY + 3 * 32; // Willy sprites Height 3 block of 32 bits
 			isFishing = true;
 			isNearMe = true;
 			upDateSprite();
+			System.out.println("SHOW");
 		} else if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // Keep Hook (Hide Hook)
+			x = 200;
+			y = 200;
+			/*
 			x = willyX;
 			y = willyY;
+			*/
 			isFishing = false;
 			isNearMe = false;
 			upDateSprite();

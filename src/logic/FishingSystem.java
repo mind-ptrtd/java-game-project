@@ -90,9 +90,10 @@ public class FishingSystem {
 		FishingSystem.fishHook = fishHook;
 	}
 
-	public void setGlobalXY(double x, double y) {
-		globalWillyX = x;
-		globalWillyY = y;
+	public static void setGlobalWillyXY(double x, double y) {
+		FishingSystem.globalWillyX = x;
+		FishingSystem.globalWillyY = y;
+		System.out.println(x+" "+y);
 	}
 
 	public static void setGlobalFishHookXY(double globalFishHookX, double globalFishHookY) {
@@ -100,7 +101,7 @@ public class FishingSystem {
 		FishingSystem.globalFishHookY = globalFishHookY;
 	}
 
-	public double getGlobalWillyX() {
+	public static double getGlobalWillyX() {
 		return globalWillyX;
 	}
 
@@ -108,7 +109,7 @@ public class FishingSystem {
 		return globalFishHookX;
 	}
 
-	public double getGlobalWillyY() {
+	public static double getGlobalWillyY() {
 		return globalWillyY;
 	}
 

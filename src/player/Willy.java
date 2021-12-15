@@ -52,10 +52,11 @@ public class Willy extends Entity implements Updateable, Animateable,FishingSync
 		isNearMe = FishingSystem.getNearMe();
 		speedX = 1.5f * ShopSystem.getWalkSpeedFactor();
 		// Push local to global
-		FishingSystem.getInstance().setGlobalXY(getX(), getY());
+		FishingSystem.setGlobalWillyXY(getX(), getY());
 	}
 	// Update Logic
 	public void logicUpdate() {
+		fishingSync();
 		
 		// Control
 		if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // keep Hook
