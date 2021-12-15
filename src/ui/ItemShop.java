@@ -1,19 +1,22 @@
 package ui;
 
+import javafx.scene.image.Image;
+import logic.GameObject;
+
 public class ItemShop {
 	
 	private String itemName;
-	private String url;
+	private Image image;
 	private int price;
 	private int income;
 
 	ItemShop(String itemName){
 		switch(itemName) {
-			case "Fish Speed" :	url = "blueFish_Right.png"; price = 1000;	break;
-			case "Hook Speed" : url = "fishHook.png"; 	price = 1900; 	break;
-			case "Hook Size" : 	url = "fishHook.png"; 	price = 2500;	break;
-			case "Player Speed" : url = "willy.png"; price = 800;	break;
-			default : 			url = ""; 	price = 0; itemName = "";
+			case "Fish Speed" :	image = GameObject.blueFish_Right;	price = 1000;	break;
+			case "Hook Speed" : image = GameObject.fishHook; 	price = 1900; 	break;
+			case "Hook Size" : 	image = GameObject.fishHook; 	price = 2500;	break;
+			case "Player Speed" : image = GameObject.playerPic;	price = 800;	break;
+			default : 			image = null; 	price = 0; itemName = "";
 		}
 		
 		this.itemName = itemName;
@@ -28,8 +31,8 @@ public class ItemShop {
 		return price;
 	}
 
-	public String getUrl() {
-		return url;
+	public Image getImage() {
+		return image;
 	}
 
 	public int getIncome() {
