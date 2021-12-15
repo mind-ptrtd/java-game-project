@@ -1,5 +1,6 @@
 package ui;
 
+import fishing.FishingSystem;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -17,14 +18,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
 import main.Main;
 import shop.ShopSystem;
 import shop.ShopUpdateable;
+
 
 public class ManagerTab extends HBox implements ShopUpdateable {
 	private Text moneyText;
 	private Button buyBtn;
 	private int moneyShow;
+	private ItemShop itemShop;
 
 	public ManagerTab() {
 		this.setAlignment(Pos.CENTER_RIGHT);
@@ -72,8 +76,17 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		});
 	}
 	public void shopUpdate() {
-		moneyShow = ShopSystem.getMoney();
-		moneyText.setText("Fish Catched: " + "Money: " + moneyShow + "       ");
+		
+		if (SellPopUp.getIsBuy() && ShopSystem.getMoney() >= itemShop.getPrice()) {
+			moneyShow = ShopSystem.getMoney() - itemShop.getPrice();
+			System.out.println("money left");
+		}
+		
+		else {
+			moneyShow = ShopSystem.getMoney();
+		}
+		
+		moneyText.setText("Fish Catched: " + FishingSystem.getFishHook() + "   " + "Money: " + moneyShow + "          ");
 	}
 
 	// Getter-Setter
@@ -86,5 +99,6 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		this.buyBtn = buyBtn;
 		
 	}
+	
 
 }

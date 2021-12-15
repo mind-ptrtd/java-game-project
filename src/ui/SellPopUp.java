@@ -20,6 +20,8 @@ import main.Main;
 public class SellPopUp extends VBox {
 	private Text sellText;
 	private Button yesBtn,noBtn;
+	private static boolean isBuy;
+	
 
 	public SellPopUp() {
 		this.setPrefWidth(120);
@@ -44,7 +46,7 @@ public class SellPopUp extends VBox {
 		this.getChildren().addAll(sellText, yesBtn, noBtn);
 	}
 	private void initSellText() {
-		Text sellText = new Text("Sell this item?");
+		Text sellText = new Text("Buy this item?");
 		sellText.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		setSellText(sellText);
 	}
@@ -56,7 +58,7 @@ public class SellPopUp extends VBox {
 		setYesBtn(yesBtn);
 		yesBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
-				// GET MONEY
+				isBuy = true;
 				Main.getSellPopUp().setVisible(false);
 				Main.getGameScreen().requestFocus();
 			
@@ -71,6 +73,7 @@ public class SellPopUp extends VBox {
 		setNoBtn(noBtn);
 		noBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
+				isBuy = false;
 				Main.getSellPopUp().setVisible(false);
 				Main.getGameScreen().requestFocus();
 			}
@@ -80,11 +83,17 @@ public class SellPopUp extends VBox {
 	public void setSellText(Text sellText) {
 		this.sellText = sellText;
 	}
+	
 	public void setYesBtn(Button yesBtn) {
 		this.yesBtn = yesBtn;
 	}
+	
 	public void setNoBtn(Button noBtn) {
 		this.noBtn = noBtn;
+	}
+	
+	public static boolean getIsBuy() {
+		return SellPopUp.isBuy;
 	}
 	
 }
