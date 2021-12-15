@@ -19,11 +19,11 @@ import shop.ShopSystem;
 import logic.GameObject;
 
 public class Willy extends Entity implements Updateable, Animateable, FishingSyncable {
-	private ImageView imageView;
-	private Animation animation;
 	private boolean isNearMe;
 	private float speedX;
 	private static WillyState currentState;
+	private ImageView imageView;
+	private Animation animation;
 
 	public Willy() {
 		super();
