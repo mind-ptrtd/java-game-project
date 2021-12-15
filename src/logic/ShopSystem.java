@@ -4,7 +4,7 @@ public class ShopSystem {
 	private static float fishSpeedFactor = 0.5f;
 	private static float walkSpeedFactor = 1f;
 	private static float hookSpeedFactor = 1f;
-	private static int HookSize = 1;
+	private static int HookSize = 100;
 
 	private static int money;
 

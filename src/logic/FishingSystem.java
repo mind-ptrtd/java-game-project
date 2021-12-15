@@ -10,77 +10,78 @@ public class FishingSystem {
 	private static double globalWillyX, globalWillyY;
 	private static double globalFishHookX, globalFishHookY;
 	private static boolean globalFishing, isNearMe;
-	
+
 	private static int HookSize;
-	private static boolean isBackPackFull,isHookFull;
-	private static int fishSea,fishHook;
-	
+	private static int fishSea, fishHook;
+
 	// FishSpawn
 	private static int poolSize = 20;
 	private static int fishCount;
+
 	public static void increaseFishCount() {
 		fishCount++;
 	}
+
 	public static void decreaseFishCount() {
 		fishCount--;
 	}
 
 	// FISH HOOK ------------------------------------//
-	
+
 	public static boolean isHookFull() {
-		return fishHook>=HookSize;
+		return fishHook >= HookSize;
 	}
 
 	// FISH CONTAINER
-	private static final ArrayList<Fish> allFishContainer = new ArrayList<Fish>();
-	
+	private final ArrayList<Fish> allFishContainer = new ArrayList<Fish>();
+
 	public void addFishIntoAllFishContainer(Fish fish) {
 		allFishContainer.add(fish);
 	}
+
 	public static void fishUpdate() {
 		// Pull From Global
 		HookSize = ShopSystem.getHookSize();
-		
+
 		int fishHOOK = 0;
-		for (int i = allFishContainer.size() - 1; i >= 0; i--) {
-			Fish fishInLoop = allFishContainer.get(i);
-			if(fishInLoop.getFishwhere() == FishWhere.HOOK){
-				fishHOOK+=1;
-			} else if(fishInLoop.getFishwhere() == FishWhere.DEAD) {
-				allFishContainer.remove(fishInLoop);
+		for (int i = getInstance().getAllFishContainer().size() - 1; i >= 0; i--) {
+			Fish fishInLoop = getInstance().getAllFishContainer().get(i);
+			if (fishInLoop.getFishwhere() == FishWhere.HOOK) {
+				fishHOOK += 1;
+			} else if (fishInLoop.getFishwhere() == FishWhere.DEAD) {
+				getInstance().getAllFishContainer().remove(fishInLoop);
 			}
 		}
-		//System.out.println(fishHOOK);
+		// System.out.println(fishHOOK);
 		setFishHook(fishHOOK);
 	}
 
-	
-	
-	
-	
-	
-	
-	//-------------------------//
-	
+	// -------------------------//
+
 	public static void setHookSize(int hookSize) {
 		HookSize = hookSize;
 	}
-	public static ArrayList<Fish> getAllFishContainer(){
+
+	public ArrayList<Fish> getAllFishContainer() {
 		return allFishContainer;
 	}
+
 	public static int getFishCount() {
 		return fishCount;
 	}
-	
+
 	public static int getPoolSize() {
 		return poolSize;
 	}
+
 	public static FishingSystem getInstance() {
 		return instance;
 	}
+
 	public static int getFishSea() {
 		return fishSea;
 	}
+
 	public static void setFishSea(int fishSea) {
 		FishingSystem.fishSea = fishSea;
 	}
@@ -88,9 +89,11 @@ public class FishingSystem {
 	public static int getFishHook() {
 		return fishHook;
 	}
+
 	public static void setFishHook(int fishHook) {
 		FishingSystem.fishHook = fishHook;
 	}
+
 	public static boolean getGlobalFishing() {
 		return globalFishing;
 	}

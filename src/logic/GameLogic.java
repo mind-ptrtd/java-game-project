@@ -3,10 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javafx.application.Platform;
-
 import fish.*;
-import main.Main;
 import player.Willy;
 import ui.Map;
 
@@ -32,7 +29,7 @@ public class GameLogic {
 	
 	public void spawnMoreFish() {
 		addNewObject(FishRandomizer());
-		FishingSystem.getInstance().increaseFishCount();
+		FishingSystem.increaseFishCount();
 	}
 	public void initializeFish() {
 		int numberOfFish = 10 + random.nextInt(10);
@@ -86,14 +83,14 @@ public class GameLogic {
 		gameObjectContainer.add(entity);
 		GameObject.getInstance().add(entity);
 		if(entity instanceof Fish) {
-			FishingSystem.getAllFishContainer().add((Fish)(entity));
+			FishingSystem.getInstance().getAllFishContainer().add((Fish)(entity));
 		}
 
 	}
 	// Handle Logic among Updateble
 	public void logicUpdate() {
 		spawnTimer+=0.1f;
-		if((spawnTimer>=10) && (FishingSystem.getInstance().getFishCount()<FishingSystem.getInstance().getPoolSize())) {
+		if((spawnTimer>=10) && (FishingSystem.getFishCount()<FishingSystem.getPoolSize())) {
 			spawnMoreFish();
 			spawnTimer=0;
 		}

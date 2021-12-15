@@ -14,7 +14,7 @@ public class Map implements IRenderable{
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		gc.drawImage(GameObject.getInstance().map, 0, 0);
+		gc.drawImage(GameObject.map, 0, 0);
 	}
 
 	@Override

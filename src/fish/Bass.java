@@ -15,9 +15,9 @@ public class Bass extends Fish {
 	@Override
 	public ImageView imageViewFish() {
 		if(isRight) {
-			return new ImageView(GameObject.getInstance().bass_Right);
+			return new ImageView(GameObject.bass_Right);
 		} else {
-			return new ImageView(GameObject.getInstance().bass_Left);
+			return new ImageView(GameObject.bass_Left);
 		}
 	}
 	@Override

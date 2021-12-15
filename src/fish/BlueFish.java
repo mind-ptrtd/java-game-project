@@ -9,7 +9,7 @@ public class BlueFish extends Fish{
 		super();
 		this.price = 100;
 		this.name = "Blue Fish";
-		this.fishType = fishType.BLUEFISH;
+		this.fishType = FishType.BLUEFISH;
 		this.setSpeed(1*fishSpeedFactor);
 		// ADD BELOW
 		
@@ -18,9 +18,9 @@ public class BlueFish extends Fish{
 	@Override
 	public ImageView imageViewFish() {
 		if(isRight) {
-			return new ImageView(GameObject.getInstance().blueFish_Right);
+			return new ImageView(GameObject.blueFish_Right);
 		} else {
-			return new ImageView(GameObject.getInstance().blueFish_Left);
+			return new ImageView(GameObject.blueFish_Left);
 		}
 	}
 

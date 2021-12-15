@@ -15,9 +15,9 @@ public class Squid extends Fish {
 	@Override
 	public ImageView imageViewFish() {
 		if(isRight) {
-			return new ImageView(GameObject.getInstance().squid_Right);
+			return new ImageView(GameObject.squid_Right);
 		} else {
-			return new ImageView(GameObject.getInstance().squid_Left);
+			return new ImageView(GameObject.squid_Left);
 		}
 	}
 	@Override
