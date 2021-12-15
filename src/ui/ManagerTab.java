@@ -22,13 +22,14 @@ import javafx.scene.text.Text;
 import main.Main;
 import shop.ShopSystem;
 import shop.ShopUpdateable;
+import shop.UpgradeType;
 
 
 public class ManagerTab extends HBox implements ShopUpdateable {
 	private Text moneyText;
 	private Button buyBtn;
 	private int moneyShow;
-	private ItemShop itemShop;
+	private static ItemShop SelectedItemShop;
 
 	public ManagerTab() {
 		this.setAlignment(Pos.CENTER_RIGHT);
@@ -38,9 +39,11 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		this.setBackground(new Background(new BackgroundFill(Color.DIMGRAY, null, null)));
 		
 		Text space = new Text("   ");
-		
 		initMoneyText();
 		initBuyBtn();
+		
+		SelectedItemShop = new ItemShop("NONE");
+		
 		this.getChildren().addAll(moneyText, buyBtn, space);
 	}
 
@@ -76,17 +79,15 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		});
 	}
 	public void shopUpdate() {
-		
-		if (SellPopUp.getIsBuy() && ShopSystem.getMoney() >= itemShop.getPrice()) {
-			moneyShow = ShopSystem.getMoney() - itemShop.getPrice();
-			System.out.println("money left");
-		}
-		
-		else {
-			moneyShow = ShopSystem.getMoney();
-		}
-		
+		moneyShow = ShopSystem.getMoney();
 		moneyText.setText("Fish Catched: " + FishingSystem.getFishHook() + "   " + "Money: " + moneyShow + "          ");
+		if (SelectedItemShop.getUpgradeType() == UpgradeType.NONE) {
+			// Nothing Happen
+		} else if (SellPopUp.getIsBuy() && ShopSystem.getMoney() >= SelectedItemShop.getPrice()) {			
+			ShopSystem.setMoney(ShopSystem.getMoney()-SelectedItemShop.getPrice());
+			System.out.println("money spend");
+			setSelectedItemShop(new ItemShop("NONE"));
+		} 
 	}
 
 	// Getter-Setter
@@ -98,6 +99,14 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 	private void setBuyBtn(Button buyBtn) {
 		this.buyBtn = buyBtn;
 		
+	}
+
+	public static ItemShop getSelectedItemShop() {
+		return SelectedItemShop;
+	}
+
+	public static void setSelectedItemShop(ItemShop selectedItemShop) {
+		SelectedItemShop = selectedItemShop;
 	}
 	
 

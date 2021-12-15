@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.GameObject;
 import main.Main;
+import shop.ShopSystem;
 import ui.ItemShop;
 
 public class BuyItem extends Button {
@@ -47,6 +48,7 @@ public class BuyItem extends Button {
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
 				System.out.println("CLICKED");
+				ManagerTab.setSelectedItemShop(itemShop);
 				Main.getSellPopUp().setVisible(true);
 				Main.getGameScreen().requestFocus();
 			}

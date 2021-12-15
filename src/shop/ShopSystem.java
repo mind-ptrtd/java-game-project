@@ -1,6 +1,7 @@
 package shop;
 
 import main.Main;
+import ui.ItemShop;
 
 public class ShopSystem {
 	private static float fishSpeedFactor = 0.5f;
@@ -54,5 +55,5 @@ public class ShopSystem {
 	public static void setHookSize(int hookSize) {
 		HookSize = hookSize;
 	}
-	
+
 }
