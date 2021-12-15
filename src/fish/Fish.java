@@ -33,8 +33,8 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 	protected FishType fishType;
 	protected String name;
 	protected int price;
-	protected boolean isLeft, isRight;
 
+	private boolean isLeft, isRight;
 	private float speedX;
 	private ImageView imageView;
 	private Animation animation;
@@ -226,4 +226,11 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 		return fishwhere;
 	}
 
+	public boolean getLeft() {
+		return isLeft;
+	}
+
+	public boolean getRight() {
+		return isRight;
+	}
 }

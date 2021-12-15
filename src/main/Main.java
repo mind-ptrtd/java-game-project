@@ -91,7 +91,7 @@ public class Main extends Application {
 		animation.start();
 	}
 
-	public static void changeScene() {
+	private static void changeScene() {
 		if (screenNow == Game.START) {
 			stage.setScene(startScene);
 			// System.out.println("START");
@@ -105,19 +105,19 @@ public class Main extends Application {
 		}
 	}
 
+	public static void addToPane(ImageView imageview) {
+		imagePane.getChildren().add(imageview);
+	}
+	
+	public static void removeFromPane(ImageView imageview) {
+		imagePane.getChildren().remove(imageview);
+	}
 	
 	// Getter-Setter
 	public static void setScreenNow(Game screenNow) {
 		Main.screenNow = screenNow;
 	}
 
-	public static void addToPane(ImageView imageview) {
-		imagePane.getChildren().add(imageview);
-	}
-
-	public static void removeFromPane(ImageView imageview) {
-		imagePane.getChildren().remove(imageview);
-	}
 
 	public static void setClose(boolean isClose) {
 		Main.isClose = isClose;

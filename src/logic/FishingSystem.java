@@ -35,10 +35,6 @@ public class FishingSystem {
 	// FISH CONTAINER
 	private final ArrayList<Fish> allFishContainer = new ArrayList<Fish>();
 
-	public void addFishIntoAllFishContainer(Fish fish) {
-		allFishContainer.add(fish);
-	}
-
 	public static void fishUpdate() {
 		// Pull From Global
 		HookSize = ShopSystem.getHookSize();

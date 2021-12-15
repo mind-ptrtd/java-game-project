@@ -17,7 +17,7 @@ public class BlueFish extends Fish{
 
 	@Override
 	public ImageView imageViewFish() {
-		if(isRight) {
+		if(getRight()) {
 			return new ImageView(GameObject.blueFish_Right);
 		} else {
 			return new ImageView(GameObject.blueFish_Left);
