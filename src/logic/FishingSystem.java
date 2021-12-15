@@ -9,10 +9,10 @@ public class FishingSystem {
 	private static final FishingSystem instance = new FishingSystem();
 	private static double globalWillyX, globalWillyY;
 	private static double globalFishHookX, globalFishHookY;
-	private static boolean globalFishing, isNearMe;
+	private static boolean isglobalFishing, isNearMe;
 
 	private static int HookSize;
-	private static int fishSea, fishHook;
+	private static int fishHook;
 
 	// FishSpawn
 	private static int poolSize = 100;
@@ -77,15 +77,15 @@ public class FishingSystem {
 	public static FishingSystem getInstance() {
 		return instance;
 	}
-
-	public static int getFishSea() {
-		return fishSea;
+	
+	public static boolean getIsGlobalFishing() {
+		return isglobalFishing;
 	}
-
-	public static void setFishSea(int fishSea) {
-		FishingSystem.fishSea = fishSea;
+	
+	public static void setGlobalFishing(boolean globalFishing) {
+		FishingSystem.isglobalFishing = globalFishing;
 	}
-
+	
 	public static int getFishHook() {
 		return fishHook;
 	}
@@ -94,34 +94,26 @@ public class FishingSystem {
 		FishingSystem.fishHook = fishHook;
 	}
 
-	public static boolean getGlobalFishing() {
-		return globalFishing;
+	public void setGlobalXY(double x, double y) {
+		globalWillyX = x;
+		globalWillyY = y;
 	}
 
-	public static void setFishing(boolean globalFishing) {
-		FishingSystem.globalFishing = globalFishing;
+	public static void setGlobalFishHookXY(double globalFishHookX, double globalFishHookY) {
+		FishingSystem.globalFishHookX = globalFishHookX;
+		FishingSystem.globalFishHookY = globalFishHookY;
 	}
 
 	public double getGlobalWillyX() {
 		return globalWillyX;
 	}
 
-	public double getGlobalWillyY() {
-		return globalWillyY;
-	}
-
-	public void setGlobalXY(double x, double y) {
-		globalWillyX = x;
-		globalWillyY = y;
-	}
-
 	public static double getGlobalFishHookX() {
 		return globalFishHookX;
 	}
 
-	public static void setGlobalFishHookXY(double globalFishHookX, double globalFishHookY) {
-		FishingSystem.globalFishHookX = globalFishHookX;
-		FishingSystem.globalFishHookY = globalFishHookY;
+	public double getGlobalWillyY() {
+		return globalWillyY;
 	}
 
 	public static double getGlobalFishHookY() {

@@ -11,13 +11,14 @@ import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import logic.Direction;
 import logic.Entity;
+import logic.FishingSync;
 import logic.Updateable;
 import main.Main;
 import logic.FishingSystem;
 import logic.GameObject;
 import logic.ShopSystem;
 
-public class Willy extends Entity implements Updateable, Animateable {
+public class Willy extends Entity implements Updateable, Animateable,FishingSync {
 	private ImageView imageView;
 	private Animation animation;
 	private boolean isWalkLeft, isWalkRight, isFishing, isDead, isFront, isNearMe;
@@ -35,9 +36,9 @@ public class Willy extends Entity implements Updateable, Animateable {
 	}
 
 	// margin 20
-	public void move(Direction dir) {
+	private void move(Direction dir) {
 		if (dir == Direction.RIGHT) {
-			if (x <= 800 - 32 - 20) { 
+			if (x <= 800 - 32 - 20) {
 				x += speedX;
 			}
 		} else {
@@ -46,41 +47,47 @@ public class Willy extends Entity implements Updateable, Animateable {
 			}
 		}
 	}
-
-	// Update Logic
-	public void logicUpdate() {
+	public void fishingSync() {
 		// Pull Global to local
 		isNearMe = FishingSystem.getNearMe();
 		speedX = 1.5f * ShopSystem.getWalkSpeedFactor();
 		// Push local to global
 		FishingSystem.getInstance().setGlobalXY(getX(), getY());
-
+	}
+	// Update Logic
+	public void logicUpdate() {
+		
 		// Control
-		if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // reset
+		if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // keep Hook
 			isWalkLeft = isWalkRight = false;
-			setFishing(false);
 			isFront = true;
+			setFishing(false);
 			upDateSprite();
-		} else if (InputUtility.getKeyPressed(KeyCode.SPACE)) {
+		} else if (InputUtility.getKeyPressed(KeyCode.SPACE)) { // Go Fishing
+			isWalkLeft = isWalkRight = false;
 			isFront = false;
 			setFishing(true);
 			upDateSprite();
 		} else {
 			// MOVE RIGHT
-			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && isWalkRight && InputUtility.getKeyPressed(KeyCode.D) && !InputUtility.getKeyPressed(KeyCode.SPACE)) {
+			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && isWalkRight && InputUtility.getKeyPressed(KeyCode.D)
+					&& !InputUtility.getKeyPressed(KeyCode.SPACE)) {
 				move(Direction.RIGHT);
 			}
-			if ((isWalkLeft || isFront) && !InputUtility.getKeyPressed(KeyCode.SPACE) && InputUtility.getKeyPressed(KeyCode.D) && !InputUtility.getKeyPressed(KeyCode.SPACE)) {
+			if ((isWalkLeft || isFront) && !InputUtility.getKeyPressed(KeyCode.SPACE)
+					&& InputUtility.getKeyPressed(KeyCode.D) && !InputUtility.getKeyPressed(KeyCode.SPACE)) {
 				move(Direction.RIGHT);
 				isWalkRight = true;
 				isFront = isWalkLeft = false;
 				upDateSprite();
 			}
 			// MOVE LEFT
-			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && isWalkLeft && InputUtility.getKeyPressed(KeyCode.A) && !InputUtility.getKeyPressed(KeyCode.SPACE)) {
+			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && isWalkLeft && InputUtility.getKeyPressed(KeyCode.A)
+					&& !InputUtility.getKeyPressed(KeyCode.SPACE)) {
 				move(Direction.LEFT);
 			}
-			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && (isWalkRight || isFront) && InputUtility.getKeyPressed(KeyCode.A)) {
+			if (!InputUtility.getKeyPressed(KeyCode.SPACE) && (isWalkRight || isFront)
+					&& InputUtility.getKeyPressed(KeyCode.A)) {
 				move(Direction.LEFT);
 				isWalkLeft = true;
 				isFront = isWalkRight = false;
@@ -176,14 +183,10 @@ public class Willy extends Entity implements Updateable, Animateable {
 		}
 	}
 
-	public boolean isFishing() {
-		return isFishing;
-	}
-
+	// Getter - Setter
 	public void setFishing(boolean isFishing) {
 		this.isFishing = isFishing;
-		FishingSystem.getInstance();
-		FishingSystem.setFishing(isFishing); // Update Global
+		FishingSystem.setGlobalFishing(isFishing); // Update Global
 	}
 
 }
