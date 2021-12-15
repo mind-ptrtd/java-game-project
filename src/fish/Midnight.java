@@ -14,7 +14,7 @@ public class Midnight extends Fish{
 
 	@Override
 	public ImageView imageViewFish() {
-		if(isRight) {
+		if(getRight()) {
 			return new ImageView(GameObject.midNight_Right);
 		} else {
 			return new ImageView(GameObject.midNight_Left);

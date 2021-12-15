@@ -8,22 +8,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import main.Main;
 
-public class FishHook extends Entity implements Updateable, ImageViewable {
+public class FishHook extends Entity implements Updateable, ImageViewable,FishingSyncable {
 	private ImageView imageView;
 	private boolean isNearMe, isFishing;
 	private float speedY;
+	private double willyX,willyY;
 
 	public FishHook() {
 		super();
-		x = FishingSystem.getInstance().getGlobalWillyX();
-		y = FishingSystem.getInstance().getGlobalWillyY(); // under his Willy's Feet
 		z = 30;
 		speedY = 2;
 		createFirstSprite();
 		upDateSprite();
 	}
 
-	public void move(Direction dir) {
+	private void move(Direction dir) {
 		if (dir == Direction.DOWN) {
 			if (y <= 550) {
 				y += speedY;
@@ -35,39 +34,56 @@ public class FishHook extends Entity implements Updateable, ImageViewable {
 		}
 	}
 
-	public void updateNear() {
-		if (isFishing && Math.abs(FishingSystem.getInstance().getGlobalWillyY() + 3 * 32 - getY()) <= 10) { // Near
+	private void updateNear() {
+		if (isFishing && Math.abs(FishingSystem.getGlobalWillyY() + 3 * 32 - getY()) <= 10) { // Near
 			isNearMe = true;
 		} else {
 			isNearMe = false;
 		}
 	}
-
-	// Update Logic
-	public void logicUpdate() {
+	public void fishingSync() {
 		// Pull Global to local
-		double willyX = FishingSystem.getInstance().getGlobalWillyX();
-		double willyY = FishingSystem.getInstance().getGlobalWillyY(); // Update Willy Pos
+		willyX = FishingSystem.getGlobalWillyX();
+		willyY = FishingSystem.getGlobalWillyY(); // Update Willy Pos
+
 		speedY = 2 * ShopSystem.getHookSpeedFactor(); // Set Speed Rely on GlobalSpeed ()
 		// Push local to global
 		FishingSystem.setGlobalFishHookXY(getX(), getY());
 		FishingSystem.setNearMe(isNearMe);
-
+	}
+	
+	// Update Logic
+	public void logicUpdate() {
+		fishingSync();
+		
 		if (!isFishing) {
+			x = 200;
+			y = 200;
+			/*
 			x = willyX;
 			y = willyY;
+			*/
 		}
 		updateNear();
 		// CONTROL
 		if (!isFishing && InputUtility.getKeyPressed(KeyCode.SPACE)) { // Fishing Show Hook
+			x = 200;
+			y = 200;
 			x = willyX;
 			y = willyY + 3 * 32; // Willy sprites Height 3 block of 32 bits
 			isFishing = true;
+			isNearMe = true;
 			upDateSprite();
+			System.out.println("SHOW");
 		} else if (isNearMe && InputUtility.getKeyPressed(KeyCode.E)) { // Keep Hook (Hide Hook)
+			x = 200;
+			y = 200;
+			/*
 			x = willyX;
 			y = willyY;
+			*/
 			isFishing = false;
+			isNearMe = false;
 			upDateSprite();
 		} else { // MOVEMENT
 			if (isFishing && InputUtility.getKeyPressed(KeyCode.S)) { // Go Down
@@ -105,19 +121,16 @@ public class FishHook extends Entity implements Updateable, ImageViewable {
 		if (!isFishing) { // Hide Hook
 			imageView.setImage(null);
 			GameObject.getInstance();
-			imageView.setImage(GameObject.emptySprite);
+			imageView = new ImageView(GameObject.emptySprite);
 		}
 		if (isFishing) { // Show Hook
 			imageView.setImage(null);
 			GameObject.getInstance();
-			imageView.setImage(GameObject.fishHook);
+			imageView = new ImageView(GameObject.fishHook);
 		}
 		// Cut ImageView
 		imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
 	}
 
-	public void setImageView(ImageView imageView) {
-		this.imageView = imageView;
-	}
-
+	
 }

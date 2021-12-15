@@ -14,7 +14,7 @@ public class LionFish extends Fish{
 
 	@Override
 	public ImageView imageViewFish() {
-		if(isRight) {
+		if(getRight()) {
 			return new ImageView(GameObject.lionFish_Right);
 		} else {
 			return new ImageView(GameObject.lionFish_Left);
