@@ -17,7 +17,7 @@ import ui.BuyTab;
 import ui.GameScreen;
 import ui.MainMenu;
 import ui.ManagerTab;
-import ui.SellPopUp;
+import ui.BuyPopUp;
 import ui.Storage;
 import fishing.FishingSystem;
 import input.InputUtility;
@@ -26,7 +26,7 @@ public class Main extends Application {
 
 	public Storage storage;
 	private static Game screenNow;
-	private static SellPopUp sellPopUp;
+	private static BuyPopUp sellPopUp;
 	private static ManagerTab managerTab;
 	private static BuyTab buyTab;
 	private static boolean isClose;
@@ -50,7 +50,7 @@ public class Main extends Application {
 		Main.gameScreen = new GameScreen(800, 600);
 
 		Group screen = new Group();
-		Main.sellPopUp = new SellPopUp();
+		Main.sellPopUp = new BuyPopUp();
 		sellPopUp.setVisible(false);
 
 		Main.managerTab = new ManagerTab();
@@ -138,7 +138,7 @@ public class Main extends Application {
 		Main.isClose = isClose;
 	}
 
-	public static SellPopUp getSellPopUp() {
+	public static BuyPopUp getSellPopUp() {
 		return sellPopUp;
 	}
 

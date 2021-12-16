@@ -83,7 +83,7 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		moneyText.setText("Fish Catched: " + FishingSystem.getFishHook() + "   " + "Money: " + moneyShow + "          ");
 		if (SelectedItemShop.getUpgradeType() == UpgradeType.NONE) {
 			// Nothing Happen
-		} else if (SellPopUp.getIsBuy() && ShopSystem.getMoney() >= SelectedItemShop.getPrice()) {			
+		} else if (BuyPopUp.getIsBuy() && ShopSystem.getMoney() >= SelectedItemShop.getPrice()) {			
 			ShopSystem.setMoney(ShopSystem.getMoney()-SelectedItemShop.getPrice());
 			System.out.println("money spend");
 			setSelectedItemShop(new ItemShop("NONE"));
