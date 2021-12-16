@@ -41,7 +41,7 @@ public class BuyPopUp extends VBox {
 		initYesBtn();
 		initNoBtn();
 		
-		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
+		this.setBackground(new Background(new BackgroundFill(Color.CHOCOLATE, null, null)));
 		this.setBorder(new Border(new BorderStroke(Color.AZURE, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, new BorderWidths(2.5))));
 		btnPane = new HBox();
@@ -53,6 +53,7 @@ public class BuyPopUp extends VBox {
 	private void initSellText() {
 		Text sellText = new Text("Buy this item?");
 		sellText.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		sellText.setFill(Color.ANTIQUEWHITE);
 		setSellText(sellText);
 	}
 	private void initYesBtn() {
