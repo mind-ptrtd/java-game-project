@@ -35,7 +35,7 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		this.setAlignment(Pos.CENTER_RIGHT);
 		this.setPrefWidth(800);
 		this.setPrefHeight(50);
-		this.setBorder(new Border(new BorderStroke(Color.LIGHTGOLDENRODYELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
+		//this.setBorder(new Border(new BorderStroke(Color.LIGHTGOLDENRODYELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
 		this.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD, null, null)));
 		
 		Text space = new Text("   ");
