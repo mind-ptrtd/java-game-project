@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import shop.ShopSystem;
 
 public class BuyTab extends GridPane {
 	private BuyItem fishPrice;
@@ -30,9 +31,9 @@ public class BuyTab extends GridPane {
 		this.setPrefHeight(100);
 		this.setLayoutX(260);
 		
-		this.setBorder(new Border(new BorderStroke(Color.AZURE, BorderStrokeStyle.SOLID, 
+		this.setBorder(new Border(new BorderStroke(Color.SADDLEBROWN, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, new BorderWidths(4.5))));
-		this.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setBackground(new Background(new BackgroundFill(Color.SANDYBROWN, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		fishPrice = new BuyItem("Fish Price");
 		hookSpeed = new BuyItem("Hook Speed");
@@ -40,7 +41,8 @@ public class BuyTab extends GridPane {
 		playerSpeed = new BuyItem("Player Speed");
 		buyItemList.addAll(fishPrice, hookSpeed, hookSize, playerSpeed);
 
-		this.addRow(0, fishSpeed, hookSpeed, hookSize, playerSpeed);
+		this.addRow(0, fishPrice, hookSpeed, hookSize, playerSpeed);
+	}
 
 	public BuyItem getHookSize() {
 		return hookSize;
@@ -49,9 +51,18 @@ public class BuyTab extends GridPane {
 	public BuyItem getPlayerSpeed() {
 		return playerSpeed;
 	}
+	
+	public BuyItem getHookSpeed() {
+		return hookSpeed;
+	}
+	
+	public BuyItem getFishPrice() {
+		return fishPrice;
+	}
 
 	public ObservableList<BuyItem> getBuyItemList() {
 		return buyItemList;
 	}
+	
 	
 }

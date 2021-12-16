@@ -7,6 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -25,27 +30,23 @@ public class BuyPopUp extends VBox {
 	private static boolean isBuy;
 
 	public BuyPopUp() {
-		this.setPrefWidth(150);
+		this.setPrefWidth(180);
 		this.setPrefHeight(120);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(3.5);
+		this.setLayoutX(320);
+		this.setLayoutY(170);
 		
 		initSellText();
 		initYesBtn();
 		initNoBtn();
 		
-//	    VBox fishInfo = new VBox(20);
-//	    fishInfo.setAlignment(Pos.CENTER);		
-//	    Image fishImage = GameLogic.getInstance().bass_Right;
-//	    BackgroundImage bgImg = new BackgroundImage(fishImage, 
-//	    	    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-//	    	    BackgroundPosition.DEFAULT, 
-//	    	    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
-//	    fishInfo.getChildren().add(bgImg);
-		this.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
+		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
+		this.setBorder(new Border(new BorderStroke(Color.AZURE, BorderStrokeStyle.SOLID, 
+				CornerRadii.EMPTY, new BorderWidths(2.5))));
 		btnPane = new HBox();
 		btnPane.getChildren().addAll(yesBtn, noBtn);
-		btnPane.setSpacing(2);
+		btnPane.setSpacing(10);
 		btnPane.setAlignment(Pos.CENTER);
 		this.getChildren().addAll(sellText,btnPane);
 	}

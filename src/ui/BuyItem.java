@@ -38,7 +38,7 @@ public class BuyItem extends Button implements ShopUpdateable{
 		this.setPadding(new Insets(10));
 		this.setPrefWidth(42);
 		this.setPrefHeight(42);
-		this.setBorder(new Border(new BorderStroke(Color.DARKSLATEGRAY, BorderStrokeStyle.SOLID, 
+		this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, new BorderWidths(1.5))));
 
 		itemShop = new ItemShop(item);

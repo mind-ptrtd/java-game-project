@@ -59,7 +59,8 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 	private void initBuyBtn() {
 		Button buyBtn = new Button("Buy");
 		
-		buyBtn.setFont(Font.font("Comic Sans Ms", FontWeight.SEMI_BOLD, FontPosture.REGULAR, 15));
+		buyBtn.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 15));
+		buyBtn.setAlignment(Pos.CENTER);
 		buyBtn.setPrefWidth(70);
 		buyBtn.setPrefHeight(30);
 		buyBtn.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
