@@ -10,10 +10,10 @@ public class ItemShop {
 	private Image image;
 	private int price;
 	private UpgradeType upgradeType;
-	private static int levelFishPrice;
-	private static int levelHookSpeed;
-	private static int levelHookSize;
-	private static int levelPlayerSpeed;
+	private static int levelFishPrice=1;
+	private static int levelHookSpeed=1;
+	private static int levelHookSize=1;
+	private static int levelPlayerSpeed=1;
 
 	public ItemShop(String itemName) {
 		switch (itemName) {
