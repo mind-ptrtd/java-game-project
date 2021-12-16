@@ -30,7 +30,6 @@ public class BuyItem extends Button {
 	
 	private ItemShop itemShop;
 	private boolean isDrawn;
-	private boolean isClicked;
 
 	public BuyItem(String item) {
 			
@@ -46,7 +45,14 @@ public class BuyItem extends Button {
 		this.draw(icon);
 		this.setTooltip();
 		
-		this.buttonClicked();
+		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				System.out.println("CLICKED");
+				ManagerTab.setSelectedItemShop(itemShop);
+				Main.getSellPopUp().setVisible(true);
+				Main.getGameScreen().requestFocus();
+			}
+		});
 		
 	
 	
@@ -85,31 +91,12 @@ public class BuyItem extends Button {
 		});		
 	}
 	
-	private void buttonClicked() {
-		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent e) {
-				System.out.println("CLICKED");
-				ManagerTab.setSelectedItemShop(itemShop);
-				Main.getSellPopUp().setVisible(true);
-				Main.getGameScreen().requestFocus();
-				setClicked(true);
-			}
-		});
-	}
-
-	public boolean isClicked() {
-		return isClicked;
-	}
-
-	public void setClicked(boolean isClicked) {
-		this.isClicked = isClicked;
-	}
 	
 
 
-	
 
 		
+
 	
 
 
