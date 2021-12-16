@@ -18,21 +18,19 @@ import ui.GameScreen;
 import ui.MainMenu;
 import ui.ManagerTab;
 import ui.BuyPopUp;
-import ui.Storage;
 import fishing.FishingSystem;
 import input.InputUtility;
 
 public class Main extends Application {
 
-	public Storage storage;
+	private static boolean isClose;
 	private static Game screenNow;
 	private static BuyPopUp sellPopUp;
 	private static ManagerTab managerTab;
 	private static BuyTab buyTab;
-	private static boolean isClose;
-	public static Pane imagePane = new Pane();
+	private static Pane imagePane = new Pane();
 	private static Stage stage;
-	private static Scene gameScene, startScene, testScene;
+	private static Scene gameScene, startScene;
 	private static GameScreen gameScreen;
 
 	public static void main(String[] args) {
@@ -68,16 +66,7 @@ public class Main extends Application {
 		MainMenu mainmenu = new MainMenu();
 		startRoot.getChildren().add(mainmenu);
 
-		// ---------------------------- //
-
-		// --TEST ---------------//
-		HBox testRoot = new HBox();
-		Main.testScene = new Scene(testRoot);
-
-		BuyTab buyTab = new BuyTab();
-		testRoot.getChildren().addAll(buyTab);
-		// ------------------------//
-
+		
 		screenNow = Game.START;
 		stage.setScene(startScene);
 		stage.setTitle("FISHING VALLEY");
