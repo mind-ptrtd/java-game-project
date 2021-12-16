@@ -13,7 +13,6 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import shop.ShopSystem;
 
 public class BuyTab extends GridPane {
 	private BuyItem fishPrice;

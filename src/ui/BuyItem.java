@@ -1,17 +1,13 @@
 package ui;
 
-import fish.Fish;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Border;
@@ -21,11 +17,8 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import logic.GameObject;
 import main.Main;
-import shop.ShopSystem;
 import shop.ShopUpdateable;
-import ui.ItemShop;
 
 public class BuyItem extends Button implements ShopUpdateable{
 

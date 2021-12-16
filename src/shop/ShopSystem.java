@@ -1,7 +1,6 @@
 package shop;
 
 import main.Main;
-import ui.ItemShop;
 
 public class ShopSystem {
 	private static float walkSpeedFactor = 1f;
