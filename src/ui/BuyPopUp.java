@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -20,12 +21,12 @@ import main.Main;
 public class BuyPopUp extends VBox {
 	private Text sellText;
 	private Button yesBtn,noBtn;
+	private HBox btnPane;
 	private static boolean isBuy;
-	
 
 	public BuyPopUp() {
-		this.setPrefWidth(120);
-		this.setPrefHeight(200);
+		this.setPrefWidth(150);
+		this.setPrefHeight(120);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(3.5);
 		
@@ -41,9 +42,12 @@ public class BuyPopUp extends VBox {
 //	    	    BackgroundPosition.DEFAULT, 
 //	    	    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
 //	    fishInfo.getChildren().add(bgImg);
-		
 		this.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
-		this.getChildren().addAll(sellText, yesBtn, noBtn);
+		btnPane = new HBox();
+		btnPane.getChildren().addAll(yesBtn, noBtn);
+		btnPane.setSpacing(2);
+		btnPane.setAlignment(Pos.CENTER);
+		this.getChildren().addAll(sellText,btnPane);
 	}
 	private void initSellText() {
 		Text sellText = new Text("Buy this item?");
