@@ -16,14 +16,15 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.Main;
+import shop.ShopSystem;
 
-public class SellPopUp extends VBox {
+public class BuyPopUp extends VBox {
 	private Text sellText;
 	private Button yesBtn,noBtn;
 	private static boolean isBuy;
 	
 
-	public SellPopUp() {
+	public BuyPopUp() {
 		this.setPrefWidth(120);
 		this.setPrefHeight(200);
 		this.setAlignment(Pos.CENTER);
@@ -93,7 +94,7 @@ public class SellPopUp extends VBox {
 	}
 	
 	public static boolean getIsBuy() {
-		return SellPopUp.isBuy;
+		return BuyPopUp.isBuy;
 	}
 	
 }

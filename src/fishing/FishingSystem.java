@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import fish.Fish;
 import fish.FishState;
 import shop.ShopSystem;
+import ui.BuyPopUp;
 
 public class FishingSystem {
 	private static final FishingSystem instance = new FishingSystem();
@@ -22,7 +23,11 @@ public class FishingSystem {
 
 	public static void fishUpdate() {
 		// Pull From Global
-		HookSize = ShopSystem.getHookSize();
+		
+//		if (BuyPopUp.getIsBuy()) {
+//			HookSize = ShopSystem.getHookSize();
+//		}
+		
 		int fishHook = 0;
 		for (int i = getInstance().getAllFishContainer().size() - 1; i >= 0; i--) {
 			Fish fishInLoop = getInstance().getAllFishContainer().get(i);

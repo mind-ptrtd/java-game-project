@@ -17,9 +17,8 @@ public class BuyTab extends GridPane {
 	public BuyTab() {
 
 		this.setAlignment(Pos.CENTER);
-		this.setVgap(10);
 		this.setHgap(20);
-		this.setPrefWidth(500);
+		this.setPrefWidth(300);
 		this.setPrefHeight(100);
 		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 
