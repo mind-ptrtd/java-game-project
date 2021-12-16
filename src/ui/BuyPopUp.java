@@ -30,7 +30,7 @@ public class BuyPopUp extends VBox {
 	private static boolean isBuy;
 
 	public BuyPopUp() {
-		this.setPrefWidth(180);
+		this.setPrefWidth(190);
 		this.setPrefHeight(120);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(3.5);
@@ -51,7 +51,7 @@ public class BuyPopUp extends VBox {
 		this.getChildren().addAll(sellText,btnPane);
 	}
 	private void initSellText() {
-		Text sellText = new Text("Buy this item?");
+		Text sellText = new Text("Buy this upgrade?");
 		sellText.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		sellText.setFill(Color.ANTIQUEWHITE);
 		setSellText(sellText);
