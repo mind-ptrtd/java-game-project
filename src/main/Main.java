@@ -2,6 +2,7 @@ package main;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;

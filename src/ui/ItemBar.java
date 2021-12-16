@@ -22,7 +22,7 @@ public class ItemBar extends VBox {
 		
 		this.setPrefHeight(400);
 		this.setAlignment(Pos.CENTER);
-		this.setBorder(new Border(new BorderStroke(Color.BISQUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
+		this.setBorder(new Border(new BorderStroke(Color.BROWN, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
 		Storage storage = new Storage();
 		storage.setAlignment(Pos.BOTTOM_CENTER);
 		Text item = new Text();

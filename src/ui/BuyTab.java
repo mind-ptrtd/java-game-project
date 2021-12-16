@@ -6,9 +6,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import shop.ShopSystem;
 
 public class BuyTab extends GridPane {
 	private BuyItem fishPrice;
@@ -24,7 +29,11 @@ public class BuyTab extends GridPane {
 		this.setHgap(20);
 		this.setPrefWidth(300);
 		this.setPrefHeight(100);
-		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setLayoutX(260);
+		
+		this.setBorder(new Border(new BorderStroke(Color.SADDLEBROWN, BorderStrokeStyle.SOLID, 
+				CornerRadii.EMPTY, new BorderWidths(4.5))));
+		this.setBackground(new Background(new BackgroundFill(Color.SANDYBROWN, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		fishPrice = new BuyItem("Fish Price");
 		hookSpeed = new BuyItem("Hook Speed");
@@ -32,25 +41,7 @@ public class BuyTab extends GridPane {
 		playerSpeed = new BuyItem("Player Speed");
 		buyItemList.addAll(fishPrice, hookSpeed, hookSize, playerSpeed);
 
-//	 	for (BuyItem buyItem : buyItemList) {
-//	 		buyItem.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//	 			//public void handle(ActionEvent event) 
-//	 				
-//	 			
-//	 				
-//	 		
-//	 	}
-
 		this.addRow(0, fishPrice, hookSpeed, hookSize, playerSpeed);
-
-	}
-
-	public BuyItem getFishPrice() {
-		return fishPrice;
-	}
-
-	public BuyItem getHookSpeed() {
-		return hookSpeed;
 	}
 
 	public BuyItem getHookSize() {
@@ -60,9 +51,18 @@ public class BuyTab extends GridPane {
 	public BuyItem getPlayerSpeed() {
 		return playerSpeed;
 	}
+	
+	public BuyItem getHookSpeed() {
+		return hookSpeed;
+	}
+	
+	public BuyItem getFishPrice() {
+		return fishPrice;
+	}
 
 	public ObservableList<BuyItem> getBuyItemList() {
 		return buyItemList;
 	}
+	
 	
 }
