@@ -25,10 +25,10 @@ public class Main extends Application {
 
 	private static boolean isClose;
 	private static Game screenNow;
-	private static BuyPopUp sellPopUp;
+	private static BuyPopUp buyPopUp;
 	private static ManagerTab managerTab;
 	private static BuyTab buyTab;
-	private static Pane imagePane = new Pane();
+	private static Pane imagePane;
 	private static Stage stage;
 	private static Scene gameScene, startScene;
 	private static GameScreen gameScreen;
@@ -46,16 +46,17 @@ public class Main extends Application {
 		Main.gameScene = new Scene(gameRoot);
 		GameLogic gameLogic = new GameLogic();
 		Main.gameScreen = new GameScreen(800, 600);
-
+		
+		imagePane = new Pane();
+		
 		Group screen = new Group();
-		Main.sellPopUp = new BuyPopUp();
-		sellPopUp.setVisible(false);
+		Main.buyPopUp = new BuyPopUp();
+		buyPopUp.setVisible(false);
 		Main.buyTab = new BuyTab();
 		buyTab.setVisible(false);
-		
 		Main.managerTab = new ManagerTab();
 		
-		screen.getChildren().addAll(gameScreen, imagePane, buyTab,sellPopUp);
+		screen.getChildren().addAll(gameScreen, imagePane, buyTab,buyPopUp);
 		
 		gameRoot.getChildren().addAll(managerTab,screen);
 
@@ -84,7 +85,7 @@ public class Main extends Application {
 			public void handle(long now) {
 				gameScreen.paintComponent();
 				gameLogic.logicUpdate();
-				Main.changeScene();
+				changeScene();
 				GameObject.getInstance().objectUpdate();
 				InputUtility.updateInputState();
 				FishingSystem.fishUpdate();
@@ -94,17 +95,14 @@ public class Main extends Application {
 		animation.start();
 	}
 
-	private static void changeScene() {
+	private void changeScene() {
 		if (screenNow == Game.START) {
 			stage.setScene(startScene);
-			// System.out.println("START");
 		} else if (screenNow == Game.INGAME) {
 			stage.setScene(gameScene);
-			// System.out.println("GAME");
 		}
 		if (isClose) {
 			stage.close();
-			// System.out.println("CLOSE");
 		}
 	}
 
@@ -126,7 +124,7 @@ public class Main extends Application {
 	}
 
 	public static BuyPopUp getSellPopUp() {
-		return sellPopUp;
+		return buyPopUp;
 	}
 
 	public static GameScreen getGameScreen() {

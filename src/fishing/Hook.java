@@ -31,12 +31,16 @@ public class Hook extends Entity implements Updateable, ImageViewable, FishingSy
 
 	private void move(Direction dir) {
 		if (dir == Direction.DOWN) {
-			if (y <= 550) {
+			if (y + speedY <= 550) {
 				y += speedY;
+			} else {
+				y = 550;
 			}
 		} else {
-			if (y >= 120 + 3 * 32) { // Will Fish Height is 3 block of 32 bits
+			if (y - speedY>= 120 + 3 * 32) { // Will Fish Height is 3 block of 32 bits
 				y -= speedY;
+			} else {
+				y = 120+3*32;
 			}
 		}
 	}
@@ -76,7 +80,7 @@ public class Hook extends Entity implements Updateable, ImageViewable, FishingSy
 		// CONTROL
 		if (currentState == HookState.KEEP && InputUtility.getKeyPressed(KeyCode.SPACE)) { // Fishing Show Hook
 			x = willyX;
-			y = willyY + 3 * 32; // Willy sprites Height 3 block of 32 bits
+			y = 120+3*32; // Willy sprites Height 3 block of 32 bits
 			currentState = HookState.FISHING;
 			isNearMe = true;
 			updateSprite();

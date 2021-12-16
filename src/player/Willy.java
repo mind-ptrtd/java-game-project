@@ -39,12 +39,16 @@ public class Willy extends Entity implements Updateable, Animateable, FishingSyn
 	// margin 20
 	private void move(Direction dir) {
 		if (dir == Direction.RIGHT) {
-			if (x <= 800 - 32 - 20) {
+			if (x + speedX <= 800 - 32 - 20) {
 				x += speedX;
+			} else {
+				x = 800-32-20;
 			}
 		} else {
-			if (x >= 0 + 20) {
+			if (x - speedX >= 0 + 20) {
 				x -= speedX;
+			} else {
+				x = 0+20;
 			}
 		}
 	}

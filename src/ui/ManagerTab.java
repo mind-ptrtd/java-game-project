@@ -99,11 +99,11 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 			ShopSystem.setMoney(ShopSystem.getMoney()-SelectedItemShop.getPrice());
 			switch (SelectedItemShop.getUpgradeType()) {
 			case FISHPRICE:
-				ShopSystem.setEarnFactor(ShopSystem.getEarnFactor()*1.1f);
+				ShopSystem.setEarnFactor(ShopSystem.getEarnFactor()+0.1f);
 				ItemShop.setLevelFishPrice(ItemShop.getLevelFishPrice()+1);
 				break;
 			case HOOKSPEED:
-				ShopSystem.setHookSpeedFactor(ShopSystem.getHookSpeedFactor()*1.1f);
+				ShopSystem.setHookSpeedFactor(ShopSystem.getHookSpeedFactor()*0.1f);
 				ItemShop.setLevelHookSpeed(ItemShop.getLevelHookSpeed()+1);
 				break;
 			case HOOKSIZE:
@@ -111,7 +111,7 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 				ItemShop.setLevelHookSize(ItemShop.getLevelHookSize()+1);
 				break;
 			case PLAYERSPEED:
-				ShopSystem.setWalkSpeedFactor(ShopSystem.getWalkSpeedFactor()+0.05f);
+				ShopSystem.setWalkSpeedFactor(ShopSystem.getWalkSpeedFactor()+0.1f);
 				ItemShop.setLevelPlayerSpeed(ItemShop.getLevelPlayerSpeed()+1);
 				break;
 			default:
