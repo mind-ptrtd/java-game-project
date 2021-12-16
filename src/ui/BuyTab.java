@@ -11,7 +11,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 public class BuyTab extends GridPane {
-
+	private BuyItem fishPrice;
+	private BuyItem hookSpeed;
+	private BuyItem hookSize;
+	private BuyItem playerSpeed;
+	
 	private ObservableList<BuyItem> buyItemList = FXCollections.observableArrayList();
 
 	public BuyTab() {
@@ -22,11 +26,11 @@ public class BuyTab extends GridPane {
 		this.setPrefHeight(100);
 		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 
-		BuyItem fishSpeed = new BuyItem("Fish Speed");
-		BuyItem hookSpeed = new BuyItem("Hook Speed");
-		BuyItem hookSize = new BuyItem("Hook Size");
-		BuyItem playerSpeed = new BuyItem("Player Speed");
-		buyItemList.addAll(fishSpeed, hookSpeed, hookSize, playerSpeed);
+		fishPrice = new BuyItem("Fish Price");
+		hookSpeed = new BuyItem("Hook Speed");
+		hookSize = new BuyItem("Hook Size");
+		playerSpeed = new BuyItem("Player Speed");
+		buyItemList.addAll(fishPrice, hookSpeed, hookSize, playerSpeed);
 
 //	 	for (BuyItem buyItem : buyItemList) {
 //	 		buyItem.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -37,8 +41,28 @@ public class BuyTab extends GridPane {
 //	 		
 //	 	}
 
-		this.addRow(0, fishSpeed, hookSpeed, hookSize, playerSpeed);
+		this.addRow(0, fishPrice, hookSpeed, hookSize, playerSpeed);
 
 	}
 
+	public BuyItem getFishPrice() {
+		return fishPrice;
+	}
+
+	public BuyItem getHookSpeed() {
+		return hookSpeed;
+	}
+
+	public BuyItem getHookSize() {
+		return hookSize;
+	}
+
+	public BuyItem getPlayerSpeed() {
+		return playerSpeed;
+	}
+
+	public ObservableList<BuyItem> getBuyItemList() {
+		return buyItemList;
+	}
+	
 }

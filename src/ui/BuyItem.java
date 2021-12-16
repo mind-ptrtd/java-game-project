@@ -24,27 +24,29 @@ import javafx.scene.text.Font;
 import logic.GameObject;
 import main.Main;
 import shop.ShopSystem;
+import shop.ShopUpdateable;
 import ui.ItemShop;
 
-public class BuyItem extends Button {
-	
+public class BuyItem extends Button implements ShopUpdateable{
+
 	private ItemShop itemShop;
 	private boolean isDrawn;
-
+	private Tooltip tooltip;
+	
 	public BuyItem(String item) {
-			
+
 		this.setPadding(new Insets(10));
 		this.setPrefWidth(42);
 		this.setPrefHeight(42);
-		this.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, 
-				CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		this.setBorder(new Border(
+				new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		itemShop = new ItemShop(item);
-		WritableImage icon = new WritableImage(itemShop.getImage().getPixelReader(),0,0,32,32);
+		WritableImage icon = new WritableImage(itemShop.getImage().getPixelReader(), 0, 0, 32, 32);
 
 		this.draw(icon);
 		this.setTooltip();
-		
+
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
 				System.out.println("CLICKED");
@@ -53,11 +55,9 @@ public class BuyItem extends Button {
 				Main.getGameScreen().requestFocus();
 			}
 		});
-		
-	
-	
+
 	}
-	
+
 	private void draw(Image image) {
 		BackgroundSize bgSize = new BackgroundSize(42, 42, false, false, false, false);
 		BackgroundImage bgImg = new BackgroundImage(image, null, null, null, bgSize);
@@ -73,31 +73,26 @@ public class BuyItem extends Button {
 	public void setDrawn(boolean isDrawn) {
 		this.isDrawn = isDrawn;
 	}
-			
+
 	// need to be fixed
-	
+
 	private void setTooltip() {
-		Tooltip	tooltip = new Tooltip();
+		this.tooltip = new Tooltip();
 		tooltip.setFont(new Font(12));
-		tooltip.setText(itemShop.getItemName() + itemShop.getPriceText());
+		tooltip.setText(itemShop.getItemName() + itemShop.getPriceText() + itemShop.getLevelText());
 		this.setOnMouseMoved((MouseEvent e) -> {
 			if (itemShop.getItemName() != null) {
-				tooltip.show(this, e.getScreenX(), e.getScreenY()+10);	
+				tooltip.show(this, e.getScreenX(), e.getScreenY() + 10);
 			}
 		});
-		
+
 		this.setOnMouseExited((MouseEvent e) -> {
 			tooltip.hide();
-		});		
+		});
 	}
-	
-	
 
-
-
-		
-
-	
-
+	public void shopUpdate() {
+		tooltip.setText(itemShop.getItemName() + itemShop.getPriceText() + itemShop.getLevelText());
+	}
 
 }

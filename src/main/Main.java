@@ -52,14 +52,14 @@ public class Main extends Application {
 		Group screen = new Group();
 		Main.sellPopUp = new BuyPopUp();
 		sellPopUp.setVisible(false);
-
-		Main.managerTab = new ManagerTab();
-
 		Main.buyTab = new BuyTab();
 		buyTab.setVisible(false);
+		
+		Main.managerTab = new ManagerTab();
+		
 		screen.getChildren().addAll(gameScreen, imagePane, buyTab,sellPopUp);
 		
-		gameRoot.getChildren().addAll(managerTab, screen);
+		gameRoot.getChildren().addAll(managerTab,screen);
 
 		// START ---------------------- //
 		HBox startRoot = new HBox();
@@ -112,8 +112,6 @@ public class Main extends Application {
 		} else if (screenNow == Game.INGAME) {
 			stage.setScene(gameScene);
 			// System.out.println("GAME");
-		} else {
-			stage.setScene(testScene);
 		}
 		if (isClose) {
 			stage.close();

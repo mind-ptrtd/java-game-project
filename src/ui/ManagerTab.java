@@ -77,14 +77,48 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 				}
 			}
 		});
+		buyBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				buyBtn.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+				Main.getGameScreen().requestFocus();
+			}
+		});
+		buyBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				buyBtn.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
+				Main.getGameScreen().requestFocus();
+			}
+		});
 	}
 	public void shopUpdate() {
 		moneyShow = ShopSystem.getMoney();
-		moneyText.setText("Fish Catched: " + FishingSystem.getFishHook() + "   " + "Money: " + moneyShow + "          ");
+		moneyText.setText("Fish Catched: " + FishingSystem.getFishHook()+" / "+ShopSystem.getHookSize() + "   " + "Money: " + moneyShow + "          ");
 		if (SelectedItemShop.getUpgradeType() == UpgradeType.NONE) {
 			// Nothing Happen
 		} else if (BuyPopUp.getIsBuy() && ShopSystem.getMoney() >= SelectedItemShop.getPrice()) {			
 			ShopSystem.setMoney(ShopSystem.getMoney()-SelectedItemShop.getPrice());
+			switch (SelectedItemShop.getUpgradeType()) {
+			case FISHPRICE:
+				ShopSystem.setEarnFactor(ShopSystem.getEarnFactor()*1.1f);
+				ItemShop.setLevelFishPrice(ItemShop.getLevelFishPrice()+1);
+				break;
+			case HOOKSPEED:
+				ShopSystem.setHookSpeedFactor(ShopSystem.getHookSpeedFactor()*1.1f);
+				ItemShop.setLevelHookSpeed(ItemShop.getLevelHookSpeed()+1);
+				break;
+			case HOOKSIZE:
+				ShopSystem.setHookSize(ShopSystem.getHookSize()*2);
+				ItemShop.setLevelHookSize(ItemShop.getLevelHookSize()+1);
+				break;
+			case PLAYERSPEED:
+				ShopSystem.setWalkSpeedFactor(ShopSystem.getWalkSpeedFactor()+0.05f);
+				ItemShop.setLevelPlayerSpeed(ItemShop.getLevelPlayerSpeed()+1);
+				break;
+			default:
+				// Do Nothing
+			}
+			BuyPopUp.setBuy(false);			
+			System.out.println("LEVEL : "+ItemShop.getLevelPlayerSpeed());
 			System.out.println("money spend");
 			setSelectedItemShop(new ItemShop("NONE"));
 		} 

@@ -4,14 +4,19 @@ import main.Main;
 import ui.ItemShop;
 
 public class ShopSystem {
-	private static float fishSpeedFactor = 0.5f;
 	private static float walkSpeedFactor = 1f;
 	private static float hookSpeedFactor = 1f;
-	private static int HookSize = 100;
+	private static int HookSize = 2;
 	private static int money;
+	private static float earnFactor = 1f;
 	
 	public static void shopUpdate() {
 		Main.getManagerTab().shopUpdate();
+		Main.getBuyTab().getPlayerSpeed().shopUpdate();
+		Main.getBuyTab().getHookSize().shopUpdate();
+		Main.getBuyTab().getHookSpeed().shopUpdate();
+		Main.getBuyTab().getFishPrice().shopUpdate();
+		
 		// WANT TO UPDATE ADD IT HERE
 	} 
 	
@@ -22,14 +27,6 @@ public class ShopSystem {
 
 	public static void setMoney(int money) {
 		ShopSystem.money = money;
-	}
-
-	public static float getFishSpeedFactor() {
-		return fishSpeedFactor;
-	}
-
-	public static void setFishSpeedFactor(float fishSpeedFactor) {
-		ShopSystem.fishSpeedFactor = fishSpeedFactor;
 	}
 
 	public static float getWalkSpeedFactor() {
@@ -55,5 +52,14 @@ public class ShopSystem {
 	public static void setHookSize(int hookSize) {
 		HookSize = hookSize;
 	}
+
+	public static float getEarnFactor() {
+		return earnFactor;
+	}
+
+	public static void setEarnFactor(float earnFactor) {
+		ShopSystem.earnFactor = earnFactor;
+	}
+	
 
 }

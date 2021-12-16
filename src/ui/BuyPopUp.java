@@ -95,5 +95,9 @@ public class BuyPopUp extends VBox {
 	public static boolean getIsBuy() {
 		return BuyPopUp.isBuy;
 	}
+	public static void setBuy(boolean isBuy) {
+		BuyPopUp.isBuy = isBuy;
+	}
+	
 	
 }

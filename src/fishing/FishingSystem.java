@@ -17,8 +17,7 @@ public class FishingSystem {
 	private static int fishHook;
 	private static int fishCount;
 	private static int poolSize = 100;
-	
-	
+	private static float fishSpeedFactor = 0.5f;
 
 	public static void fishUpdate() {
 		// Pull From Global
@@ -118,4 +117,8 @@ public class FishingSystem {
 	public static void setNearMe(boolean isNearMe) {
 		FishingSystem.isNearMe = isNearMe;
 	}
+	public static float getFishSpeedFactor() {
+		return fishSpeedFactor;
+	}
+	
 }

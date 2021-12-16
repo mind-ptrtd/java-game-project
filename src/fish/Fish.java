@@ -26,7 +26,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 
 	protected abstract boolean isNeedToRotate();
 
-	protected static float fishSpeedFactor = ShopSystem.getFishSpeedFactor();
+	protected static float fishSpeedFactor = FishingSystem.getFishSpeedFactor();
 
 	// For Child Class
 	protected FishType fishType;
@@ -92,7 +92,6 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 		fishHookX = FishingSystem.getGlobalFishHookX();
 		fishHookY = FishingSystem.getGlobalFishHookY();
 		isNearMe = FishingSystem.getNearMe();
-		fishSpeedFactor = ShopSystem.getFishSpeedFactor();
 	}
 	// Handle Logic
 	public void logicUpdate() {
@@ -133,7 +132,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 						fish.currentState = FishState.DEAD; // DIE
 						//System.out.println("SELL : " + fish.name);
 						killFish(fish);
-						ShopSystem.setMoney(ShopSystem.getMoney() + fish.price);
+						ShopSystem.setMoney(Math.round(ShopSystem.getMoney() + fish.price*ShopSystem.getEarnFactor()));
 					}
 				}
 			//}).start();

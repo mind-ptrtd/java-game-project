@@ -10,13 +10,17 @@ public class ItemShop {
 	private Image image;
 	private int price;
 	private UpgradeType upgradeType;
+	private static int levelFishPrice;
+	private static int levelHookSpeed;
+	private static int levelHookSize;
+	private static int levelPlayerSpeed;
 
 	public ItemShop(String itemName) {
 		switch (itemName) {
-		case "Fish Speed":
+		case "Fish Price":
 			image = GameObject.blueFish_Right;
 			price = 1000;
-			upgradeType = UpgradeType.FISHSPEED;
+			upgradeType = UpgradeType.FISHPRICE;
 			break;
 		case "Hook Speed":
 			image = GameObject.fishHook;
@@ -33,7 +37,7 @@ public class ItemShop {
 			price = 800;
 			upgradeType = UpgradeType.PLAYERSPEED;
 			break;
-		case "NONE" :
+		case "NONE":
 			image = null;
 			price = 0;
 			upgradeType = UpgradeType.NONE;
@@ -43,7 +47,6 @@ public class ItemShop {
 			price = 0;
 			itemName = "";
 		}
-
 		this.itemName = itemName;
 	}
 
@@ -66,9 +69,58 @@ public class ItemShop {
 		return "";
 	}
 
+	public String getLevelText() {
+		switch (upgradeType) {
+		case FISHPRICE:
+			return "\nLevel: " + levelFishPrice;
+		case HOOKSPEED:
+			return "\nLevel: " + levelHookSpeed;
+		case HOOKSIZE:
+			return "\nLevel: " + levelHookSize;
+		case PLAYERSPEED:
+			return "\nLevel: " + levelPlayerSpeed;
+		default:
+			return "ERROR";
+		}
+		
+	}
+
 	public UpgradeType getUpgradeType() {
 		return upgradeType;
 	}
-	
 
+	public static int getLevelFishPrice() {
+		return levelFishPrice;
+	}
+
+	public static void setLevelFishPrice(int levelFishPrice) {
+		ItemShop.levelFishPrice = levelFishPrice;
+	}
+
+	public static int getLevelHookSpeed() {
+		return levelHookSpeed;
+	}
+
+	public static void setLevelHookSpeed(int levelHookSpeed) {
+		ItemShop.levelHookSpeed = levelHookSpeed;
+	}
+
+	public static int getLevelHookSize() {
+		return levelHookSize;
+	}
+
+	public static void setLevelHookSize(int levelHookSize) {
+		ItemShop.levelHookSize = levelHookSize;
+	}
+
+	public static int getLevelPlayerSpeed() {
+		return levelPlayerSpeed;
+	}
+
+	public static void setLevelPlayerSpeed(int levelPlayerSpeed) {
+		ItemShop.levelPlayerSpeed = levelPlayerSpeed;
+	}
+
+
+	
 }

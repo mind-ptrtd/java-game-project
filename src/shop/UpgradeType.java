@@ -1,7 +1,7 @@
 package shop;
 
 public enum UpgradeType {
-	FISHSPEED,
+	FISHPRICE,
 	HOOKSPEED,
 	HOOKSIZE,
 	PLAYERSPEED,
