@@ -2,6 +2,7 @@ package main;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -50,14 +51,19 @@ public class Main extends Application {
 		Main.gameScreen = new GameScreen(800, 600);
 
 		Group screen = new Group();
+		
 		Main.sellPopUp = new BuyPopUp();
 		sellPopUp.setVisible(false);
+
+		Main.managerTab = new ManagerTab();
+
+		
+		
 		Main.buyTab = new BuyTab();
 		buyTab.setVisible(false);
 		
-		Main.managerTab = new ManagerTab();
+		screen.getChildren().addAll(gameScreen, imagePane, buyTab, sellPopUp);
 		
-		screen.getChildren().addAll(gameScreen, imagePane, buyTab,sellPopUp);
 		
 		gameRoot.getChildren().addAll(managerTab,screen);
 
