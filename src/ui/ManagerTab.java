@@ -35,8 +35,8 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		this.setAlignment(Pos.CENTER_RIGHT);
 		this.setPrefWidth(800);
 		this.setPrefHeight(50);
-		this.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
-		this.setBackground(new Background(new BackgroundFill(Color.DIMGRAY, null, null)));
+		//this.setBorder(new Border(new BorderStroke(Color.LIGHTGOLDENRODYELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
+		this.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD, null, null)));
 		
 		Text space = new Text("   ");
 		initMoneyText();
@@ -51,7 +51,7 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		Text moneyText = new Text();
 		// will be changing to sum of fish price soon
 		moneyText.setFont(Font.font("Comic Sans Ms", FontWeight.LIGHT, FontPosture.REGULAR, 18));
-		moneyText.setFill(Color.LIGHTGOLDENRODYELLOW);
+		moneyText.setFill(Color.DARKSLATEGRAY);
 		setMoneyText(moneyText);
 		
 	}
@@ -63,8 +63,8 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		buyBtn.setAlignment(Pos.CENTER);
 		buyBtn.setPrefWidth(70);
 		buyBtn.setPrefHeight(30);
-		buyBtn.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
-		buyBtn.setBorder(new Border(new BorderStroke(Color.AZURE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
+		buyBtn.setBackground(new Background(new BackgroundFill(Color.PERU, null, null)));
+		buyBtn.setBorder(new Border(new BorderStroke(Color.NAVAJOWHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
 		setBuyBtn(buyBtn);
 		buyBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
@@ -81,13 +81,13 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 		});
 		buyBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
-				buyBtn.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+				buyBtn.setBackground(new Background(new BackgroundFill(Color.TAN, null, null)));
 				Main.getGameScreen().requestFocus();
 			}
 		});
 		buyBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
-				buyBtn.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
+				buyBtn.setBackground(new Background(new BackgroundFill(Color.PERU, null, null)));
 				Main.getGameScreen().requestFocus();
 			}
 		});
