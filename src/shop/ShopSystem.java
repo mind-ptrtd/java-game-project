@@ -5,7 +5,7 @@ import main.Main;
 public class ShopSystem {
 	private static float walkSpeedFactor = 1f;
 	private static float hookSpeedFactor = 1f;
-	private static int HookSize = 2;
+	private static int HookSize = 1;
 	private static int money;
 	private static float earnFactor = 1f;
 	

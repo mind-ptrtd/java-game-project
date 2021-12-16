@@ -70,11 +70,9 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 			public void handle(MouseEvent e) {
 				if(!Main.getBuyTab().isVisible()) {
 					Main.getBuyTab().setVisible(true);
-					//System.out.println("CLICKED");
 					Main.getGameScreen().requestFocus();
 				} else {
 					Main.getBuyTab().setVisible(false);
-					//System.out.println("CLICKED");
 					Main.getGameScreen().requestFocus();
 				}
 			}
@@ -120,8 +118,6 @@ public class ManagerTab extends HBox implements ShopUpdateable {
 				// Do Nothing
 			}
 			BuyPopUp.setBuy(false);			
-			System.out.println("LEVEL : "+ItemShop.getLevelPlayerSpeed());
-			System.out.println("money spend");
 			setSelectedItemShop(new ItemShop("NONE"));
 		} 
 	}

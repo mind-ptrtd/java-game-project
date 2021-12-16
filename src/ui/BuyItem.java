@@ -42,7 +42,6 @@ public class BuyItem extends Button implements ShopUpdateable{
 
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
-				System.out.println("CLICKED");
 				ManagerTab.setSelectedItemShop(itemShop);
 				Main.getSellPopUp().setVisible(true);
 				Main.getGameScreen().requestFocus();

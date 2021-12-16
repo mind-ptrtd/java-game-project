@@ -118,7 +118,7 @@ public abstract class Fish extends Entity implements Updateable, Animateable,Fis
 				for (Fish fish : FishingSystem.getInstance().getAllFishContainer()) {
 					if (fish.currentState == FishState.HOOK) {
 						fish.currentState = FishState.DEAD;
-						System.out.println("FISH BOMB : " + fish.name);
+						//System.out.println("FISH BOMB : " + fish.name);
 						killFish(fish);
 					}
 				}
