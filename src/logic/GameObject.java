@@ -63,7 +63,7 @@ public class GameObject {
 		playerPic = new Image(ClassLoader.getSystemResource("willy.png").toString());
 		emptySprite = new Image(ClassLoader.getSystemResource("EmptySprite.png").toString());
 		fishHook = new Image(ClassLoader.getSystemResource("fishHook.png").toString(), 32, 32, false, false);
-		bomb = new Image(ClassLoader.getSystemResource("Bomb.png").toString());
+		bomb = new Image(ClassLoader.getSystemResource("bomb.png").toString());
 		title = new Image(ClassLoader.getSystemResource("title.png").toString());
 		newBtn = new Image(ClassLoader.getSystemResource("newBtn.png").toString());
 		exitBtn = new Image(ClassLoader.getSystemResource("exitBtn.png").toString());
