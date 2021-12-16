@@ -16,7 +16,7 @@ public class FishingSystem {
 	private static int HookSize;
 	private static int fishHook;
 	private static int fishCount;
-	private static int poolSize = 100;
+	private static int poolSize = 30;
 	private static float fishSpeedFactor = 0.5f;
 
 	public static void fishUpdate() {

@@ -6,9 +6,9 @@ import shop.UpgradeType;
 
 public class ItemShop {
 
+	private int price;
 	private String itemName;
 	private Image image;
-	private int price;
 	private UpgradeType upgradeType;
 	private static int levelFishPrice=1;
 	private static int levelHookSpeed=1;
@@ -50,25 +50,13 @@ public class ItemShop {
 		this.itemName = itemName;
 	}
 
-	public String getItemName() {
-		return itemName;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public Image getImage() {
-		return image;
-	}
-
 	public String getPriceText() {
 		if (price > 0) {
 			return "\nPrice: " + price;
 		}
 		return "";
 	}
-
+	
 	public String getLevelText() {
 		switch (upgradeType) {
 		case FISHPRICE:
@@ -82,8 +70,21 @@ public class ItemShop {
 		default:
 			return "ERROR";
 		}
-		
+	
+	// Getter/Setter
 	}
+	public String getItemName() {
+		return itemName;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
 
 	public UpgradeType getUpgradeType() {
 		return upgradeType;

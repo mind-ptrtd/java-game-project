@@ -21,7 +21,7 @@ import javafx.scene.text.Text;
 import main.Main;
 
 public class BuyPopUp extends VBox {
-	private Text sellText;
+	private Text buyText;
 	private Button yesBtn,noBtn;
 	private HBox btnPane;
 	private static boolean isBuy;
@@ -34,7 +34,7 @@ public class BuyPopUp extends VBox {
 		this.setLayoutX(320);
 		this.setLayoutY(170);
 		
-		initSellText();
+		initBuyText();
 		initYesBtn();
 		initNoBtn();
 		
@@ -45,13 +45,13 @@ public class BuyPopUp extends VBox {
 		btnPane.getChildren().addAll(yesBtn, noBtn);
 		btnPane.setSpacing(10);
 		btnPane.setAlignment(Pos.CENTER);
-		this.getChildren().addAll(sellText,btnPane);
+		this.getChildren().addAll(buyText,btnPane);
 	}
-	private void initSellText() {
+	private void initBuyText() {
 		Text sellText = new Text("Buy this item?");
 		sellText.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		sellText.setFill(Color.ANTIQUEWHITE);
-		setSellText(sellText);
+		setBuyText(sellText);
 	}
 	private void initYesBtn() {
 		Button yesBtn = new Button("YES");
@@ -83,8 +83,8 @@ public class BuyPopUp extends VBox {
 		});
 	}
 	
-	public void setSellText(Text sellText) {
-		this.sellText = sellText;
+	public void setBuyText(Text buyText) {
+		this.buyText = buyText;
 	}
 	
 	public void setYesBtn(Button yesBtn) {
