@@ -27,7 +27,7 @@ public class BuyPopUp extends VBox {
 	private static boolean isBuy;
 
 	public BuyPopUp() {
-		this.setPrefWidth(180);
+		this.setPrefWidth(190);
 		this.setPrefHeight(120);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(3.5);
