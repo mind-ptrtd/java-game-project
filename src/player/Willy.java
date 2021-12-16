@@ -124,7 +124,7 @@ public class Willy extends Entity implements Updateable, Animateable, FishingSyn
 	private int width;
 	private int height;
 
-	public void setSpriteProporty(int column, int count, int offsetX, int offsetY, int width, int height) {
+	private void setSpriteProporty(int column, int count, int offsetX, int offsetY, int width, int height) {
 		this.column = column;
 		this.count = count;
 		this.offsetX = offsetX;
